@@ -9,7 +9,7 @@ interface IButtonProps {
 function Button(props: IButtonProps): JSX.Element {
   return (
     <motion.button
-      className="px-6 px-3 py-2 bg-button"
+      className="md:px-6 px-3 py-2 bg-button"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onTap={props.onClick}
