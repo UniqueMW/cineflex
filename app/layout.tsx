@@ -1,5 +1,7 @@
+'use client'
 import React from 'react'
 import './globals.css'
+import { SideMenu, Nav } from 'components'
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,9 +13,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }): JSX.Element {
+  const [openMenu, setOpenMenu] = React.useState(false)
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-background">
+        <Nav setOpenMenu={setOpenMenu} />
+        <SideMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
+        {children}
+      </body>
     </html>
   )
 }

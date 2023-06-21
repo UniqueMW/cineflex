@@ -34,7 +34,7 @@ module.exports = {
         cardBackground: '#fffffe'
       },
       fontFamily: {
-        heading: ['Merriweather', 'serif'],
+        heading: ['Raleway', 'sans-serif'],
         paragraph: ['Nunito', 'sans-serif'],
         logo: ['Rubik Microbe', 'cursive']
       }
