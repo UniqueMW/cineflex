@@ -19,7 +19,7 @@ function HeroSlideDetails({ heroMovie }: IHeroSlideProps): JSX.Element {
       </h3>
       <h1 className=" text-3xl lg:text-5xl text-headline font-heading font-semibold tracking-wider bg-button/90 w-fit lg:max-w-[40%] max-w-[90%] md:max-w-[90%] p-2">
         {_.truncate(heroMovie.title, {
-          length: 60,
+          length: 30,
           omission: '.....'
         })}
       </h1>
@@ -32,7 +32,7 @@ function HeroSlideDetails({ heroMovie }: IHeroSlideProps): JSX.Element {
       </div>
       <p className="lg:block hidden text-base text-paragraph tracking-wider font-paragraph lg:max-w-[40%] max-w-[90%] bg-button/90 p-2">
         {_.truncate(heroMovie.overview, {
-          length: 300,
+          length: 200,
           omission: '.....'
         })}
       </p>
