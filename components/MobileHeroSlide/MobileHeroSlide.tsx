@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import { HeroSlideDetails } from 'components'
-import type { IMovie } from 'types'
+import type { ICardSeriesAndMovie, IMovie } from 'types'
 
 interface IHeroSlideProps {
-  heroMovie: IMovie
+  heroMovie: IMovie | ICardSeriesAndMovie
 }
 
 function MobileHeroSlide({ heroMovie }: IHeroSlideProps): JSX.Element {
@@ -14,8 +14,7 @@ function MobileHeroSlide({ heroMovie }: IHeroSlideProps): JSX.Element {
         src={`https://image.tmdb.org/t/p/original/${heroMovie.poster_path}`}
         height={2560}
         width={1440}
-        alt={heroMovie.title}
-        className="min-w-full max-h-screen border"
+        alt={heroMovie.title as string}
       />
       <HeroSlideDetails heroMovie={heroMovie} />
     </section>

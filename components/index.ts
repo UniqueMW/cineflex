@@ -9,6 +9,8 @@ import Ratings from './Ratings/Ratings'
 import Genre from './Genre/Genre'
 import HeroSlideDetails from './HeroSlideDetails/HeroSlideDetails'
 import MobileHeroSlide from './MobileHeroSlide/MobileHeroSlide'
+import Card from './Card/Card'
+import CardCarousel from './CardCarousel/CardCarousel'
 
 export {
   Nav,
@@ -21,5 +23,7 @@ export {
   Ratings,
   Genre,
   HeroSlideDetails,
-  MobileHeroSlide
+  MobileHeroSlide,
+  Card,
+  CardCarousel
 }

@@ -5,10 +5,10 @@ import { SlSocialYoutube } from 'react-icons/sl'
 import { CiBookmarkPlus } from 'react-icons/ci'
 import { AiOutlineCalendar } from 'react-icons/ai'
 
-import type { IMovie } from 'types'
+import type { ICardSeriesAndMovie, IMovie } from 'types'
 
 interface IHeroSlideProps {
-  heroMovie: IMovie
+  heroMovie: IMovie | ICardSeriesAndMovie
 }
 
 function HeroSlideDetails({ heroMovie }: IHeroSlideProps): JSX.Element {
@@ -17,7 +17,7 @@ function HeroSlideDetails({ heroMovie }: IHeroSlideProps): JSX.Element {
       <h3 className="bg-button/90 w-fit p-2">
         <Ratings rating={heroMovie.vote_average} />
       </h3>
-      <h1 className=" text-3xl lg:text-5xl text-headline font-heading font-semibold tracking-wider bg-button/90 w-fit lg:max-w-[40%] max-w-[70%] md:max-w-[90%] p-2">
+      <h1 className=" text-3xl lg:text-5xl text-headline font-heading font-semibold tracking-wider bg-button/90 w-fit lg:max-w-[40%] max-w-[90%] md:max-w-[90%] p-2">
         {_.truncate(heroMovie.title, {
           length: 60,
           omission: '.....'

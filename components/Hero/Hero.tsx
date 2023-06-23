@@ -4,8 +4,6 @@ import type { IMoviePage } from 'types'
 import useSWR from 'swr'
 import { HeroSlide, MobileHeroSlide } from 'components'
 import { fetcher } from 'utils'
-import 'swiper/css'
-import 'swiper/css/navigation'
 import {
   Swiper,
   SwiperSlide,
