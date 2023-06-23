@@ -6,6 +6,9 @@ import SideMenu from './SideMenu/SideMenu'
 import Hero from './Hero/Hero'
 import HeroSlide from './HeroSlide/HeroSlide'
 import Ratings from './Ratings/Ratings'
+import Genre from './Genre/Genre'
+import HeroSlideDetails from './HeroSlideDetails/HeroSlideDetails'
+import MobileHeroSlide from './MobileHeroSlide/MobileHeroSlide'
 
 export {
   Nav,
@@ -15,5 +18,8 @@ export {
   SideMenu,
   Hero,
   HeroSlide,
-  Ratings
+  Ratings,
+  Genre,
+  HeroSlideDetails,
+  MobileHeroSlide
 }

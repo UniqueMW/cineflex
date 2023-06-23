@@ -1,5 +1,6 @@
 import React from 'react'
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im'
+
 interface IRatingsProps {
   rating: number
 }

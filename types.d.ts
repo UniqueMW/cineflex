@@ -21,3 +21,12 @@ export interface IMovie {
   vote_average: number
   vote_count: number
 }
+
+export interface GenreList {
+  genres: Genre[]
+}
+
+export interface Genre {
+  id: number
+  name: string
+}
