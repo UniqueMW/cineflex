@@ -1,5 +1,7 @@
 'use client'
 import React from 'react'
+import 'swiper/css'
+import 'swiper/css/navigation'
 import type { IMoviePage } from 'types'
 import useSWR from 'swr'
 import { HeroSlide, MobileHeroSlide } from 'components'

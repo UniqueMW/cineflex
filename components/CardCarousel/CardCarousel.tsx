@@ -1,5 +1,7 @@
 'use client'
 import React from 'react'
+import 'swiper/css'
+import 'swiper/css/navigation'
 import useSWR from 'swr'
 import { fetcher } from 'utils'
 import { Card } from 'components'
@@ -11,13 +13,13 @@ import {
 
 import type { IMoviePage } from 'types'
 
-function CardCarousel(): JSX.Element {
-  const { data } = useSWR<IMoviePage>(
-    `https://api.themoviedb.org/3/trending/all/day?api_key=${
-      process.env.NEXT_PUBLIC_API_KEY as string
-    }`,
-    fetcher
-  )
+interface ICardCarouselProps {
+  url: string
+  carouselTitle: string
+}
+
+function CardCarousel(props: ICardCarouselProps): JSX.Element {
+  const { data } = useSWR<IMoviePage>(props.url, fetcher)
 
   const cards = React.useMemo(() => {
     return data?.results.map((movie) => (
@@ -27,7 +29,10 @@ function CardCarousel(): JSX.Element {
     ))
   }, [data])
   return (
-    <section className="px-10 py-2">
+    <section className="px-10 py-2 space-y-2">
+      <h1 className="text-2xl text-headline font-heading font-semibold tracking-wider">
+        {props.carouselTitle}
+      </h1>
       <Swiper
         spaceBetween={10}
         navigation={true}

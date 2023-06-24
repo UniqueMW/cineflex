@@ -1,6 +1,6 @@
 export interface IMoviePage {
   page: number
-  results: Array<IMovie | ICardSeriesAndMovie>
+  results: Array<IMovie & ICardSeriesAndMovie>
   total_pages: number
   total_results: number
 }

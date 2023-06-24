@@ -34,11 +34,11 @@ function Ratings({ rating }: IRatingsProps): JSX.Element {
   const renderStars = React.useMemo(() => {
     return stars.map((star, index) => {
       if (star === 2) {
-        return <ImStarFull key={index} className="text-[#FFD700]" />
+        return <ImStarFull key={index} className="text-[#FFD700] text-base" />
       } else if (star === 1) {
-        return <ImStarHalf key={index} className="text-[#FFD700]" />
+        return <ImStarHalf key={index} className="text-[#FFD700] text-base" />
       } else {
-        return <ImStarEmpty key={index} className="text-[#FFD700]" />
+        return <ImStarEmpty key={index} className="text-[#FFD700] text-base" />
       }
     })
   }, [stars])
@@ -48,14 +48,16 @@ function Ratings({ rating }: IRatingsProps): JSX.Element {
   }
 
   return (
-    <button className="flex flex-row space-x-2" onClick={handleShowNumber}>
+    <button onClick={handleShowNumber}>
       {showNumber ? (
-        <h1 className="flex flex-row items-center font-heading text-headline tracking-wider text-base">
+        <h3 className="flex flex-row items-center font-heading text-headline tracking-wider text-base mb-0 h-5">
           <ImStarFull className="text-[#FFD700] mr-1" />
           {rating}
-        </h1>
+        </h3>
       ) : (
-        renderStars
+        <div className="flex flex-row space-x-2 text-base h-5">
+          {renderStars}
+        </div>
       )}
     </button>
   )
