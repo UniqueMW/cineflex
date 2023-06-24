@@ -1,3 +1,4 @@
+import { useWindowSize } from '@/hooks'
 import React from 'react'
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im'
 
@@ -8,6 +9,7 @@ interface IRatingsProps {
 function Ratings({ rating }: IRatingsProps): JSX.Element {
   const [stars, setStars] = React.useState<Array<2 | 1 | 0>>([])
   const [showNumber, setShowNumber] = React.useState(false)
+  const [, width] = useWindowSize()
 
   React.useEffect(() => {
     const convertedStars: Array<2 | 1 | 0> = []
@@ -49,13 +51,13 @@ function Ratings({ rating }: IRatingsProps): JSX.Element {
 
   return (
     <button onClick={handleShowNumber}>
-      {showNumber ? (
-        <h3 className="flex flex-row items-center font-heading text-headline tracking-wider text-base mb-0 h-5">
+      {showNumber || width < 300 ? (
+        <h3 className="flex flex-row items-center font-heading text-headline tracking-wider md:text-base text-sm mb-0 h-5">
           <ImStarFull className="text-[#FFD700] mr-1" />
           {rating}
         </h3>
       ) : (
-        <div className="flex flex-row space-x-2 text-base h-5">
+        <div className="flex flex-row md:space-x-2 space-x-1 md:text-base sm:text-xs h-5">
           {renderStars}
         </div>
       )}

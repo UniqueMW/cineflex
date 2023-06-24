@@ -1,3 +1,4 @@
 import fetcher from './fetcher/fetcher'
+import getScreenWidth from './getScreenWidth/getScreenWidth'
 
-export { fetcher }
+export { fetcher, getScreenWidth }

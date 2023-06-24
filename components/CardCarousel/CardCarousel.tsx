@@ -12,6 +12,7 @@ import {
 } from 'PackagesClientComponents/swiper'
 
 import type { IMoviePage } from 'types'
+import { useWindowSize } from 'hooks'
 
 interface ICardCarouselProps {
   url: string
@@ -20,6 +21,7 @@ interface ICardCarouselProps {
 
 function CardCarousel(props: ICardCarouselProps): JSX.Element {
   const { data } = useSWR<IMoviePage>(props.url, fetcher)
+  const [sizeType] = useWindowSize()
 
   const cards = React.useMemo(() => {
     return data?.results.map((movie) => (
@@ -29,7 +31,7 @@ function CardCarousel(props: ICardCarouselProps): JSX.Element {
     ))
   }, [data])
   return (
-    <section className="px-10 py-2 space-y-2">
+    <section className="lg:px-10 px-2 py-2 space-y-2">
       <h1 className="text-2xl text-headline font-heading font-semibold tracking-wider">
         {props.carouselTitle}
       </h1>
@@ -37,8 +39,8 @@ function CardCarousel(props: ICardCarouselProps): JSX.Element {
         spaceBetween={10}
         navigation={true}
         modules={[Navigation]}
-        slidesPerView={6}
-        slidesPerGroup={6}
+        slidesPerView={sizeType === 'lg' ? 6 : sizeType === 'md' ? 4 : 3}
+        slidesPerGroup={sizeType === 'lg' ? 6 : sizeType === 'md' ? 4 : 3}
       >
         {cards}
       </Swiper>

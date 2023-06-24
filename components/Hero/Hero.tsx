@@ -30,7 +30,7 @@ function Hero(): JSX.Element {
   }, [data])
 
   return (
-    <section className="lg:h-fit h-[2560] overflow-y-hidden">
+    <section className="h-fit max-h-fit overflow-y-hidden">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
