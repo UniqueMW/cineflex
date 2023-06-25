@@ -12,10 +12,12 @@ function HeroSlide({ heroMovie }: IHeroSlideProps): JSX.Element {
     <section className="relative lg:block hidden">
       <Image
         src={`https://image.tmdb.org/t/p/original/${heroMovie.backdrop_path}`}
-        height={1080}
-        width={1920}
+        height={758.81}
+        placeholder="blur"
+        blurDataURL="/heroPlaceholder.png"
+        width={1349}
         alt={heroMovie.title as string}
-        className="min-w-full max-h-screen border"
+        className="w-full object-cover object-center"
       />
       <HeroSlideDetails heroMovie={heroMovie} />
     </section>

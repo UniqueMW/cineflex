@@ -22,7 +22,7 @@ function Nav(props: INavProps): JSX.Element {
       </ButtonIcon>
       <div>
         <Link
-          className="md:text-2xl text-xl text-button font-heading font-[700] tracking-wider"
+          className="md:text-3xl text-xl text-button font-logo tracking-wider"
           href="/"
         >
           CINEFLEX

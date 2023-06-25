@@ -32,7 +32,7 @@ function CardCarousel(props: ICardCarouselProps): JSX.Element {
   }, [data])
   return (
     <section className="lg:px-10 px-2 py-2 space-y-2">
-      <h1 className="text-2xl text-headline font-heading font-semibold tracking-wider">
+      <h1 className="md:text-2xl text-xl text-headline font-heading font-semibold tracking-wider">
         {props.carouselTitle}
       </h1>
       <Swiper
@@ -41,6 +41,7 @@ function CardCarousel(props: ICardCarouselProps): JSX.Element {
         modules={[Navigation]}
         slidesPerView={sizeType === 'lg' ? 6 : sizeType === 'md' ? 4 : 3}
         slidesPerGroup={sizeType === 'lg' ? 6 : sizeType === 'md' ? 4 : 3}
+        className="grid grid-flow-col gap-10"
       >
         {cards}
       </Swiper>

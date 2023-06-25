@@ -34,9 +34,9 @@ module.exports = {
         cardBackground: '#fffffe'
       },
       fontFamily: {
-        logo: ['Raleway', 'sans-serif'],
-        paragraph: ['Nunito', 'sans-serif'],
-        heading: ['Rubik Microbe', 'cursive']
+        logo: ['var(--font-logo)', 'sans-serif'],
+        paragraph: ['var(--font-paragraph)'],
+        heading: ['var(--font-heading)']
       }
     }
   }

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import 'swiper/css'
-import 'swiper/css/navigation'
+// import 'swiper/css'
+// import 'swiper/css/navigation'
 import type { IMoviePage } from 'types'
 import useSWR from 'swr'
 import { HeroSlide, MobileHeroSlide } from 'components'
@@ -30,7 +30,7 @@ function Hero(): JSX.Element {
   }, [data])
 
   return (
-    <section className="h-fit max-h-fit overflow-y-hidden">
+    <section className="h-fit">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

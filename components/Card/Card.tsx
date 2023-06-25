@@ -15,13 +15,15 @@ function Card({ data }: ICardProps): JSX.Element {
   )
   const [, width] = useWindowSize()
   return (
-    <section className="bg-cardBackground shadow-sm pb-2 px-1 min-h-[200]">
+    <section className="bg-cardBackground shadow-sm pb-2 px-1">
       <Image
         src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
-        width={200}
-        height={150}
+        width={195.16}
+        height={292.73}
         alt={cardName}
-        className="h-[150] object-cover object-center"
+        placeholder="blur"
+        blurDataURL="/cardPlaceholder.png"
+        className="object-cover object-center"
       />
       <h1 className="text-headline font-heading font-[400] sm:text-base text-xs">
         {_.truncate(cardName, {
