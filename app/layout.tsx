@@ -33,10 +33,15 @@ export default function RootLayout({
   children: React.ReactNode
 }): JSX.Element {
   const [openMenu, setOpenMenu] = React.useState(false)
+
   return (
     <html lang="en">
       <body
-        className={`bg-background  ${exo2.variable} ${shadowsIntoLightTwo.variable} ${rubikMoonrocks.variable}`}
+        className={`bg-background  ${exo2.variable} ${
+          shadowsIntoLightTwo.variable
+        } ${rubikMoonrocks.variable} ${
+          openMenu ? 'overflow-hidden' : 'overflow-auto'
+        }`}
       >
         <Nav setOpenMenu={setOpenMenu} />
         <SideMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />

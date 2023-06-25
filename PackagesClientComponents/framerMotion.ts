@@ -1,4 +1,9 @@
 'use client'
-import { Reorder, motion, AnimatePresence } from 'framer-motion'
+import {
+  Reorder,
+  motion,
+  AnimatePresence,
+  useDragControls
+} from 'framer-motion'
 
-export { Reorder, motion, AnimatePresence }
+export { Reorder, motion, AnimatePresence, useDragControls }

@@ -27,7 +27,7 @@ function SideMenu(props: ISideMenuProps): JSX.Element {
     <AnimatePresence>
       {props.openMenu && (
         <motion.nav
-          className="lg:hidden absolute flex flex-row left-0 top-0 z-20 h-screen w-full text-lg text-headline tracking-wider font-heading"
+          className="lg:hidden fixed flex flex-row left-0 top-0 z-20 h-full w-full text-lg text-headline tracking-wider font-heading"
           variants={navVariant}
           initial={'start'}
           animate={'open'}

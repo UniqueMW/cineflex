@@ -11,6 +11,8 @@ import HeroSlideDetails from './HeroSlideDetails/HeroSlideDetails'
 import MobileHeroSlide from './MobileHeroSlide/MobileHeroSlide'
 import Card from './Card/Card'
 import CardCarousel from './CardCarousel/CardCarousel'
+import CarouselGroup from './CarouselGroup/CarouselGroup'
+import DraggableCardCarousel from './DraggableCardCarousel/DraggableCardCarousel'
 
 export {
   Nav,
@@ -25,5 +27,7 @@ export {
   HeroSlideDetails,
   MobileHeroSlide,
   Card,
-  CardCarousel
+  CardCarousel,
+  CarouselGroup,
+  DraggableCardCarousel
 }
