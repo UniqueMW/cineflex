@@ -13,6 +13,8 @@ import Card from './Card/Card'
 import CardCarousel from './CardCarousel/CardCarousel'
 import CarouselGroup from './CarouselGroup/CarouselGroup'
 import DraggableCardCarousel from './DraggableCardCarousel/DraggableCardCarousel'
+import NavWrapper from './NavWrapper/NavWrapper'
+import PageGrid from './PageGrid/PageGrid'
 
 export {
   Nav,
@@ -29,5 +31,7 @@ export {
   Card,
   CardCarousel,
   CarouselGroup,
-  DraggableCardCarousel
+  DraggableCardCarousel,
+  NavWrapper,
+  PageGrid
 }

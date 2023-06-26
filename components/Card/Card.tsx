@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import { Ratings } from 'components'
@@ -24,7 +25,7 @@ function Card({ data }: ICardProps): JSX.Element {
         alt={cardName}
         placeholder="blur"
         blurDataURL="/cardPlaceholder.png"
-        className="object-cover object-center"
+        className="object-cover object-center w-full "
       />
       <h1 className="text-headline font-heading font-[400] sm:text-base text-xs">
         {_.truncate(cardName, {

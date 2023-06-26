@@ -1,12 +1,12 @@
-import { useWindowSize } from '@/hooks'
 import React from 'react'
+import { useWindowSize } from 'hooks'
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im'
 
 interface IRatingsProps {
   rating: number
 }
 
-function Ratings({ rating }: IRatingsProps): JSX.Element {
+const Ratings = React.memo(function ({ rating }: IRatingsProps): JSX.Element {
   const [stars, setStars] = React.useState<Array<2 | 1 | 0>>([])
   const [showNumber, setShowNumber] = React.useState(false)
   const [, width] = useWindowSize()
@@ -63,6 +63,8 @@ function Ratings({ rating }: IRatingsProps): JSX.Element {
       )}
     </button>
   )
-}
+})
+
+Ratings.displayName = 'Ratings'
 
 export default Ratings

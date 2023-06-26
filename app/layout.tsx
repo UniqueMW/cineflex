@@ -1,12 +1,11 @@
-'use client'
 import React from 'react'
 import './globals.css'
-import { SideMenu, Nav } from 'components'
 import {
   Exo_2,
   Shadows_Into_Light_Two,
   Rubik_Moonrocks
 } from 'next/font/google'
+import { NavWrapper } from 'components'
 
 export const metadata = {
   title: 'Create Next App',
@@ -32,20 +31,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }): JSX.Element {
-  const [openMenu, setOpenMenu] = React.useState(false)
-
   return (
     <html lang="en">
       <body
-        className={`bg-background  ${exo2.variable} ${
-          shadowsIntoLightTwo.variable
-        } ${rubikMoonrocks.variable} ${
-          openMenu ? 'overflow-hidden' : 'overflow-auto'
-        }`}
+        className={`bg-background  ${exo2.variable} ${shadowsIntoLightTwo.variable} ${rubikMoonrocks.variable}`}
       >
-        <Nav setOpenMenu={setOpenMenu} />
-        <SideMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
-        {children}
+        <NavWrapper>{children}</NavWrapper>
       </body>
     </html>
   )

@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
-import 'swiper/css'
-import 'swiper/css/navigation'
+
 import useSWR from 'swr'
+import { GrDrag } from 'react-icons/gr'
 import { fetcher } from 'utils'
 import { ButtonIcon, Card } from 'components'
 import {
@@ -10,11 +10,11 @@ import {
   Swiper,
   Navigation
 } from 'PackagesClientComponents/swiper'
-import { GrDrag } from 'react-icons/gr'
-
 import type { IMoviePage } from 'types'
 import { useWindowSize } from 'hooks'
 import type { DragControls } from 'framer-motion'
+import 'swiper/css'
+import 'swiper/css/navigation'
 
 interface ICardCarouselProps {
   url: string
@@ -22,12 +22,14 @@ interface ICardCarouselProps {
   controls?: DragControls
 }
 
-function CardCarousel(props: ICardCarouselProps): JSX.Element {
+const CardCarousel = React.memo(function (
+  props: ICardCarouselProps
+): JSX.Element {
   const { data } = useSWR<IMoviePage>(props.url, fetcher)
   const [sizeType] = useWindowSize()
 
   const cards = React.useMemo(() => {
-    return data?.results.map((movie) => (
+    return data?.results.map((movie, index) => (
       <SwiperSlide key={movie.id}>
         <Card data={movie} />
       </SwiperSlide>
@@ -59,6 +61,8 @@ function CardCarousel(props: ICardCarouselProps): JSX.Element {
       </Swiper>
     </section>
   )
-}
+})
+
+CardCarousel.displayName = 'CardCarousel'
 
 export default CardCarousel

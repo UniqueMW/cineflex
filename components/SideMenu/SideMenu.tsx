@@ -67,7 +67,7 @@ function SideMenu(props: ISideMenuProps): JSX.Element {
               transition={{ delay: 0.8 }}
             >
               <Link
-                className="md:text-2xl text-xl text-button font-heading font-[700] tracking-wider"
+                className="md:text-2xl text-xl text-button font-logo font-[700] tracking-wider"
                 href="/"
               >
                 CINEFLEX
@@ -97,7 +97,7 @@ function SideMenu(props: ISideMenuProps): JSX.Element {
                 exit={'start'}
                 transition={{ delay: 0.2 }}
               >
-                <Link href="/">Movies</Link>
+                <Link href="/movies">Movies</Link>
               </motion.div>
               <motion.div
                 variants={linkVariant}

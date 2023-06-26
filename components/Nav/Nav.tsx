@@ -30,7 +30,7 @@ function Nav(props: INavProps): JSX.Element {
       </div>
       <div className="lg:flex hidden flex-row space-x-4">
         <Link href="/">Home</Link>
-        <Link href="/">Movies</Link>
+        <Link href="/movies">Movies</Link>
         <Link href="/">Series</Link>
         <Link href="/">Cinema</Link>
         <Link href="/">Upcoming</Link>

@@ -8,7 +8,7 @@ interface IGenreProps {
   genreIds: number[]
 }
 
-function Genre(props: IGenreProps): JSX.Element {
+const Genre = React.memo(function (props: IGenreProps): JSX.Element {
   const { data } = useSWR<GenreList>(
     `https://api.themoviedb.org/3/genre/movie/list?api_key=${
       process.env.NEXT_PUBLIC_API_KEY as string
@@ -26,6 +26,8 @@ function Genre(props: IGenreProps): JSX.Element {
     return genreText
   }, [data])
   return <h3>{genreHeading}</h3>
-}
+})
+
+Genre.displayName = 'Genre'
 
 export default Genre
