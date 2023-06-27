@@ -14,7 +14,7 @@ function useInfiniteScroll(targetElement: any): boolean {
       setIsAtBottom(entries[0].isIntersecting)
     }
 
-    const observer = new IntersectionObserver(handleScroll, { threshold: 1 })
+    const observer = new IntersectionObserver(handleScroll)
 
     if (observer !== undefined) {
       targetElement !== null && observer.observe(targetElement as HTMLElement)

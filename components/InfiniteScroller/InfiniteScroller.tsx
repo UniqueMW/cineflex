@@ -1,9 +1,10 @@
 'use client'
 import React from 'react'
 import useSWR from 'swr'
-import { PageGrid } from 'components'
+import { PageGrid, TotalResults } from 'components'
 import { useInfiniteScroll } from 'hooks'
 import { fetcher } from 'utils'
+import { PulseLoader } from 'PackagesClientComponents/reactSpinner'
 
 import type { IMoviePage, IMovie, ICardSeriesAndMovie } from 'types'
 
@@ -37,13 +38,16 @@ function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
   }, [data])
 
   return (
-    <section>
+    <section className="flex flex-col items-center">
       {cardData !== undefined ? (
-        <PageGrid data={cardData} />
+        <>
+          <TotalResults numberOfResults={cardData.length} />
+          <PageGrid data={cardData} />
+        </>
       ) : (
         <h1>Loading....</h1>
       )}
-      {isLoading && <h1>Loading More.....</h1>}
+      <PulseLoader loading={isLoading} color="#078080" />
       <div ref={targetElementRef} />
     </section>
   )

@@ -16,6 +16,7 @@ import DraggableCardCarousel from './DraggableCardCarousel/DraggableCardCarousel
 import NavWrapper from './NavWrapper/NavWrapper'
 import PageGrid from './PageGrid/PageGrid'
 import InfiniteScroll from './InfiniteScroller/InfiniteScroller'
+import TotalResults from './TotalResults/TotalResults'
 
 export {
   Nav,
@@ -35,5 +36,6 @@ export {
   DraggableCardCarousel,
   NavWrapper,
   PageGrid,
-  InfiniteScroll
+  InfiniteScroll,
+  TotalResults
 }
