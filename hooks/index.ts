@@ -1,3 +1,4 @@
 import useWindowSize from './useWindowSize/useWindowSize'
+import useInfiniteScroll from './useInfiniteScroll/useInfiniteScroll'
 
-export { useWindowSize }
+export { useWindowSize, useInfiniteScroll }

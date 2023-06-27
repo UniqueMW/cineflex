@@ -15,6 +15,7 @@ import CarouselGroup from './CarouselGroup/CarouselGroup'
 import DraggableCardCarousel from './DraggableCardCarousel/DraggableCardCarousel'
 import NavWrapper from './NavWrapper/NavWrapper'
 import PageGrid from './PageGrid/PageGrid'
+import InfiniteScroll from './InfiniteScroller/InfiniteScroller'
 
 export {
   Nav,
@@ -33,5 +34,6 @@ export {
   CarouselGroup,
   DraggableCardCarousel,
   NavWrapper,
-  PageGrid
+  PageGrid,
+  InfiniteScroll
 }
