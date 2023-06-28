@@ -2,7 +2,7 @@
 import React from 'react'
 import useSWR from 'swr'
 import { PageGrid, TotalResults } from 'components'
-import { useInfiniteScroll } from 'hooks'
+import { useFilter, useInfiniteScroll } from 'hooks'
 import { fetcher } from 'utils'
 import { PulseLoader } from 'PackagesClientComponents/reactSpinner'
 
@@ -13,8 +13,8 @@ interface IInfiniteScrollProps {
 }
 
 function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
-  const [page, setPage] = React.useState(1)
-  const [pageUrl, setPageUrl] = React.useState(`${url}&page=${1}`)
+  const [pageConfig, setPage] = React.useState({ page: 1 })
+  const pageUrl = useFilter(url, pageConfig)
   const { data, isLoading } = useSWR<IMoviePage>(pageUrl, fetcher)
   const [cardData, setCardData] =
     React.useState<Array<IMovie & ICardSeriesAndMovie>>()
@@ -24,8 +24,7 @@ function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
 
   React.useEffect(() => {
     if (scrollToBottom && !isLoading) {
-      setPageUrl(`${url}&page=${page + 1}`)
-      setPage(page + 1)
+      setPage({ page: pageConfig.page + 1 })
     }
   }, [scrollToBottom])
 

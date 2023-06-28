@@ -15,7 +15,7 @@ import CarouselGroup from './CarouselGroup/CarouselGroup'
 import DraggableCardCarousel from './DraggableCardCarousel/DraggableCardCarousel'
 import NavWrapper from './NavWrapper/NavWrapper'
 import PageGrid from './PageGrid/PageGrid'
-import InfiniteScroll from './InfiniteScroller/InfiniteScroller'
+import InfiniteScroll from './InfiniteScroll/InfiniteScroll'
 import TotalResults from './TotalResults/TotalResults'
 
 export {
