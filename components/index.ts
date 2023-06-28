@@ -17,6 +17,9 @@ import NavWrapper from './NavWrapper/NavWrapper'
 import PageGrid from './PageGrid/PageGrid'
 import InfiniteScroll from './InfiniteScroll/InfiniteScroll'
 import TotalResults from './TotalResults/TotalResults'
+import SortByCard from './SortByCard/SortByCard'
+import SortByFilter from './SortByFilter/SortByFilter'
+import PageFilter from './PageFilter/PageFilter'
 
 export {
   Nav,
@@ -37,5 +40,8 @@ export {
   NavWrapper,
   PageGrid,
   InfiniteScroll,
-  TotalResults
+  TotalResults,
+  SortByCard,
+  SortByFilter,
+  PageFilter
 }

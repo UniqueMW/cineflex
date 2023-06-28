@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import useSWR from 'swr'
-import { PageGrid, TotalResults } from 'components'
+import { PageFilter, PageGrid, TotalResults } from 'components'
 import { useFilter, useInfiniteScroll } from 'hooks'
 import { fetcher } from 'utils'
 import { PulseLoader } from 'PackagesClientComponents/reactSpinner'
@@ -41,7 +41,10 @@ function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
       {cardData !== undefined ? (
         <>
           <TotalResults numberOfResults={cardData.length} />
-          <PageGrid data={cardData} />
+          <div className="flex flex-row items-start space-x-2">
+            <PageFilter />
+            <PageGrid data={cardData} />
+          </div>
         </>
       ) : (
         <h1>Loading....</h1>
