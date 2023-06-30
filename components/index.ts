@@ -20,6 +20,7 @@ import TotalResults from './TotalResults/TotalResults'
 import SortByCard from './SortByCard/SortByCard'
 import SortByFilter from './SortByFilter/SortByFilter'
 import PageFilter from './PageFilter/PageFilter'
+import GenreFilter from './GenreFilter/GenreFilter'
 
 export {
   Nav,
@@ -43,5 +44,6 @@ export {
   TotalResults,
   SortByCard,
   SortByFilter,
-  PageFilter
+  PageFilter,
+  GenreFilter
 }

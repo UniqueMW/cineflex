@@ -39,13 +39,13 @@ function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
   return (
     <section className="flex flex-col items-center">
       {cardData !== undefined ? (
-        <>
-          <TotalResults numberOfResults={cardData.length} />
-          <div className="flex flex-row items-start space-x-2">
-            <PageFilter />
+        <section className="flex flex-row space-x-2">
+          <PageFilter />
+          <div className="flex flex-col space-y-2">
+            <TotalResults numberOfResults={cardData.length} />
             <PageGrid data={cardData} />
           </div>
-        </>
+        </section>
       ) : (
         <h1>Loading....</h1>
       )}
