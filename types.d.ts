@@ -54,18 +54,18 @@ export interface Genre {
 }
 
 export interface IWatchProviderList {
-  results: Result[]
+  results: IWatchProvider[]
 }
 
 export interface IWatchProvider {
-  display_priorities: DisplayPriorities
+  display_priorities: IDisplayPriorities
   display_priority: number
   logo_path: string
   provider_name: string
   provider_id: number
 }
 
-export interface DisplayPriorities {
+export interface IDisplayPriorities {
   CA?: number
   AE?: number
   AR?: number

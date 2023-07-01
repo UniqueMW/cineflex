@@ -1,5 +1,10 @@
 import React from 'react'
-import { SortByFilter, ButtonIcon, GenreFilter } from 'components'
+import {
+  SortByFilter,
+  ButtonIcon,
+  GenreFilter,
+  WatchProviderFilter
+} from 'components'
 import { GiSettingsKnobs } from 'react-icons/gi'
 
 function PageFilter(): JSX.Element {
@@ -10,6 +15,7 @@ function PageFilter(): JSX.Element {
       </ButtonIcon>
       <SortByFilter />
       <GenreFilter title="Genre" />
+      <WatchProviderFilter />
     </section>
   )
 }
