@@ -22,6 +22,7 @@ import SortByFilter from './SortByFilter/SortByFilter'
 import PageFilter from './PageFilter/PageFilter'
 import GenreFilter from './GenreFilter/GenreFilter'
 import WatchProviderFilter from './WatchProviderFilter/WatchProviderFilter'
+import WatchProviderCard from './WatchProviderCard/WatchProviderCard'
 
 export {
   Nav,
@@ -47,5 +48,6 @@ export {
   SortByFilter,
   PageFilter,
   GenreFilter,
-  WatchProviderFilter
+  WatchProviderFilter,
+  WatchProviderCard
 }

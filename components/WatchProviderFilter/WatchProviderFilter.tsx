@@ -1,35 +1,45 @@
 'use client'
 import React from 'react'
 import useSWR from 'swr'
-import Image from 'next/image'
-import { fetcher } from 'utils'
+import { fetcher, debounce } from 'utils'
 import { GrDrag } from 'react-icons/gr'
-import { ButtonIcon } from 'components'
-import type { IWatchProviderList } from 'types'
+import { ButtonIcon, WatchProviderCard } from 'components'
+import type { IWatchProviderList, IWatchProvider } from 'types'
 
 function WatchProviderFilter(): JSX.Element {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
   const watchProviderUrl = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${API_KEY}`
   const { data } = useSWR<IWatchProviderList>(watchProviderUrl, fetcher)
+  const searchDebounce = React.useCallback(debounce(), [])
 
-  // const watchProviderCards = React.useMemo(() => {
-  //   return data?.results.map((provider) => (
-  //     <div
-  //       key={provider.provider_id}
-  //       className="flex flex-row items-center space-x-1"
-  //     >
-  //       <Image
-  //         width={30}
-  //         height={30}
-  //         src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`}
-  //         alt={provider.provider_id.toString()}
-  //         placeholder="blur"
-  //         blurDataURL="/cardPlaceholder.png"
-  //       />
-  //       <h3>{provider.provider_name}</h3>
-  //     </div>
-  //   ))
-  // }, [data])
+  const [suggestions, setSuggestion] = React.useState<IWatchProvider[]>([])
+
+  const handleProvider = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ): void => {
+    const searchedText = event.currentTarget.value
+    if (typeof data !== 'undefined' && searchedText.length > 0) {
+      searchDebounce(() => {
+        const suggestionsResults = []
+        for (const provider of data?.results) {
+          if (
+            provider.provider_name
+              .toLowerCase()
+              .includes(searchedText.toLowerCase())
+          ) {
+            suggestionsResults.push(provider)
+          }
+        }
+        setSuggestion(suggestionsResults)
+      }, 500)
+    }
+  }
+
+  const suggestionsCards = React.useMemo(() => {
+    return suggestions.map((provider) => (
+      <WatchProviderCard provider={provider} key={provider.provider_id} />
+    ))
+  }, [suggestions])
 
   return (
     <section>
@@ -43,8 +53,11 @@ function WatchProviderFilter(): JSX.Element {
         type="text"
         className="bg-transparent w-full border border-button h-10 text-headline font-heading "
         placeholder="Try Netflix"
-
+        onKeyUp={handleProvider}
       />
+      <div className="max-h-[200px] overflow-scroll space-y-1">
+        {suggestionsCards}
+      </div>
     </section>
   )
 }
