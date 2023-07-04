@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import * as _ from 'lodash'
 import type { IWatchProvider } from 'types'
 
 interface IWatchProviderCardProps {
@@ -9,7 +8,7 @@ interface IWatchProviderCardProps {
 
 function WatchProviderCard({ provider }: IWatchProviderCardProps): JSX.Element {
   return (
-    <div className="flex flex-row items-center space-x-1 shadow-sm w-fit">
+    <div className="flex flex-row items-center space-x-1 shadow-sm w-full">
       <Image
         width={30}
         height={30}
@@ -18,9 +17,7 @@ function WatchProviderCard({ provider }: IWatchProviderCardProps): JSX.Element {
         placeholder="blur"
         blurDataURL="/cardPlaceholder.png"
       />
-      <h3>
-        {_.truncate(provider.provider_name, { length: 13, omission: '...' })}
-      </h3>
+      <h3>{provider.provider_name}</h3>
     </div>
   )
 }

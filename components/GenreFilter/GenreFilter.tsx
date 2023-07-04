@@ -1,10 +1,8 @@
 'use client'
 import React from 'react'
 import useSWR from 'swr'
-import { GrDrag } from 'react-icons/gr'
 import { GiClapperboard } from 'react-icons/gi'
 import { fetcher } from 'utils'
-import { ButtonIcon } from 'components'
 import type { GenreList } from 'types'
 
 interface IGenreFilter {
@@ -19,30 +17,25 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
   const genreCards = React.useMemo(
     () =>
       data?.genres.map((genre) => (
-        <div
+        <option
           key={genre.id}
           className="w-fit border p-2 shadow-sm font-paragraph text-headline tracking-wide"
         >
           {genre.name}
-        </div>
+        </option>
       )),
     [data]
   )
 
   return (
-    <section className="flex flex-col items-center w-full justify-between text-lg text-headline font-heading tracking-wider">
-      <div className="flex flex-row items-center justify-between w-full">
-        <h3 className="flex flex-row items-center">
-          <GiClapperboard />
-          {props.title}
-        </h3>
-        <ButtonIcon>
-          <GrDrag />
-        </ButtonIcon>
-      </div>
-      <div className="flex flex-row flex-wrap gap-1 text-base">
+    <section className="flex flex-col items-center lg:w-1/2 w-full justify-between text-lg text-headline font-heading tracking-wider">
+      <h3 className="flex flex-row items-center text-left w-full">
+        <GiClapperboard className="mr-2" />
+        {props.title}
+      </h3>
+      <select className=" text-base w-full bg-background h-10 border border-button outline-none">
         {genreCards}
-      </div>
+      </select>
     </section>
   )
 }

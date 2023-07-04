@@ -1,7 +1,6 @@
 import React from 'react'
 import { BiSort } from 'react-icons/bi'
-import { GrDrag } from 'react-icons/gr'
-import { ButtonIcon, SortByCard } from 'components'
+import { SortByCard } from 'components'
 
 type sortFilterType = Array<{
   text: string
@@ -31,14 +30,10 @@ function SortByFilter(): JSX.Element {
 
   return (
     <section>
-      <div className=" flex flex-row items-center w-full justify-between text-lg text-headline font-heading tracking-wider">
-        <h1 className="flex flex-row items-center">
-          <BiSort /> Sort By
-        </h1>
-        <ButtonIcon>
-          <GrDrag />
-        </ButtonIcon>
-      </div>
+      <h1 className="flex flex-row items-center text-headline font-heading text-lg w-full text-left">
+        <BiSort className="mr-2" />
+        Sort By
+      </h1>
       <div className="flex flex-row flex-wrap gap-1">
         {sortFilters.map((filter) => (
           <SortByCard

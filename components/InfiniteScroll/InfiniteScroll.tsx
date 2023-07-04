@@ -14,6 +14,7 @@ interface IInfiniteScrollProps {
 
 function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
   const [pageConfig, setPage] = React.useState({ page: 1 })
+  const [isShowFilter, setIsShowFilter] = React.useState(false)
   const pageUrl = useFilter(url, pageConfig)
   const { data, isLoading } = useSWR<IMoviePage>(pageUrl, fetcher)
   const [cardData, setCardData] =
@@ -39,13 +40,14 @@ function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
   return (
     <section className="flex flex-col items-center">
       {cardData !== undefined ? (
-        <section className="flex flex-row space-x-2">
-          <PageFilter />
-          <div className="flex flex-col space-y-2">
-            <TotalResults numberOfResults={cardData.length} />
-            <PageGrid data={cardData} />
-          </div>
-        </section>
+        <div className="flex flex-col space-y-2">
+          <TotalResults
+            numberOfResults={cardData.length}
+            setIsShowFilter={setIsShowFilter}
+          />
+          {isShowFilter && <PageFilter />}
+          <PageGrid data={cardData} />
+        </div>
       ) : (
         <h1>Loading....</h1>
       )}

@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 import useSWR from 'swr'
+import { LiaTvSolid } from 'react-icons/lia'
 import { fetcher, debounce } from 'utils'
-import { GrDrag } from 'react-icons/gr'
-import { ButtonIcon, WatchProviderCard } from 'components'
+import { WatchProviderCard } from 'components'
 import type { IWatchProviderList, IWatchProvider } from 'types'
 
 function WatchProviderFilter(): JSX.Element {
@@ -32,6 +32,8 @@ function WatchProviderFilter(): JSX.Element {
         }
         setSuggestion(suggestionsResults)
       }, 500)
+    } else {
+      setSuggestion([])
     }
   }
 
@@ -42,20 +44,18 @@ function WatchProviderFilter(): JSX.Element {
   }, [suggestions])
 
   return (
-    <section>
-      <div className="flex flex-row items-center justify-between w-full">
-        <h3 className="flex flex-row items-center">Watch Provider</h3>
-        <ButtonIcon>
-          <GrDrag />
-        </ButtonIcon>
-      </div>
+    <section className="lg:w-1/2 w-full justify-center">
+      <h3 className="flex flex-row items-center text-lg font-heading tracking-wider text-left w-full">
+        <LiaTvSolid className="mr-2" />
+        Watch Provider
+      </h3>
       <input
         type="text"
         className="bg-transparent w-full border border-button h-10 text-headline font-heading "
         placeholder="Try Netflix"
         onKeyUp={handleProvider}
       />
-      <div className="max-h-[200px] overflow-scroll space-y-1">
+      <div className="max-h-[200px] overflow-y-scroll space-y-1 font-paragraph text-base">
         {suggestionsCards}
       </div>
     </section>
