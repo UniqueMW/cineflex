@@ -2,6 +2,7 @@
 import React from 'react'
 import useSWR from 'swr'
 import { GiClapperboard } from 'react-icons/gi'
+import { ToggleButton } from 'components'
 import { fetcher } from 'utils'
 import type { GenreList } from 'types'
 
@@ -28,11 +29,14 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
   )
 
   return (
-    <section className="flex flex-col items-center lg:w-1/2 w-full justify-between text-lg text-headline font-heading tracking-wider">
-      <h3 className="flex flex-row items-center text-left w-full">
-        <GiClapperboard className="mr-2" />
-        {props.title}
-      </h3>
+    <section className="flex flex-col items-center lg:w-1/2 w-full justify-between text-lg text-headline font-heading tracking-wider space-y-1">
+      <div className="flex flex-row items-center justify-between w-full">
+        <h3 className="flex flex-row items-center text-left w-full">
+          <GiClapperboard className="mr-2" />
+          {props.title}
+        </h3>
+        <ToggleButton options={['Include', 'Exclude']} />
+      </div>
       <select className=" text-base w-full bg-background h-10 border border-button outline-none">
         {genreCards}
       </select>

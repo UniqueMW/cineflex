@@ -23,6 +23,7 @@ import PageFilter from './PageFilter/PageFilter'
 import GenreFilter from './GenreFilter/GenreFilter'
 import WatchProviderFilter from './WatchProviderFilter/WatchProviderFilter'
 import WatchProviderCard from './WatchProviderCard/WatchProviderCard'
+import ToggleButton from './ToggleButton/ToggleButton'
 
 export {
   Nav,
@@ -49,5 +50,6 @@ export {
   PageFilter,
   GenreFilter,
   WatchProviderFilter,
-  WatchProviderCard
+  WatchProviderCard,
+  ToggleButton
 }
