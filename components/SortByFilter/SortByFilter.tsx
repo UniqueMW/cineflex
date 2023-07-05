@@ -1,10 +1,14 @@
+'use client'
 import React from 'react'
 import { BiSort } from 'react-icons/bi'
 import { SortByCard } from 'components'
+import { PageFilterContext } from 'reactContexts'
+
+import type { sortByType } from 'types'
 
 type sortFilterType = Array<{
   text: string
-  value: string
+  value: sortByType
   direction: 'asc' | 'desc'
 }>
 
@@ -13,7 +17,7 @@ function SortByFilter(): JSX.Element {
     { text: 'Popularity', value: 'popularity.asc', direction: 'asc' },
     { text: 'Popularity', value: 'popularity.desc', direction: 'desc' },
     { text: 'Revenue', value: 'revenue.asc', direction: 'asc' },
-    { text: 'Revenue', value: 'popularity.desc', direction: 'desc' },
+    { text: 'Revenue', value: 'revenue.desc', direction: 'desc' },
     {
       text: 'Release Date',
       value: 'primary_release_date.asc',
@@ -28,6 +32,20 @@ function SortByFilter(): JSX.Element {
     { text: 'Ratings', value: 'vote_average.desc', direction: 'desc' }
   ]
 
+  const [sortValue, setSortValue] =
+    React.useState<sortByType>('popularity.desc')
+  const pageFilterContext = React.useContext(PageFilterContext)
+
+  React.useEffect(() => {
+    if (pageFilterContext !== null) {
+      pageFilterContext.setPageConfig({
+        ...pageFilterContext.pageConfig,
+        sort_by: sortValue,
+        page: 1
+      })
+    }
+  }, [sortValue])
+
   return (
     <section>
       <h1 className="flex flex-row items-center text-headline font-heading text-lg w-full text-left">
@@ -40,6 +58,8 @@ function SortByFilter(): JSX.Element {
             text={filter.text}
             value={filter.value}
             direction={filter.direction}
+            sortFilterValue={sortValue}
+            setSortFilterValue={setSortValue}
             key={filter.value}
           />
         ))}

@@ -16,18 +16,20 @@ function ToggleButton(props: IToggleButtonProps): JSX.Element {
       setWidth(heading.offsetWidth)
     }
   }, [headingRef.current, isToggle])
+
   const handleToggle = (): void => {
     setIsToggle((prev) => !prev)
   }
+
   return (
     <button
-      className={`flex border border-button bg-background items-center ${
+      className={`flex border border-button bg-background items-center rounded-sm ${
         isToggle ? 'flex-row-reverse' : 'flex-row'
       }`}
       onClick={handleToggle}
     >
       <h3
-        className="h-7 flex-grow text-headline font-heading tracking-wide"
+        className="h-7 flex-grow text-headline font-heading tracking-wide px-1"
         ref={headingRef}
       >
         {isToggle ? props.options[0] : props.options[1]}
@@ -36,9 +38,7 @@ function ToggleButton(props: IToggleButtonProps): JSX.Element {
         className={`flex-grow h-7 bg-button`}
         style={{ width: `${width}px` }}
         layout
-      >
-        {'  '}
-      </motion.div>
+      />
     </button>
   )
 }

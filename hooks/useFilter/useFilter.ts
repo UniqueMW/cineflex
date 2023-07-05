@@ -1,29 +1,5 @@
 import React from 'react'
-
-interface IFilterConfig {
-  language?: 'en-US'
-  include_adult?: boolean
-  include_video?: boolean
-  page?: number
-  with_genres?: number
-  without_genres?: number
-  with_watch_providers?: number
-  without_watch_providers?: number
-  year?: number
-  'vote_average.gte'?: number
-  sort_by?:
-    | 'popularity.asc'
-    | 'popularity.desc'
-    | 'revenue.asc'
-    | 'revenue.desc'
-    | 'primary_release_date.asc'
-    | 'primary_release_date.desc'
-    | 'vote_average.asc'
-    | 'vote_average.desc'
-    | 'vote_count.asc'
-    | 'vote_count.desc'
-  [key: string]: undefined | boolean | number | string
-}
+import type { IFilterConfig } from 'types'
 
 function useFilter(baseUrl: string, filterConfig?: IFilterConfig): string {
   const defaultConfig: IFilterConfig = { language: 'en-US', page: 1 }
