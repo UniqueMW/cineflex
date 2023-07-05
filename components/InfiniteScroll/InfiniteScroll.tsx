@@ -21,7 +21,6 @@ interface IInfiniteScrollProps {
 function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
   const [pageConfig, setPageConfig] = React.useState<IFilterConfig>({ page: 1 })
   const [isShowFilter, setIsShowFilter] = React.useState(false)
-  const [currentPage, setCurrentPage] = React.useState(pageConfig.page)
   const pageUrl = useFilter(url, pageConfig)
   const { data, isLoading } = useSWR<IMoviePage>(pageUrl, fetcher)
   const [cardData, setCardData] =
@@ -38,10 +37,9 @@ function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
 
   React.useEffect(() => {
     if (typeof data !== 'undefined') {
-      if (typeof cardData === 'undefined' || currentPage >= pageConfig.page) {
+      if (typeof cardData === 'undefined' || data.page === 1) {
         setCardData(data.results)
-      } else if (currentPage < pageConfig.page) {
-        setCurrentPage(pageConfig.page)
+      } else if (typeof cardData !== 'undefined') {
         setCardData([...cardData, ...data.results])
       }
     }
