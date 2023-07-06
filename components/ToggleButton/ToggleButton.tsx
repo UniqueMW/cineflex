@@ -15,7 +15,7 @@ function ToggleButton(props: IToggleButtonProps): JSX.Element {
     if (heading !== null) {
       setWidth(heading.offsetWidth)
     }
-  }, [headingRef.current, isToggle])
+  }, [headingRef.current?.offsetWidth, headingRef.current, isToggle])
 
   const handleToggle = (): void => {
     setIsToggle((prev) => !prev)
@@ -35,10 +35,12 @@ function ToggleButton(props: IToggleButtonProps): JSX.Element {
         {isToggle ? props.options[0] : props.options[1]}
       </h3>
       <motion.div
-        className={`flex-grow h-7 bg-button`}
-        style={{ width: `${width}px` }}
+        className="flex-grow h-7 bg-button"
+        initial={{ width }}
         layout
-      />
+      >
+        {' '}
+      </motion.div>
     </button>
   )
 }

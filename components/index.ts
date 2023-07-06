@@ -24,6 +24,7 @@ import GenreFilter from './GenreFilter/GenreFilter'
 import WatchProviderFilter from './WatchProviderFilter/WatchProviderFilter'
 import WatchProviderCard from './WatchProviderCard/WatchProviderCard'
 import ToggleButton from './ToggleButton/ToggleButton'
+import Chip from './Chip/Chip'
 
 export {
   Nav,
@@ -51,5 +52,6 @@ export {
   GenreFilter,
   WatchProviderFilter,
   WatchProviderCard,
-  ToggleButton
+  ToggleButton,
+  Chip
 }

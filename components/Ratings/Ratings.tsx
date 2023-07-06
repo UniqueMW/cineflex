@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { useWindowSize } from 'hooks'
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im'

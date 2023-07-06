@@ -2,10 +2,10 @@
 import React from 'react'
 import useSWR from 'swr'
 import { GiClapperboard } from 'react-icons/gi'
-import { ToggleButton } from 'components'
+import { ToggleButton, Chip } from 'components'
 import { PageFilterContext } from 'reactContexts'
 import { fetcher } from 'utils'
-import type { GenreList } from 'types'
+import type { GenreList, Genre } from 'types'
 
 interface IGenreFilter {
   title: string
@@ -17,12 +17,14 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
   const { data } = useSWR<GenreList>(genresUrl, fetcher)
   const filterContext = React.useContext(PageFilterContext)
 
-  const genreCards = React.useMemo(
+  const [selectedChips, setSelectedChips] = React.useState<Genre[]>()
+
+  const genreOptions = React.useMemo(
     () =>
       data?.genres.map((genre) => (
         <option
           key={genre.id}
-          value={genre.id}
+          value={JSON.stringify(genre)}
           className="w-fit border p-2 shadow-sm font-paragraph text-headline tracking-wide"
         >
           {genre.name}
@@ -31,15 +33,38 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
     [data]
   )
 
+  const chips = React.useMemo(() => {
+    if (typeof selectedChips !== 'undefined') {
+      return selectedChips.map((chipInfo) => (
+        <Chip key={chipInfo.id}>{chipInfo.name}</Chip>
+      ))
+    }
+    return []
+  }, [selectedChips])
+
   const handleOnGenreSelect = (
     event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
-    if (filterContext !== null) {
-      filterContext.setPageConfig({
-        ...filterContext.pageConfig,
-        with_genres: parseInt(event.target.value),
-        page: 1
-      })
+    // if (filterContext !== null) {
+    //   filterContext.setPageConfig({
+    //     ...filterContext.pageConfig,
+    //     with_genres: parseInt(event.target.value),
+    //     page: 1
+    //   })
+    // }
+    const newChip = JSON.parse(event.target.value) as Genre
+
+    if (Array.isArray(selectedChips) && selectedChips.length > 0) {
+      const isChipSelected = selectedChips.some(
+        (chip) => chip.id === newChip.id
+      )
+      if (isChipSelected) {
+        setSelectedChips(selectedChips.filter((chip) => chip.id !== newChip.id))
+      } else {
+        setSelectedChips([...selectedChips, newChip])
+      }
+    } else {
+      setSelectedChips([newChip])
     }
   }
 
@@ -56,8 +81,11 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
         className=" text-base w-full bg-background h-10 border border-button outline-none"
         onChange={handleOnGenreSelect}
       >
-        {genreCards}
+        {genreOptions}
       </select>
+      <div className="flex flex-row flex-wrap justify-center gap-2 px-2">
+        {chips}
+      </div>
     </section>
   )
 }
