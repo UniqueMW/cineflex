@@ -39,6 +39,6 @@ module.exports = {
         heading: ['var(--font-heading)']
       }
     }
-  }
-  // plugins: [require('tailwind-scrollbar')({ nocompatible: true })]
+  },
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })]
 }

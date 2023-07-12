@@ -4,7 +4,6 @@ import { motion } from 'PackagesClientComponents/framerMotion'
 interface IToggleButtonProps {
   options: [string, string]
   setOption: React.Dispatch<React.SetStateAction<string>>
-  toggleIndicatorClass: string
 }
 
 function ToggleButton(props: IToggleButtonProps): JSX.Element {
@@ -22,13 +21,10 @@ function ToggleButton(props: IToggleButtonProps): JSX.Element {
       }`}
       onClick={handleToggle}
     >
-      <h3 className="h-7 flex-grow text-headline font-heading tracking-wide px-1">
+      <h3 className="h-7 flex-grow text-headline font-heading tracking-wide px-1 text-base">
         {isToggle ? props.options[0] : props.options[1]}
       </h3>
-      <motion.div
-        className={`flex-grow h-7 bg-button ${props.toggleIndicatorClass}`}
-        layout
-      >
+      <motion.div className="flex-grow w-12 h-7 bg-button" layout>
         {' '}
       </motion.div>
     </button>

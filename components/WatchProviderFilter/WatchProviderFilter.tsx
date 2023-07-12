@@ -3,8 +3,8 @@ import React from 'react'
 import useSWR from 'swr'
 import { LiaTvSolid } from 'react-icons/lia'
 import { fetcher, debounce } from 'utils'
-import { WatchProviderCard, ToggleButton } from 'components'
-import type { IWatchProviderList, IWatchProvider } from 'types'
+import { WatchProviderCard, ToggleButton, Chip } from 'components'
+import type { IWatchProviderList, IWatchProvider, Genre } from 'types'
 
 function WatchProviderFilter(): JSX.Element {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
@@ -13,6 +13,8 @@ function WatchProviderFilter(): JSX.Element {
   const searchDebounce = React.useCallback(debounce(), [])
 
   const [suggestions, setSuggestion] = React.useState<IWatchProvider[]>([])
+  const [selectedWatchProviders, setSelectedWatchProviders] =
+    React.useState<Array<IWatchProvider & Genre>>()
 
   const handleProvider = (
     event: React.KeyboardEvent<HTMLInputElement>
@@ -39,9 +41,31 @@ function WatchProviderFilter(): JSX.Element {
 
   const suggestionsCards = React.useMemo(() => {
     return suggestions.map((provider) => (
-      <WatchProviderCard provider={provider} key={provider.provider_id} />
+      <WatchProviderCard
+        provider={provider}
+        key={provider.provider_id}
+        selectedWatchProviders={selectedWatchProviders}
+        setSelectedWatchProviders={setSelectedWatchProviders}
+      />
     ))
-  }, [suggestions])
+  }, [suggestions, selectedWatchProviders])
+
+  const watchProvidersChips = React.useMemo(() => {
+    if (selectedWatchProviders !== undefined) {
+      return selectedWatchProviders.map((providerInfo) => (
+        <Chip
+          key={providerInfo.provider_id}
+          selectedChips={selectedWatchProviders}
+          setSelectedChips={setSelectedWatchProviders}
+          id={providerInfo.provider_id}
+        >
+          <WatchProviderCard provider={providerInfo} />
+        </Chip>
+      ))
+    }
+
+    return []
+  }, [selectedWatchProviders])
 
   return (
     <section className="lg:w-1/2 w-full justify-center space-y-1">
@@ -50,15 +74,18 @@ function WatchProviderFilter(): JSX.Element {
           <LiaTvSolid className="mr-2" />
           Watch Provider
         </h3>
-        <ToggleButton options={['AND', 'OR']} toggleIndicatorClass="w-8" />
+        <ToggleButton options={['Include', 'Exclude']} />
       </div>
       <input
         type="text"
-        className="bg-transparent w-full border border-button h-10 text-headline font-heading "
+        className="bg-transparent w-full border border-button h-10 text-headline font-heading outline-none px-1"
         placeholder="Try Netflix"
         onKeyUp={handleProvider}
       />
-      <div className="max-h-[200px] overflow-y-scroll space-y-1 font-paragraph text-base">
+      <div className="flex flex-row flex-wrap justify-center gap-1">
+        {watchProvidersChips}
+      </div>
+      <div className="max-h-[200px] overflow-y-scroll space-y-1 font-paragraph text-base scrollbar scrollbar-thumb-button scrollbar-thin">
         {suggestionsCards}
       </div>
     </section>

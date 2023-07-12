@@ -5,7 +5,7 @@ import { GiClapperboard } from 'react-icons/gi'
 import { ToggleButton, Chip } from 'components'
 import { PageFilterContext } from 'reactContexts'
 import { fetcher, groupFilterOptionsWithLogic } from 'utils'
-import type { GenreList, Genre } from 'types'
+import type { GenreList, Genre, IWatchProvider } from 'types'
 
 interface IGenreFilter {
   title: string
@@ -17,7 +17,8 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
   const { data } = useSWR<GenreList>(genresUrl, fetcher)
   const filterContext = React.useContext(PageFilterContext)
 
-  const [selectedChips, setSelectedChips] = React.useState<Genre[]>()
+  const [selectedChips, setSelectedChips] =
+    React.useState<Array<Genre & IWatchProvider>>()
   const [toggleOption, setToggleOption] = React.useState('Include')
 
   const genreOptions = React.useMemo(
@@ -68,7 +69,7 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
   const handleOnGenreSelect = (
     event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
-    const newChip = JSON.parse(event.target.value) as Genre
+    const newChip = JSON.parse(event.target.value) as Genre & IWatchProvider
 
     if (Array.isArray(selectedChips) && selectedChips.length > 0) {
       const isChipSelected = selectedChips.some(
@@ -94,7 +95,6 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
         <ToggleButton
           options={['Include', 'Exclude']}
           setOption={setToggleOption}
-          toggleIndicatorClass="w-12"
         />
       </div>
       <select

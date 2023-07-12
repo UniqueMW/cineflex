@@ -1,18 +1,22 @@
 import React from 'react'
-import type { Genre } from 'types'
+import type { Genre, IWatchProvider } from 'types'
 import { LiaTimesSolid } from 'react-icons/lia'
 
 interface IChipProps {
   children: React.ReactNode
   id: number
-  selectedChips: Genre[] | undefined
-  setSelectedChips: React.Dispatch<React.SetStateAction<Genre[] | undefined>>
+  selectedChips: Array<Genre & IWatchProvider> | undefined
+  setSelectedChips: React.Dispatch<
+    React.SetStateAction<Array<Genre & IWatchProvider> | undefined>
+  >
 }
 
 function Chip(props: IChipProps): JSX.Element {
   const handleRemoveChip = (): void => {
     const filteredChips = props.selectedChips?.filter(
-      (chipInfo) => chipInfo.id !== props.id
+      (chipInfo) =>
+        (chipInfo.id !== undefined ? chipInfo.id : chipInfo.provider_id) !==
+        props.id
     )
     props.setSelectedChips(filteredChips)
   }
