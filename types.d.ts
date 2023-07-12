@@ -224,8 +224,8 @@ export interface IFilterConfig {
   include_adult?: boolean
   include_video?: boolean
   page: number
-  with_genres?: number
-  without_genres?: number
+  with_genres?: string
+  without_genres?: string
   with_watch_providers?: number
   without_watch_providers?: number
   year?: number

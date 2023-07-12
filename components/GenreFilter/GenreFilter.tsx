@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { GiClapperboard } from 'react-icons/gi'
 import { ToggleButton, Chip } from 'components'
 import { PageFilterContext } from 'reactContexts'
-import { fetcher } from 'utils'
+import { fetcher, groupFilterOptionsWithLogic } from 'utils'
 import type { GenreList, Genre } from 'types'
 
 interface IGenreFilter {
@@ -18,6 +18,7 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
   const filterContext = React.useContext(PageFilterContext)
 
   const [selectedChips, setSelectedChips] = React.useState<Genre[]>()
+  const [toggleOption, setToggleOption] = React.useState('Include')
 
   const genreOptions = React.useMemo(
     () =>
@@ -36,22 +37,37 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
   const chips = React.useMemo(() => {
     if (typeof selectedChips !== 'undefined') {
       return selectedChips.map((chipInfo) => (
-        <Chip key={chipInfo.id}>{chipInfo.name}</Chip>
+        <Chip
+          key={chipInfo.id}
+          id={chipInfo.id}
+          selectedChips={selectedChips}
+          setSelectedChips={setSelectedChips}
+        >
+          {chipInfo.name}
+        </Chip>
       ))
     }
     return []
   }, [selectedChips])
 
+  React.useEffect(() => {
+    if (filterContext !== null && typeof selectedChips !== 'undefined') {
+      delete filterContext.pageConfig.with_genres
+      delete filterContext.pageConfig.without_genres
+      const genreKey =
+        toggleOption === 'Include' ? 'with_genres' : 'without_genres'
+
+      filterContext.setPageConfig({
+        ...filterContext.pageConfig,
+        [genreKey]: groupFilterOptionsWithLogic(selectedChips),
+        page: 1
+      })
+    }
+  }, [selectedChips, toggleOption])
+
   const handleOnGenreSelect = (
     event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
-    // if (filterContext !== null) {
-    //   filterContext.setPageConfig({
-    //     ...filterContext.pageConfig,
-    //     with_genres: parseInt(event.target.value),
-    //     page: 1
-    //   })
-    // }
     const newChip = JSON.parse(event.target.value) as Genre
 
     if (Array.isArray(selectedChips) && selectedChips.length > 0) {
@@ -75,7 +91,11 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
           <GiClapperboard className="mr-2" />
           {props.title}
         </h3>
-        <ToggleButton options={['Include', 'Exclude']} />
+        <ToggleButton
+          options={['Include', 'Exclude']}
+          setOption={setToggleOption}
+          toggleIndicatorClass="w-12"
+        />
       </div>
       <select
         className=" text-base w-full bg-background h-10 border border-button outline-none"

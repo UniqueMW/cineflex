@@ -11,7 +11,7 @@ function useFilter(baseUrl: string, filterConfig?: IFilterConfig): string {
     const isValid = regex.test(baseUrl)
 
     if (isValid) {
-      let generatedUrl = url
+      let generatedUrl = baseUrl
       for (const key in config) {
         generatedUrl = `${generatedUrl}&${key}=${String(config[key])}`
       }
@@ -22,7 +22,6 @@ function useFilter(baseUrl: string, filterConfig?: IFilterConfig): string {
       )
     }
   }, [baseUrl, filterConfig])
-
   return url
 }
 

@@ -3,22 +3,16 @@ import { motion } from 'PackagesClientComponents/framerMotion'
 
 interface IToggleButtonProps {
   options: [string, string]
+  setOption: React.Dispatch<React.SetStateAction<string>>
+  toggleIndicatorClass: string
 }
 
 function ToggleButton(props: IToggleButtonProps): JSX.Element {
   const [isToggle, setIsToggle] = React.useState(true)
-  const [width, setWidth] = React.useState(10)
-  const headingRef = React.useRef<HTMLHeadingElement>(null)
-
-  React.useEffect(() => {
-    const heading = headingRef.current
-    if (heading !== null) {
-      setWidth(heading.offsetWidth)
-    }
-  }, [headingRef.current?.offsetWidth, headingRef.current, isToggle])
 
   const handleToggle = (): void => {
     setIsToggle((prev) => !prev)
+    props.setOption(isToggle ? props.options[1] : props.options[0])
   }
 
   return (
@@ -28,15 +22,11 @@ function ToggleButton(props: IToggleButtonProps): JSX.Element {
       }`}
       onClick={handleToggle}
     >
-      <h3
-        className="h-7 flex-grow text-headline font-heading tracking-wide px-1"
-        ref={headingRef}
-      >
+      <h3 className="h-7 flex-grow text-headline font-heading tracking-wide px-1">
         {isToggle ? props.options[0] : props.options[1]}
       </h3>
       <motion.div
-        className="flex-grow h-7 bg-button"
-        initial={{ width }}
+        className={`flex-grow h-7 bg-button ${props.toggleIndicatorClass}`}
         layout
       >
         {' '}

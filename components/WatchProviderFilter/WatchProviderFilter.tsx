@@ -50,7 +50,7 @@ function WatchProviderFilter(): JSX.Element {
           <LiaTvSolid className="mr-2" />
           Watch Provider
         </h3>
-        <ToggleButton options={['AND', 'OR']} />
+        <ToggleButton options={['AND', 'OR']} toggleIndicatorClass="w-8" />
       </div>
       <input
         type="text"
