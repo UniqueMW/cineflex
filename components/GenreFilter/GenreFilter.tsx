@@ -4,8 +4,9 @@ import useSWR from 'swr'
 import { GiClapperboard } from 'react-icons/gi'
 import { ToggleButton, Chip } from 'components'
 import { PageFilterContext } from 'reactContexts'
-import { fetcher, groupFilterOptionsWithLogic } from 'utils'
+import { fetcher } from 'utils'
 import type { GenreList, Genre, IWatchProvider } from 'types'
+import { useFilterEffect } from '@/hooks'
 
 interface IGenreFilter {
   title: string
@@ -51,20 +52,21 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
     return []
   }, [selectedChips])
 
-  React.useEffect(() => {
-    if (filterContext !== null && typeof selectedChips !== 'undefined') {
-      delete filterContext.pageConfig.with_genres
-      delete filterContext.pageConfig.without_genres
-      const genreKey =
-        toggleOption === 'Include' ? 'with_genres' : 'without_genres'
+  // React.useEffect(() => {
+  //   if (filterContext !== null && typeof selectedChips !== 'undefined') {
+  //     delete filterContext.pageConfig.with_genres
+  //     delete filterContext.pageConfig.without_genres
+  //     const genreKey =
+  //       toggleOption === 'Include' ? 'with_genres' : 'without_genres'
 
-      filterContext.setPageConfig({
-        ...filterContext.pageConfig,
-        [genreKey]: groupFilterOptionsWithLogic(selectedChips),
-        page: 1
-      })
-    }
-  }, [selectedChips, toggleOption])
+  //     filterContext.setPageConfig({
+  //       ...filterContext.pageConfig,
+  //       [genreKey]: groupFilterOptionsWithLogic(selectedChips),
+  //       page: 1
+  //     })
+  //   }
+  // }, [selectedChips, toggleOption])
+  useFilterEffect(filterContext, selectedChips, toggleOption, 'genres')
 
   const handleOnGenreSelect = (
     event: React.ChangeEvent<HTMLSelectElement>

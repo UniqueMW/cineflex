@@ -1,16 +1,19 @@
-import type { Genre } from 'types'
+import type { Genre, IWatchProvider } from 'types'
 
 function groupFilterOptionsWithLogic(
-  filters: Genre[],
+  filters: Array<Genre & IWatchProvider>,
   logic: 'AND' | 'OR' = 'AND'
 ): string {
   let groupedFilters = ''
   for (const filter of filters) {
-    if (logic === 'AND') {
-      groupedFilters = `${groupedFilters},${filter.id}`
-    } else {
-      groupedFilters = `${groupedFilters}|${filter.id}`
+    if (groupedFilters.length > 0) {
+      groupedFilters += logic === 'AND' ? ',' : '|'
     }
+
+    groupedFilters +=
+      filter.id !== undefined
+        ? filter.id.toString()
+        : filter.provider_id.toString()
   }
   return groupedFilters
 }

@@ -8,6 +8,7 @@ interface IWatchProviderCardProps {
   setSelectedWatchProviders?: React.Dispatch<
     React.SetStateAction<Array<Genre & IWatchProvider> | undefined>
   >
+  setIsSuggestionsVisible?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function WatchProviderCard(props: IWatchProviderCardProps): JSX.Element {
@@ -28,7 +29,11 @@ function WatchProviderCard(props: IWatchProviderCardProps): JSX.Element {
         props.provider as IWatchProvider & Genre
       ])
     }
+    if (props.setIsSuggestionsVisible !== undefined) {
+      props.setIsSuggestionsVisible(false)
+    }
   }
+
   return (
     <button
       className="flex flex-row items-center space-x-1 w-full"

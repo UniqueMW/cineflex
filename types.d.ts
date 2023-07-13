@@ -233,3 +233,8 @@ export interface IFilterConfig {
   sort_by?: sortByType
   [key: string]: undefined | boolean | number | string
 }
+
+export interface IPageFilterContext {
+  pageConfig: IFilterConfig
+  setPageConfig: React.Dispatch<React.SetStateAction<IFilterConfig>>
+}
