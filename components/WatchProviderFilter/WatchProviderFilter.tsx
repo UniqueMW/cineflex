@@ -84,26 +84,6 @@ function WatchProviderFilter(): JSX.Element {
     'watch_providers'
   )
 
-  // React.useEffect(() => {
-  //   if (
-  //     filterContext !== null &&
-  //     typeof selectedWatchProviders !== 'undefined'
-  //   ) {
-  //     delete filterContext.pageConfig.with_watch_providers
-  //     delete filterContext.pageConfig.without_watch_providers
-  //     const genreKey =
-  //       toggleOption === 'Include'
-  //         ? 'with_watch_providers'
-  //         : 'without_watch_providers'
-
-  //     filterContext.setPageConfig({
-  //       ...filterContext.pageConfig,
-  //       [genreKey]: groupFilterOptionsWithLogic(selectedWatchProviders),
-  //       page: 1
-  //     })
-  //   }
-  // }, [toggleOption, selectedWatchProviders])
-
   return (
     <section className="lg:w-1/2 w-full justify-center space-y-1">
       <div className="flex flex-row items-center justify-between w-full">
@@ -126,7 +106,7 @@ function WatchProviderFilter(): JSX.Element {
         {watchProvidersChips}
       </div>
       <div
-        className={`max-h-[200px] overflow-y-scroll space-y-1 font-paragraph text-base scrollbar scrollbar-thumb-button scrollbar-thin ${
+        className={`max-h-[200px] overflow-y-scroll space-y-1 font-paragraph text-base scrollbar-thumb-button scrollbar-thin ${
           isSuggestionsVisible ? 'block' : 'hidden'
         }`}
       >

@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Ratings } from 'components'
 import * as _ from 'lodash'
 import { useWindowSize } from 'hooks'
@@ -17,7 +18,10 @@ function Card({ data }: ICardProps): JSX.Element {
   )
   const [, width] = useWindowSize()
   return (
-    <section className="bg-cardBackground shadow-sm pb-2 px-1">
+    <Link
+      className="bg-cardBackground shadow-sm pb-2 px-1"
+      href={`${data.first_air_date !== undefined ? 'tv' : 'movie'}/${data.id}`}
+    >
       <Image
         src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
         width={195.16}
@@ -40,7 +44,7 @@ function Card({ data }: ICardProps): JSX.Element {
           : data.release_date}
       </h3>
       <Ratings rating={data.vote_average} />
-    </section>
+    </Link>
   )
 }
 
