@@ -14,9 +14,12 @@ interface IGenreFilter {
 
 function GenreFilter(props: IGenreFilter): JSX.Element {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
-  const genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
-  const { data } = useSWR<GenreList>(genresUrl, fetcher)
   const filterContext = React.useContext(PageFilterContext)
+  const genresUrl =
+    filterContext?.genreType === 'MOVIES'
+      ? `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
+      : `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}`
+  const { data } = useSWR<GenreList>(genresUrl, fetcher)
 
   const [selectedChips, setSelectedChips] =
     React.useState<Array<Genre & IWatchProvider>>()
@@ -52,20 +55,6 @@ function GenreFilter(props: IGenreFilter): JSX.Element {
     return []
   }, [selectedChips])
 
-  // React.useEffect(() => {
-  //   if (filterContext !== null && typeof selectedChips !== 'undefined') {
-  //     delete filterContext.pageConfig.with_genres
-  //     delete filterContext.pageConfig.without_genres
-  //     const genreKey =
-  //       toggleOption === 'Include' ? 'with_genres' : 'without_genres'
-
-  //     filterContext.setPageConfig({
-  //       ...filterContext.pageConfig,
-  //       [genreKey]: groupFilterOptionsWithLogic(selectedChips),
-  //       page: 1
-  //     })
-  //   }
-  // }, [selectedChips, toggleOption])
   useFilterEffect(filterContext, selectedChips, toggleOption, 'genres')
 
   const handleOnGenreSelect = (

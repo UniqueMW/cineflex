@@ -237,4 +237,5 @@ export interface IFilterConfig {
 export interface IPageFilterContext {
   pageConfig: IFilterConfig
   setPageConfig: React.Dispatch<React.SetStateAction<IFilterConfig>>
+  genreType: 'MOVIES' | 'SERIES'
 }

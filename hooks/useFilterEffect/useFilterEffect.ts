@@ -10,8 +10,10 @@ function useFilterEffect(
 ): void {
   React.useEffect(() => {
     if (filterContext !== null && typeof selectedOptions !== 'undefined') {
-      delete filterContext.pageConfig[`with_${keyName}`]
-      delete filterContext.pageConfig[`without_${keyName}`]
+      const withKey = `with_${keyName}`
+      const withoutKey = `without_${keyName}`
+      filterContext.pageConfig[withKey] = ''
+      filterContext.pageConfig[withoutKey] = ''
 
       const genreKey =
         toggleOption === 'Include' ? `with_${keyName}` : `without_${keyName}`

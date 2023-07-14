@@ -10,10 +10,13 @@ import type { IWatchProviderList, IWatchProvider, Genre } from 'types'
 
 function WatchProviderFilter(): JSX.Element {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
-  const watchProviderUrl = `https://api.themoviedb.org/3/watch/providers/movie?api_key=${API_KEY}`
+  const filterContext = React.useContext(PageFilterContext)
+  const watchProviderUrl =
+    filterContext?.genreType === 'MOVIES'
+      ? `https://api.themoviedb.org/3/watch/providers/movie?api_key=${API_KEY}`
+      : `https://api.themoviedb.org/3/watch/providers/tv?api_key=${API_KEY}`
   const { data } = useSWR<IWatchProviderList>(watchProviderUrl, fetcher)
   const searchDebounce = React.useCallback(debounce(), [])
-  const filterContext = React.useContext(PageFilterContext)
 
   const [suggestions, setSuggestion] = React.useState<IWatchProvider[]>([])
   const [isSuggestionsVisible, setIsSuggestionsVisible] = React.useState(false)

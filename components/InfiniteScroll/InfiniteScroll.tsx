@@ -16,9 +16,15 @@ import type {
 
 interface IInfiniteScrollProps {
   url: string
+  genreType: 'MOVIES' | 'SERIES'
+  displayFilter: boolean
 }
 
-function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
+function InfiniteScroll({
+  url,
+  genreType,
+  displayFilter
+}: IInfiniteScrollProps): JSX.Element {
   const [pageConfig, setPageConfig] = React.useState<IFilterConfig>({ page: 1 })
   const [isShowFilter, setIsShowFilter] = React.useState(false)
   const pageUrl = useFilter(url, pageConfig)
@@ -52,8 +58,11 @@ function InfiniteScroll({ url }: IInfiniteScrollProps): JSX.Element {
           <TotalResults
             numberOfResults={cardData.length}
             setIsShowFilter={setIsShowFilter}
+            displayFilter={displayFilter}
           />
-          <PageFilterContext.Provider value={{ pageConfig, setPageConfig }}>
+          <PageFilterContext.Provider
+            value={{ pageConfig, setPageConfig, genreType }}
+          >
             <PageFilter isShowFilter={isShowFilter} />
           </PageFilterContext.Provider>
           <PageGrid data={cardData} />

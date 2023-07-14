@@ -13,7 +13,14 @@ function useFilter(baseUrl: string, filterConfig?: IFilterConfig): string {
     if (isValid) {
       let generatedUrl = baseUrl
       for (const key in config) {
-        generatedUrl = `${generatedUrl}&${key}=${String(config[key])}`
+        const checkKeyValue = Boolean(config[key])
+        if (
+          checkKeyValue ||
+          typeof config[key] === 'boolean' ||
+          typeof config[key] === 'number'
+        ) {
+          generatedUrl = `${generatedUrl}&${key}=${String(config[key])}`
+        }
       }
       setUrl(generatedUrl)
     } else {
