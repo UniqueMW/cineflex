@@ -25,6 +25,7 @@ import WatchProviderFilter from './WatchProviderFilter/WatchProviderFilter'
 import WatchProviderCard from './WatchProviderCard/WatchProviderCard'
 import ToggleButton from './ToggleButton/ToggleButton'
 import Chip from './Chip/Chip'
+import Detail from './Detail/Detail'
 
 export {
   Nav,
@@ -53,5 +54,6 @@ export {
   WatchProviderFilter,
   WatchProviderCard,
   ToggleButton,
-  Chip
+  Chip,
+  Detail
 }
