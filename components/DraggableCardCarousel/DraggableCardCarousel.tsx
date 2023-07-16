@@ -1,10 +1,14 @@
 'use client'
 import React from 'react'
 import { Reorder, useDragControls } from 'PackagesClientComponents/framerMotion'
+import type { ICardSeriesAndMovie, IMovie } from 'types'
 import { CardCarousel } from 'components'
 
 interface IDraggableCardCarouselProps {
-  item: { title: string; url: string }
+  item: {
+    title: string
+    data: Array<ICardSeriesAndMovie & IMovie>
+  }
 }
 
 function DraggableCardCarousel({
@@ -14,9 +18,9 @@ function DraggableCardCarousel({
   return (
     <Reorder.Item value={item} dragListener={false} dragControls={controls}>
       <CardCarousel
-        url={item.url}
         carouselTitle={item.title}
         controls={controls}
+        data={item.data}
       />
     </Reorder.Item>
   )

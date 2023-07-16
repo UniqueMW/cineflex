@@ -1,47 +1,44 @@
 'use client'
 import React from 'react'
-
-import useSWR from 'swr'
 import { GrDrag } from 'react-icons/gr'
-import { fetcher } from 'utils'
 import { ButtonIcon, Card } from 'components'
 import {
   SwiperSlide,
   Swiper,
   Navigation
 } from 'PackagesClientComponents/swiper'
-import type { IMoviePage } from 'types'
+import type { ICardSeriesAndMovie, IMovie, Season } from 'types'
 import { useWindowSize } from 'hooks'
 import type { DragControls } from 'framer-motion'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
 interface ICardCarouselProps {
-  url: string
+  // url: string
   carouselTitle: string
   controls?: DragControls
+  data: Array<ICardSeriesAndMovie & IMovie & Season>
 }
 
 const CardCarousel = React.memo(function (
   props: ICardCarouselProps
 ): JSX.Element {
-  const { data } = useSWR<IMoviePage>(props.url, fetcher)
   const [sizeType] = useWindowSize()
 
   const cards = React.useMemo(() => {
-    return data?.results.map((movie, index) => (
+    return props.data?.map((movie) => (
       <SwiperSlide key={movie.id}>
         <Card data={movie} />
       </SwiperSlide>
     ))
-  }, [data])
+  }, [props.data])
 
   const handleDrag = (event: any): void => {
     props.controls?.start(event)
   }
 
   return (
-    <section className="lg:px-10 px-2 py-2 space-y-2">
+    <section className="space-y-2">
       <div className="flex flex-row justify-between items-center">
         <h1 className="md:text-2xl text-xl text-headline font-heading font-semibold tracking-wider">
           {props.carouselTitle}

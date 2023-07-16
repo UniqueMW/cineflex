@@ -368,3 +368,8 @@ export interface BelongsToCollection {
   poster_path: string
   backdrop_path: string
 }
+
+export interface ICarouselGroupItem {
+  title: string
+  data: Array<IMovie & ICardSeriesAndMovie & Season>
+}

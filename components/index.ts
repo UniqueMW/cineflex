@@ -26,6 +26,7 @@ import WatchProviderCard from './WatchProviderCard/WatchProviderCard'
 import ToggleButton from './ToggleButton/ToggleButton'
 import Chip from './Chip/Chip'
 import Detail from './Detail/Detail'
+import HomeCarouselsWrapper from './HomeCarouselsWrapper/HomeCarouselsWrapper'
 
 export {
   Nav,
@@ -55,5 +56,6 @@ export {
   WatchProviderCard,
   ToggleButton,
   Chip,
-  Detail
+  Detail,
+  HomeCarouselsWrapper
 }

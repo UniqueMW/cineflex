@@ -3,7 +3,7 @@ import React from 'react'
 import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import useSWR from 'swr'
-import { Ratings } from 'components'
+import { Ratings, CarouselGroup } from 'components'
 import { fetcher } from 'utils'
 
 import type { IMovieDetail, ISeriesDetail } from 'types'
@@ -21,12 +21,19 @@ function Detail(props: IDetailProps): JSX.Element {
       ? `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
       : `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`
 
-  const { data, isLoading } = useSWR<IMovieDetail & ISeriesDetail>(url, fetcher)
+  const recommendationsUrls =
+    props.mediaType === 'MOVIE'
+      ? `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`
+      : `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=${API_KEY}`
 
-  if (isLoading || data === undefined) {
+  const { data } = useSWR<IMovieDetail & ISeriesDetail>(url, fetcher)
+  const recommendations = useSWR(recommendationsUrls, fetcher)
+
+  console.log(recommendations, 'data', recommendationsUrls)
+
+  if (data === undefined || recommendations.data === undefined) {
     return <h1>Loading....</h1>
   }
-
   return (
     <section className="space-y-4">
       <Image
@@ -55,6 +62,12 @@ function Detail(props: IDetailProps): JSX.Element {
           {data.overview}
         </p>
       </div>
+      <CarouselGroup
+        items={[
+          { title: 'Seasons', data: data.seasons },
+          { title: 'You Might Also Like', data: recommendations.data.results }
+        ]}
+      />
     </section>
   )
 }
