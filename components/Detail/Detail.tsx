@@ -4,9 +4,9 @@ import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import useSWR from 'swr'
 import { Ratings, CarouselGroup } from 'components'
-import { fetcher } from 'utils'
+import { fetcher, fetchers } from 'utils'
 
-import type { IMovieDetail, ISeriesDetail } from 'types'
+import type { IMovieDetail, ISeriesDetail, ICarouselGroupItem } from 'types'
 
 interface IDetailProps {
   mediaType: 'TV' | 'MOVIE'
@@ -26,12 +26,51 @@ function Detail(props: IDetailProps): JSX.Element {
       ? `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`
       : `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=${API_KEY}`
 
+  const castUrls =
+    props.mediaType === 'MOVIE'
+      ? `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
+      : `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}`
+
   const { data } = useSWR<IMovieDetail & ISeriesDetail>(url, fetcher)
-  const recommendations = useSWR(recommendationsUrls, fetcher)
+  const additionalData = useSWR([castUrls, recommendationsUrls], fetchers)
 
-  console.log(recommendations, 'data', recommendationsUrls)
+  const [carouselItems, setCarouselItems] =
+    React.useState<ICarouselGroupItem[]>()
 
-  if (data === undefined || recommendations.data === undefined) {
+  React.useEffect(() => {
+    if (props.mediaType === 'MOVIE' && additionalData.data !== undefined) {
+      setCarouselItems([
+        {
+          title: 'Cast',
+          data: additionalData.data[0].cast,
+          cardType: 'ACTOR'
+        },
+        {
+          title: 'You Might Also Like',
+          data: additionalData.data[1].results
+        }
+      ])
+    } else if (additionalData.data !== undefined && data !== undefined) {
+      setCarouselItems([
+        { title: 'Seasons', data: data?.seasons },
+        {
+          title: 'Cast',
+          data: additionalData.data[0].cast,
+          cardType: 'ACTOR'
+        },
+        {
+          title: 'You Might Also Like',
+          data: additionalData.data[1].results
+        }
+      ])
+    }
+  }, [data, additionalData])
+
+  if (
+    data === undefined ||
+    carouselItems === undefined ||
+    additionalData === undefined
+  ) {
     return <h1>Loading....</h1>
   }
   return (
@@ -62,12 +101,7 @@ function Detail(props: IDetailProps): JSX.Element {
           {data.overview}
         </p>
       </div>
-      <CarouselGroup
-        items={[
-          { title: 'Seasons', data: data.seasons },
-          { title: 'You Might Also Like', data: recommendations.data.results }
-        ]}
-      />
+      <CarouselGroup items={carouselItems} />
     </section>
   )
 }

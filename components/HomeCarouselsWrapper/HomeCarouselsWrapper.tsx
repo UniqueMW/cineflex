@@ -43,7 +43,11 @@ function HomeCarouselsWrapper(): JSX.Element {
   if (initialItems === undefined) {
     return <h1>Loading....</h1>
   }
-  return <CarouselGroup items={initialItems as ICarouselGroupItem[]} />
+  return (
+    <div className="lg:px-10 px-2">
+      <CarouselGroup items={initialItems as ICarouselGroupItem[]} />
+    </div>
+  )
 }
 
 export default HomeCarouselsWrapper
