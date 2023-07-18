@@ -18,8 +18,8 @@ function HomeCarouselsWrapper(): JSX.Element {
     [
       trendingUrl,
       topRatedMoviesUrl,
-      popularMoviesUrl,
       topRatedSeriesUrl,
+      popularMoviesUrl,
       popularSeriesUrl,
       airingSeriesUrl
     ],
