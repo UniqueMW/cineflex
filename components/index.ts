@@ -28,6 +28,7 @@ import Chip from './Chip/Chip'
 import Detail from './Detail/Detail'
 import HomeCarouselsWrapper from './HomeCarouselsWrapper/HomeCarouselsWrapper'
 import CastCard from './CastCard/CastCard'
+import Date from './Date/Date'
 
 export {
   Nav,
@@ -59,5 +60,6 @@ export {
   Chip,
   Detail,
   HomeCarouselsWrapper,
-  CastCard
+  CastCard,
+  Date
 }

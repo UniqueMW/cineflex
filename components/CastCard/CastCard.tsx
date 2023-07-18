@@ -13,8 +13,8 @@ function CastCard(props: ICastCardProps): JSX.Element {
         src={`https://image.tmdb.org/t/p/original/${
           props.cast.profile_path as string
         }`}
-        width={200}
-        height={200}
+        width={150}
+        height={150}
         alt={props.cast.name}
         placeholder="blur"
         blurDataURL="/cardPlaceholder.png"

@@ -1,9 +1,8 @@
 import React from 'react'
-import { Genre, Ratings, ButtonIcon } from 'components'
+import { Genre, Ratings, ButtonIcon, Date } from 'components'
 import * as _ from 'lodash'
 import { SlSocialYoutube } from 'react-icons/sl'
 import { CiBookmarkPlus } from 'react-icons/ci'
-import { AiOutlineCalendar } from 'react-icons/ai'
 
 import type { ICardSeriesAndMovie, IMovie } from 'types'
 
@@ -23,10 +22,10 @@ function HeroSlideDetails({ heroMovie }: IHeroSlideProps): JSX.Element {
           omission: '.....'
         })}
       </h1>
-      <h3 className="flex flex-row items-center space-x-2 w-fit bg-button/90 p-2 text-headline font-heading tracking-wider text-base">
-        <AiOutlineCalendar className="mr-2" />
-        {heroMovie.release_date}
-      </h3>
+      <Date
+        date={heroMovie.release_date}
+        className="bg-button/90 p-2 text-base font-heading text-headline"
+      />
       <div className=" text-headline font-heading tracking-wider text-base space-x-2 bg-button/90 w-fit lg:max-w-[40%] md:max-w-[90%] max-w-[70%] p-2">
         <Genre genreIds={heroMovie.genre_ids} />
       </div>

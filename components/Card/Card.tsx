@@ -2,10 +2,9 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Ratings } from 'components'
+import { Ratings, Date } from 'components'
 import * as _ from 'lodash'
 import { useWindowSize } from 'hooks'
-import { AiOutlineCalendar } from 'react-icons/ai'
 import type { ICardSeriesAndMovie, IMovie, Season } from 'types'
 
 interface ICardProps {
@@ -37,14 +36,16 @@ function Card({ data }: ICardProps): JSX.Element {
             omission: '...'
           })}
         </h1>
-        <h3 className="text-heading text-xs font-heading tracking-wider flex flex-row items-center">
-          <AiOutlineCalendar className="mr-1" />
-          {data.first_air_date !== undefined
-            ? data.first_air_date
-            : data.release_date !== undefined
-            ? data.release_date
-            : data.air_date}
-        </h3>
+        <Date
+          date={
+            data.first_air_date !== undefined
+              ? data.first_air_date
+              : data.release_date !== undefined
+              ? data.release_date
+              : data.air_date
+          }
+          className="lg:text-sm text-xs font-heading text-headline"
+        />
         <Ratings rating={data.vote_average} />
       </section>
     </Link>
