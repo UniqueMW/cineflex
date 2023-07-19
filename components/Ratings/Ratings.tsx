@@ -5,9 +5,13 @@ import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im'
 
 interface IRatingsProps {
   rating: number
+  className?: string
 }
 
-const Ratings = React.memo(function ({ rating }: IRatingsProps): JSX.Element {
+const Ratings = React.memo(function ({
+  rating,
+  className
+}: IRatingsProps): JSX.Element {
   const [stars, setStars] = React.useState<Array<2 | 1 | 0>>([])
   const [showNumber, setShowNumber] = React.useState(false)
   const [, width] = useWindowSize()
@@ -51,9 +55,18 @@ const Ratings = React.memo(function ({ rating }: IRatingsProps): JSX.Element {
   }
 
   return (
-    <button onClick={handleShowNumber}>
+    <button
+      onClick={handleShowNumber}
+      className={`${className !== undefined ? className : ''}`}
+    >
       {showNumber || width < 300 ? (
-        <h3 className="flex flex-row items-center font-heading text-headline tracking-wider md:text-base text-sm mb-0 h-5">
+        <h3
+          className={`flex flex-row items-center mb-0  ${
+            className !== undefined
+              ? className
+              : 'font-heading text-headline tracking-wider md:text-base text-sm h-5'
+          } `}
+        >
           <ImStarFull className="text-[#FFD700] mr-1" />
           {rating}
         </h3>

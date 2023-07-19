@@ -6,7 +6,10 @@ interface IDateProps {
   className?: string
 }
 
-function Date(props: IDateProps): JSX.Element {
+function Date(props: IDateProps): JSX.Element | null {
+  if (props.date === undefined) {
+    return null
+  }
   return (
     <h3
       className={`flex flex-row items-center w-fit tracking-wider ${
@@ -14,7 +17,7 @@ function Date(props: IDateProps): JSX.Element {
       }`}
     >
       <AiOutlineCalendar className="mr-2" />
-      {props.date !== undefined ? props.date : 'Not Available'}
+      {props?.date.length > 0 ? props.date : 'Not Available'}
     </h3>
   )
 }

@@ -29,6 +29,8 @@ import Detail from './Detail/Detail'
 import HomeCarouselsWrapper from './HomeCarouselsWrapper/HomeCarouselsWrapper'
 import CastCard from './CastCard/CastCard'
 import Date from './Date/Date'
+import SearchBar from './SearchBar/SearchBar'
+import SuggestionBox from './SuggestionBox/SuggestionBox'
 
 export {
   Nav,
@@ -61,5 +63,7 @@ export {
   Detail,
   HomeCarouselsWrapper,
   CastCard,
-  Date
+  Date,
+  SearchBar,
+  SuggestionBox
 }

@@ -5,8 +5,9 @@ import { fetchers } from 'utils'
 import { CarouselGroup } from 'components'
 import type { IMoviePage, ICarouselGroupItem } from 'types'
 
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
+
 function HomeCarouselsWrapper(): JSX.Element {
-  const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
   const trendingUrl = `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`
   const topRatedMoviesUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`
   const popularMoviesUrl = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${API_KEY}`

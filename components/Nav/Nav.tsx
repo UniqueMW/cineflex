@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { RiSearch2Line } from 'react-icons/ri'
 import { BsJournalBookmark } from 'react-icons/bs'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { useRouter } from 'next/navigation'
 import { Button, ButtonAlt, ButtonIcon } from 'components'
 
 interface INavProps {
@@ -11,9 +12,14 @@ interface INavProps {
 }
 
 function Nav(props: INavProps): JSX.Element {
+  const router = useRouter()
   const handleOpenMenu = React.useCallback(() => {
     props.setOpenMenu(true)
   }, [])
+
+  const handleSearchPage = (): void => {
+    router.push('/search')
+  }
 
   return (
     <nav className="sticky top-0 left-0 z-10 w-full flex flex-row justify-between items-center lg:px-10 md:px-6 px-2 text-heading text-lg tracking-wider font-heading bg-background border shadow-md py-3">
@@ -36,7 +42,7 @@ function Nav(props: INavProps): JSX.Element {
         <Link href="/upcoming">Upcoming</Link>
       </div>
       <div className="flex flex-row items-center space-x-3">
-        <ButtonIcon>
+        <ButtonIcon onClick={handleSearchPage}>
           <RiSearch2Line />
         </ButtonIcon>
         <ButtonIcon>
