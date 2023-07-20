@@ -3,18 +3,34 @@ import React from 'react'
 import { RiSearch2Line } from 'react-icons/ri'
 import { Button } from 'components'
 import { debounce } from 'utils'
+import type { IFilterConfig } from 'types'
 
 interface ISearchBarProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>
+  setConfig: React.Dispatch<React.SetStateAction<IFilterConfig>>
+  setIsDisplaySuggestion: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function SearchBar(props: ISearchBarProps): JSX.Element {
+  const inputRef = React.useRef<HTMLInputElement>(null)
   const delaySearchedWord = React.useCallback(debounce(), [])
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleSearchSuggestion = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    props.setIsDisplaySuggestion(true)
     delaySearchedWord((): void => {
       props.setSearch(event.target.value)
     }, 500)
   }
+
+  const handleSearch = (): void => {
+    if (inputRef.current !== null) {
+      const searchValue = inputRef.current.value
+      props.setConfig({ page: 1, query: searchValue })
+      props.setIsDisplaySuggestion(false)
+    }
+  }
+
   return (
     <div className="flex flex-row justify-center py-4">
       <section className="flex flex-row justify-center gap-x-2 lg:w-1/2 md:w-4/5 w-full h-fit py-2 px-6 shadow-md">
@@ -22,9 +38,13 @@ function SearchBar(props: ISearchBarProps): JSX.Element {
           type="text"
           placeholder="Try Severance"
           className="border border-button w-full h-12 bg-transparent px-1 text-headline font-heading tracking-wider outline-none"
-          onChange={handleSearch}
+          onChange={handleSearchSuggestion}
+          ref={inputRef}
         />
-        <Button className="flex flex-row items-center gap-x-2 text-heading font-heading tracking-wider">
+        <Button
+          className="flex flex-row items-center gap-x-2 text-heading font-heading tracking-wider"
+          onClick={handleSearch}
+        >
           <RiSearch2Line />
           <h4 className="md:block hidden">Search</h4>
         </Button>

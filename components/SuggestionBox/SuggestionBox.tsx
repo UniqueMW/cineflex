@@ -10,6 +10,7 @@ import type { IMoviePage } from 'types'
 
 interface ISuggestionBoxProps {
   search: string
+  isDisplaySuggestion: boolean
 }
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
@@ -46,8 +47,12 @@ function SuggestionBox(props: ISuggestionBoxProps): JSX.Element {
     ))
   }, [data])
   return (
-    <section className="flex flex-col items-center w-full">
-      <div className="lg:w-1/2 md:w-4/5 w-full shadow-md">
+    <section className="flex flex-col items-center w-full relative">
+      <div
+        className={`${
+          props.isDisplaySuggestion ? 'block' : 'hidden'
+        } lg:w-1/2 md:w-4/5 w-full shadow-md absolute z-10 bg-background`}
+      >
         {suggestionCards}
       </div>
     </section>

@@ -22,7 +22,7 @@ function Nav(props: INavProps): JSX.Element {
   }
 
   return (
-    <nav className="sticky top-0 left-0 z-10 w-full flex flex-row justify-between items-center lg:px-10 md:px-6 px-2 text-heading text-lg tracking-wider font-heading bg-background border shadow-md py-3">
+    <nav className="sticky top-0 left-0 z-20 w-full flex flex-row justify-between items-center lg:px-10 md:px-6 px-2 text-heading text-lg tracking-wider font-heading bg-background border shadow-md py-3">
       <ButtonIcon className="block lg:hidden" onClick={handleOpenMenu}>
         <GiHamburgerMenu />
       </ButtonIcon>

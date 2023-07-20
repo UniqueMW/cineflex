@@ -18,12 +18,14 @@ interface IInfiniteScrollProps {
   url: string
   genreType: 'MOVIES' | 'SERIES'
   displayFilter: boolean
+  config?: IFilterConfig
 }
 
 function InfiniteScroll({
   url,
   genreType,
-  displayFilter
+  displayFilter,
+  config
 }: IInfiniteScrollProps): JSX.Element {
   const [pageConfig, setPageConfig] = React.useState<IFilterConfig>({ page: 1 })
   const [isShowFilter, setIsShowFilter] = React.useState(false)
@@ -50,6 +52,12 @@ function InfiniteScroll({
       }
     }
   }, [data])
+
+  React.useEffect(() => {
+    if (config !== undefined) {
+      setPageConfig(config)
+    }
+  }, [config])
 
   return (
     <section className="flex flex-col items-center">

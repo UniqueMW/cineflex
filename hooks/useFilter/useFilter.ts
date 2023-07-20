@@ -7,6 +7,8 @@ function useFilter(baseUrl: string, filterConfig?: IFilterConfig): string {
 
   React.useEffect(() => {
     const regex = /^https?:\/\/[^?]+\?([^=&]*api_key=[^=&]*)$/
+    // const regex =
+    //   /^https?:\/\/[^?]+\?(?=.*\bapi_key=)(?=.*\bquery=|\bapi_key=|[^&]*$).+$/
     const config: IFilterConfig = { ...defaultConfig, ...filterConfig }
     const isValid = regex.test(baseUrl)
 

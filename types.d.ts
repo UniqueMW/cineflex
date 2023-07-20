@@ -229,6 +229,7 @@ export interface IFilterConfig {
   with_watch_providers?: number
   without_watch_providers?: number
   year?: number
+  query?: string
   'vote_average.gte'?: number
   sort_by?: sortByType
   [key: string]: undefined | boolean | number | string
