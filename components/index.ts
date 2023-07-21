@@ -31,6 +31,8 @@ import CastCard from './CastCard/CastCard'
 import Date from './Date/Date'
 import SearchBar from './SearchBar/SearchBar'
 import SuggestionBox from './SuggestionBox/SuggestionBox'
+import SeriesMovieSegment from './SeriesMovieSegment/SeriesMovieSegment'
+import SuggestionCard from './SuggestionCard/SuggestionCard'
 
 export {
   Nav,
@@ -65,5 +67,7 @@ export {
   CastCard,
   Date,
   SearchBar,
-  SuggestionBox
+  SuggestionBox,
+  SeriesMovieSegment,
+  SuggestionCard
 }

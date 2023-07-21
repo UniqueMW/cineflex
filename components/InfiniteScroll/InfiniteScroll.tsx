@@ -19,13 +19,17 @@ interface IInfiniteScrollProps {
   genreType: 'MOVIES' | 'SERIES'
   displayFilter: boolean
   config?: IFilterConfig
+  segment?: string
 }
+
+// TODO handle empty case
 
 function InfiniteScroll({
   url,
   genreType,
   displayFilter,
-  config
+  config,
+  segment
 }: IInfiniteScrollProps): JSX.Element {
   const [pageConfig, setPageConfig] = React.useState<IFilterConfig>({ page: 1 })
   const [isShowFilter, setIsShowFilter] = React.useState(false)
@@ -57,12 +61,12 @@ function InfiniteScroll({
     if (config !== undefined) {
       setPageConfig(config)
     }
-  }, [config])
+  }, [config, segment])
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center w-full">
       {cardData !== undefined ? (
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2 w-full">
           <TotalResults
             numberOfResults={cardData.length}
             setIsShowFilter={setIsShowFilter}

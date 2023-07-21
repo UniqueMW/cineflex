@@ -4,11 +4,15 @@ import { RiSearch2Line } from 'react-icons/ri'
 import { Button } from 'components'
 import { debounce } from 'utils'
 import type { IFilterConfig } from 'types'
+import { setConfig } from 'next/config'
 
 interface ISearchBarProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>
   setConfig: React.Dispatch<React.SetStateAction<IFilterConfig>>
   setIsDisplaySuggestion: React.Dispatch<React.SetStateAction<boolean>>
+  segment: string
+  inputSuggestion: string
+  isHoverSuggestion: boolean
 }
 
 function SearchBar(props: ISearchBarProps): JSX.Element {
@@ -31,6 +35,32 @@ function SearchBar(props: ISearchBarProps): JSX.Element {
     }
   }
 
+  const handleDisplaySuggestion = (): void => {
+    if (inputRef.current !== null) {
+      const searchValue = inputRef.current.value
+      props.setIsDisplaySuggestion(searchValue.length > 0)
+    }
+  }
+
+  const handleHideSuggestion = (): void => {
+    if (!props.isHoverSuggestion) {
+      props.setIsDisplaySuggestion(false)
+    }
+  }
+
+  React.useEffect(() => {
+    if (inputRef.current !== null) {
+      const searchValue = inputRef.current.value
+      setConfig({ page: 1, query: searchValue })
+    }
+  }, [props.segment])
+
+  React.useEffect(() => {
+    if (inputRef.current !== null && props.inputSuggestion.length > 0) {
+      inputRef.current.value = props.inputSuggestion
+    }
+  }, [props.inputSuggestion, inputRef])
+
   return (
     <div className="flex flex-row justify-center py-4">
       <section className="flex flex-row justify-center gap-x-2 lg:w-1/2 md:w-4/5 w-full h-fit py-2 px-6 shadow-md">
@@ -39,6 +69,8 @@ function SearchBar(props: ISearchBarProps): JSX.Element {
           placeholder="Try Severance"
           className="border border-button w-full h-12 bg-transparent px-1 text-headline font-heading tracking-wider outline-none"
           onChange={handleSearchSuggestion}
+          onFocus={handleDisplaySuggestion}
+          onBlur={handleHideSuggestion}
           ref={inputRef}
         />
         <Button
