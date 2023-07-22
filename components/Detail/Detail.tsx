@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import useSWR from 'swr'
 import { BsJournalBookmark } from 'react-icons/bs'
@@ -18,6 +18,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
 function Detail(props: IDetailProps): JSX.Element {
   const { id } = useParams() as { id: string }
+  const router = useRouter()
 
   const url = React.useMemo(
     () =>
@@ -78,6 +79,16 @@ function Detail(props: IDetailProps): JSX.Element {
     }
   }, [data, additionalData.data])
 
+  const handleTrailer = (): void => {
+    if (data !== undefined) {
+      router.push(
+        `/trailer/${data.first_air_date !== undefined ? 'tv' : 'movie'}/${
+          data.id
+        }`
+      )
+    }
+  }
+
   if (
     data === undefined ||
     carouselItems === undefined ||
@@ -124,7 +135,10 @@ function Detail(props: IDetailProps): JSX.Element {
         </p>
       </div>
       <div className="flex flex-row justify-center space-x-6 w-full">
-        <Button className="flex flex-row items-center text-lg font-heading text-headline tracking-wider">
+        <Button
+          className="flex flex-row items-center text-lg font-heading text-headline tracking-wider"
+          onClick={handleTrailer}
+        >
           <SlSocialYoutube className="mr-2" />
           <h2>Trailer</h2>
         </Button>

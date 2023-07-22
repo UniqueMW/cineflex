@@ -15,6 +15,8 @@ interface ISearchBarProps {
   isHoverSuggestion: boolean
 }
 
+// TODO turn into a form
+
 function SearchBar(props: ISearchBarProps): JSX.Element {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const delaySearchedWord = React.useCallback(debounce(), [])

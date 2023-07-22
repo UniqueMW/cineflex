@@ -36,7 +36,10 @@ function SuggestionCard({
       key={suggestion.id}
       className="flex flex-row justify-between items-center text-headline font-heading tracking-wider text-base shadow-sm px-4 w-full"
     >
-      <button className="flex flex-col" onClick={handleSuggestionAndSearch}>
+      <button
+        className="flex flex-col items-start w-full"
+        onClick={handleSuggestionAndSearch}
+      >
         <h3 className="text-left">
           {suggestion.name !== undefined ? suggestion.name : suggestion.title}
         </h3>

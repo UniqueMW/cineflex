@@ -11,7 +11,8 @@ import type {
   IMoviePage,
   IMovie,
   ICardSeriesAndMovie,
-  IFilterConfig
+  IFilterConfig,
+  Season
 } from 'types'
 
 interface IInfiniteScrollProps {
@@ -23,6 +24,7 @@ interface IInfiniteScrollProps {
 }
 
 // TODO handle empty case
+// TODO handle end of the page case
 
 function InfiniteScroll({
   url,
@@ -77,7 +79,9 @@ function InfiniteScroll({
           >
             <PageFilter isShowFilter={isShowFilter} />
           </PageFilterContext.Provider>
-          <PageGrid data={cardData} />
+          <PageGrid
+            data={cardData as Array<IMovie & ICardSeriesAndMovie & Season>}
+          />
         </div>
       ) : (
         <h1>Loading....</h1>
