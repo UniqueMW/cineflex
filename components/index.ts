@@ -33,6 +33,10 @@ import SearchBar from './SearchBar/SearchBar'
 import SuggestionBox from './SuggestionBox/SuggestionBox'
 import SeriesMovieSegment from './SeriesMovieSegment/SeriesMovieSegment'
 import SuggestionCard from './SuggestionCard/SuggestionCard'
+import TrailerIFrame from './TrailerIFrame/TrailerIFrame'
+import TrailerSidePanel from './TrailerSidePanel/TrailerSidePanel'
+import TrailerCard from './TrailerCard/TrailerCard'
+import TrailerPageWrapper from './TrailerPageWrapper/TrailerPageWrapper'
 
 export {
   Nav,
@@ -69,5 +73,9 @@ export {
   SearchBar,
   SuggestionBox,
   SeriesMovieSegment,
-  SuggestionCard
+  SuggestionCard,
+  TrailerIFrame,
+  TrailerSidePanel,
+  TrailerCard,
+  TrailerPageWrapper
 }

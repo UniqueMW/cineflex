@@ -7,9 +7,14 @@ interface IDateProps {
 }
 
 function Date(props: IDateProps): JSX.Element | null {
-  if (props.date === undefined) {
-    return null
-  }
+  const [date, setDate] = React.useState('Not Available')
+
+  React.useEffect(() => {
+    if (typeof props.date === 'string') {
+      props.date.length > 0 && setDate(props.date)
+    }
+  }, [props.date])
+
   return (
     <h3
       className={`flex flex-row items-center w-fit tracking-wider ${
@@ -17,7 +22,7 @@ function Date(props: IDateProps): JSX.Element | null {
       }`}
     >
       <AiOutlineCalendar className="mr-2" />
-      {props?.date.length > 0 ? props.date : 'Not Available'}
+      {date}
     </h3>
   )
 }
