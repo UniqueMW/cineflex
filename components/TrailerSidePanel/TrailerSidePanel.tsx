@@ -19,6 +19,7 @@ function TrailerSidePanel(props: ITrailerSidePanelProps): JSX.Element {
       />
     ))
   }, [props.Trailers, props.activeTrailer])
+
   return (
     <div className="lg:w-[30%] w-full lg:max-h-screen lg:overflow-y-scroll lg:scrollbar-thumb-button lg:scrollbar-thin lg:px-1">
       <h2 className="text-lg tracking-wider font-heading text-headline font-semibold">

@@ -21,6 +21,10 @@ function Nav(props: INavProps): JSX.Element {
     router.push('/search')
   }
 
+  const handleBookmarkPage = (): void => {
+    router.push('/bookmark')
+  }
+
   return (
     <nav className="sticky top-0 left-0 z-20 w-full flex flex-row justify-between items-center lg:px-10 md:px-6 px-2 text-heading text-lg tracking-wider font-heading bg-background border shadow-md py-3">
       <ButtonIcon className="block lg:hidden" onClick={handleOpenMenu}>
@@ -45,7 +49,7 @@ function Nav(props: INavProps): JSX.Element {
         <ButtonIcon onClick={handleSearchPage}>
           <RiSearch2Line />
         </ButtonIcon>
-        <ButtonIcon>
+        <ButtonIcon onClick={handleBookmarkPage}>
           <BsJournalBookmark />
         </ButtonIcon>
         <div className="md:flex hidden flex-row space-x-3">

@@ -1,6 +1,7 @@
-import type { ITrailer } from 'types'
 import React from 'react'
 import { Date } from 'components'
+import type { ITrailer } from 'types'
+import { useDate } from 'hooks'
 
 interface ITrailerIFrameProps {
   Trailer: ITrailer
@@ -9,6 +10,7 @@ interface ITrailerIFrameProps {
 // TODO Adjust Iframe based on screen size
 
 function TrailerIFrame(props: ITrailerIFrameProps): JSX.Element {
+  const date = useDate(props.Trailer.published_at)
   return (
     <section className="w-full h-screen flex flex-col justify-start gap-y-4">
       <iframe
@@ -23,7 +25,7 @@ function TrailerIFrame(props: ITrailerIFrameProps): JSX.Element {
         <h1 className="text-headline font-heading tracking-wider text-xl text-left">
           {props.Trailer.name}
         </h1>
-        <Date date={props.Trailer.published_at} />
+        <Date date={date} />
       </div>
     </section>
   )

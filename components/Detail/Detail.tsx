@@ -3,10 +3,10 @@ import React from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import useSWR from 'swr'
-import { BsJournalBookmark } from 'react-icons/bs'
+import { BsJournalBookmark, BsJournalBookmarkFill } from 'react-icons/bs'
 import { SlSocialYoutube } from 'react-icons/sl'
 import { Ratings, CarouselGroup, Button, ButtonAlt, Date } from 'components'
-import { fetcher, fetchers } from 'utils'
+import { fetcher, fetchers, addAndRemoveBookmark, checkInBookmark } from 'utils'
 
 import type { IMovieDetail, ISeriesDetail, ICarouselGroupItem } from 'types'
 
@@ -46,6 +46,7 @@ function Detail(props: IDetailProps): JSX.Element {
 
   const { data } = useSWR<IMovieDetail & ISeriesDetail>(url, fetcher)
   const additionalData = useSWR([castUrls, recommendationsUrls], fetchers)
+  const [isBookmarked, setIsBookmarked] = React.useState(false)
 
   const [carouselItems, setCarouselItems] =
     React.useState<ICarouselGroupItem[]>()
@@ -79,6 +80,12 @@ function Detail(props: IDetailProps): JSX.Element {
     }
   }, [data, additionalData.data])
 
+  React.useEffect(() => {
+    if (data !== undefined) {
+      setIsBookmarked(checkInBookmark(data))
+    }
+  }, [data])
+
   const handleTrailer = (): void => {
     if (data !== undefined) {
       router.push(
@@ -86,6 +93,13 @@ function Detail(props: IDetailProps): JSX.Element {
           data.id
         }`
       )
+    }
+  }
+
+  const handleBookmark = (): void => {
+    if (data !== undefined) {
+      addAndRemoveBookmark(data)
+      setIsBookmarked(checkInBookmark(data))
     }
   }
 
@@ -142,8 +156,16 @@ function Detail(props: IDetailProps): JSX.Element {
           <SlSocialYoutube className="mr-2" />
           <h2>Trailer</h2>
         </Button>
-        <ButtonAlt className="flex flex-row items-center font-heading text-lg text-headline tracking-wider">
-          <BsJournalBookmark className="mr-2" />
+        <ButtonAlt
+          className="flex flex-row items-center font-heading text-lg text-headline tracking-wider"
+          onClick={handleBookmark}
+        >
+          {isBookmarked ? (
+            <BsJournalBookmarkFill className="mr-2 text-[#FFD700]" />
+          ) : (
+            <BsJournalBookmark className="mr-2" />
+          )}
+
           <h2>Bookmark</h2>
         </ButtonAlt>
       </div>

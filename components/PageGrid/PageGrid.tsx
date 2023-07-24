@@ -1,10 +1,18 @@
 'use client'
 import React from 'react'
 import { Card } from 'components'
-import type { IMovie, ICardSeriesAndMovie, Season } from 'types'
+import type {
+  IMovie,
+  ICardSeriesAndMovie,
+  Season,
+  IMovieDetail,
+  ISeriesDetail
+} from 'types'
 
 interface IPageGridProps {
-  data: Array<IMovie & ICardSeriesAndMovie & Season>
+  data: Array<
+    IMovie & ICardSeriesAndMovie & Season & IMovieDetail & ISeriesDetail
+  >
 }
 
 // TODO refactor
