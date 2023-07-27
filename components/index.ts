@@ -38,6 +38,7 @@ import TrailerSidePanel from './TrailerSidePanel/TrailerSidePanel'
 import TrailerCard from './TrailerCard/TrailerCard'
 import TrailerPageWrapper from './TrailerPageWrapper/TrailerPageWrapper'
 import Footer from './Footer/Footer'
+import ContactForm from './ContactForm/ContactForm'
 
 export {
   Nav,
@@ -79,5 +80,6 @@ export {
   TrailerSidePanel,
   TrailerCard,
   TrailerPageWrapper,
-  Footer
+  Footer,
+  ContactForm
 }

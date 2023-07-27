@@ -2,11 +2,11 @@
 import React, { useEffect } from 'react'
 import { Nav, SideMenu } from 'components'
 
-interface INavWrappper {
+interface INavWrapper {
   children: React.ReactNode
 }
 
-function NavWrapper(props: INavWrappper): JSX.Element {
+function NavWrapper(props: INavWrapper): JSX.Element {
   const [openMenu, setOpenMenu] = React.useState(false)
 
   useEffect(() => {
