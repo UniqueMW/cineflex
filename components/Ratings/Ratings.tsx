@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import { useWindowSize } from 'hooks'
 import { ImStarFull, ImStarHalf, ImStarEmpty } from 'react-icons/im'
+import { useWindowSize } from 'hooks'
 
 interface IRatingsProps {
   rating: number
@@ -12,6 +12,11 @@ const Ratings = React.memo(function ({
   rating,
   className
 }: IRatingsProps): JSX.Element {
+  enum StarLevel {
+    EMPTY,
+    HALF,
+    FULL
+  }
   const [stars, setStars] = React.useState<Array<2 | 1 | 0>>([])
   const [showNumber, setShowNumber] = React.useState(false)
   const [, width] = useWindowSize()
@@ -22,16 +27,16 @@ const Ratings = React.memo(function ({
 
     for (let i = 0; i < 5; i++) {
       if (convertedRatings > 1) {
-        convertedStars.push(2)
+        convertedStars.push(StarLevel.FULL)
         convertedRatings--
       } else if (convertedRatings >= 0.3 && convertedRatings <= 0.7) {
-        convertedStars.push(1)
+        convertedStars.push(StarLevel.HALF)
         convertedRatings = 0
       } else if (convertedRatings > 0.7) {
-        convertedStars.push(2)
+        convertedStars.push(StarLevel.FULL)
         convertedRatings = 0
       } else {
-        convertedStars.push(0)
+        convertedStars.push(StarLevel.EMPTY)
       }
     }
 
