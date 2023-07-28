@@ -25,6 +25,14 @@ function Nav(props: INavProps): JSX.Element {
     router.push('/bookmark')
   }
 
+  const handleJoinNow = (): void => {
+    router.push('/join')
+  }
+
+  const handleLogin = (): void => {
+    router.push('/login')
+  }
+
   return (
     <nav className="sticky top-0 left-0 z-20 w-full flex flex-row justify-between items-center lg:px-10 md:px-6 px-2 text-heading text-lg tracking-wider font-heading bg-background border shadow-md py-3">
       <ButtonIcon className="block lg:hidden" onClick={handleOpenMenu}>
@@ -53,8 +61,8 @@ function Nav(props: INavProps): JSX.Element {
           <BsJournalBookmark />
         </ButtonIcon>
         <div className="md:flex hidden flex-row space-x-3">
-          <Button>Join Now</Button>
-          <ButtonAlt>LOGIN</ButtonAlt>
+          <Button onClick={handleJoinNow}>Join Now</Button>
+          <ButtonAlt onClick={handleLogin}>LOGIN</ButtonAlt>
         </div>
       </div>
     </nav>

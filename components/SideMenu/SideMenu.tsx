@@ -2,6 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { RxCross2 } from 'react-icons/rx'
+import { useRouter } from 'next/navigation'
 import { Button, ButtonAlt, ButtonIcon } from 'components'
 import { motion, AnimatePresence } from 'PackagesClientComponents/framerMotion'
 
@@ -10,18 +11,28 @@ interface ISideMenuProps {
   setOpenMenu: (arg: boolean) => void
 }
 
+const linkVariant = {
+  start: { opacity: 0, x: -10 },
+  open: { opacity: 1, x: 0 }
+}
+const navVariant = {
+  start: { x: -100, opacity: 0 },
+  open: { x: 0, opacity: 1 }
+}
+
 function SideMenu(props: ISideMenuProps): JSX.Element {
-  const linkVariant = {
-    start: { opacity: 0, x: -10 },
-    open: { opacity: 1, x: 0 }
-  }
-  const navVariant = {
-    start: { x: -100, opacity: 0 },
-    open: { x: 0, opacity: 1 }
-  }
+  const router = useRouter()
   const handleCloseMenu = React.useCallback((): void => {
     props.setOpenMenu(false)
   }, [])
+
+  const handleJoinNow = (): void => {
+    router.push('/join')
+  }
+
+  const handleLogin = (): void => {
+    router.push('/login')
+  }
 
   return (
     <AnimatePresence>
@@ -134,8 +145,8 @@ function SideMenu(props: ISideMenuProps): JSX.Element {
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.8 }}
             >
-              <Button>Join Now</Button>
-              <ButtonAlt>LOGIN</ButtonAlt>
+              <Button onClick={handleJoinNow}>Join Now</Button>
+              <ButtonAlt onClick={handleLogin}>LOGIN</ButtonAlt>
             </motion.div>
           </motion.section>
         </motion.nav>

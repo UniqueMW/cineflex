@@ -39,6 +39,7 @@ import TrailerCard from './TrailerCard/TrailerCard'
 import TrailerPageWrapper from './TrailerPageWrapper/TrailerPageWrapper'
 import Footer from './Footer/Footer'
 import ContactForm from './ContactForm/ContactForm'
+import AuthForm from './AuthForm/AuthForm'
 
 export {
   Nav,
@@ -81,5 +82,6 @@ export {
   TrailerCard,
   TrailerPageWrapper,
   Footer,
-  ContactForm
+  ContactForm,
+  AuthForm
 }
