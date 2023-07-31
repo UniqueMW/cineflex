@@ -3,7 +3,11 @@ import React from 'react'
 function ContactForm(): JSX.Element {
   return (
     <section className="flex flex-row justify-center items-center lg:mt-4 mt-2 ">
-      <form className="flex flex-col items-center bg-cardBackground text-headline font-heading text-lg tracking-wider lg:w-1/2 w-full px-2 py-2">
+      <form
+        className="flex flex-col items-center bg-cardBackground text-headline font-heading text-lg tracking-wider lg:w-1/2 w-full px-2 py-2"
+        action="https://formsubmit.co/your@email.com"
+        method="POST"
+      >
         <label htmlFor="name" className="text-left w-full">
           Name
         </label>
@@ -11,6 +15,7 @@ function ContactForm(): JSX.Element {
           placeholder="What is your Name?"
           id="name"
           className="background-transparent border-b border-b-headline w-full"
+          required
         />
         <label htmlFor="email" className="text-left w-full">
           Email
@@ -18,7 +23,9 @@ function ContactForm(): JSX.Element {
         <input
           placeholder="Provide Your Email."
           id="email"
+          name="email"
           className="background-transparent  border-b border-b-headline w-full"
+          required
         />
         <label htmlFor="subject" className="text-left w-full">
           Subject
@@ -27,7 +34,14 @@ function ContactForm(): JSX.Element {
           placeholder="Subject"
           id="subject"
           className="background-transparent border-b border-b-headline w-full"
+          name="_subject"
+          required
         />
+        <input
+          type="hidden"
+          name="_autoresponse"
+          value="Thank you for reaching out. I will get back to you as soon as possible"
+        ></input>
         <label htmlFor="message" className="text-left w-full mt-3">
           Message
         </label>
@@ -35,6 +49,7 @@ function ContactForm(): JSX.Element {
           placeholder="Message"
           id="message"
           className="h-32 border border-headline w-full"
+          required
         />
         <button
           type="submit"

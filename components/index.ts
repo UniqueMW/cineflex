@@ -40,6 +40,7 @@ import TrailerPageWrapper from './TrailerPageWrapper/TrailerPageWrapper'
 import Footer from './Footer/Footer'
 import ContactForm from './ContactForm/ContactForm'
 import AuthForm from './AuthForm/AuthForm'
+import UserAvatar from './UserAvatar/UserAvatar'
 
 export {
   Nav,
@@ -83,5 +84,6 @@ export {
   TrailerPageWrapper,
   Footer,
   ContactForm,
-  AuthForm
+  AuthForm,
+  UserAvatar
 }
