@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import GoogleButton from 'react-google-button'
 import {
   GoogleAuthProvider,
@@ -22,6 +23,7 @@ const actionCodeSettings = {
 
 function AuthForm(props: IAuthFormProps): JSX.Element {
   const formRef = React.useRef(null)
+  const router = useRouter()
   const [persistUser, setPersistUser] = React.useState(false)
   const [isEmailSent, setIsEmailSent] = React.useState(false)
   const handleGoogleAuth = (): void => {
@@ -29,6 +31,7 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
     signInWithPopup(auth, provider)
       .then(() => {
         console.log('user signed in with google')
+        router.push('/')
       })
       .catch((error) => {
         console.log(error)
@@ -45,26 +48,26 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
 
   const handleSignIn = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    if (formRef.current === null) {
-      throw new Error('No form')
-    }
-    const email = formRef.current.email.value
+    if (formRef.current !== null) {
+      const email = formRef.current.email.value as string
 
-    sendSignInLinkToEmail(auth, email, actionCodeSettings)
-      .then(() => {
-        setIsEmailSent(true)
-        localStorage.setItem('userEmail', email)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+      sendSignInLinkToEmail(auth, email, actionCodeSettings)
+        .then(() => {
+          setIsEmailSent(true)
+          localStorage.setItem('userEmail', email)
+          router.push('/')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 
   React.useEffect(() => {
     if (!persistUser) {
       setPersistence(auth, browserSessionPersistence)
         .then(() => {
-          console.log('dont remember')
+          console.log("don't remember")
         })
         .catch((error) => {
           console.log(error)
@@ -81,34 +84,42 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
   }, [persistUser])
 
   return (
-    <form
-      className="text-headline font-heading tracking-wider space-y-2 text-lg"
-      ref={formRef}
-    >
-      <h1>{props.title}</h1>
-      <div>
-        <label htmlFor="emailLink">Email</label>
-        <input type="email" id="emailLink" />
-        {isEmailSent ? (
-          <p className="text-sm text-action tracking-wide text-left">
-            Click the link sent to your Email to continue.If you have not
-            received any Email try signing in or up again.
-          </p>
-        ) : null}
-      </div>
-      <div>
-        <label htmlFor="remember">Remember Me</label>
-        <input type="checkbox" onClick={handleRememberMe} />
-      </div>
-      <button
-        className="lg:px-6 px-3 py-2 bg-button"
-        type="submit"
-        onClick={handleSignIn}
+    <section className="w-full flex flex-col justify-center items-center lg:mt-10 mt-4">
+      <form
+        className="text-headline font-heading tracking-wider space-y-2 text-lg"
+        ref={formRef}
       >
-        {props.title}
-      </button>
-      <GoogleButton onClick={handleGoogleAuth} />
-    </form>
+        <h1 className="text-xl font-semibold">{props.title}</h1>
+        <div className="flex flex-col">
+          <label htmlFor="emailLink">Email</label>
+          <input
+            type="email"
+            id="emailLink"
+            className="bg-transparent border-b border-b-headline outline-none"
+          />
+          {isEmailSent ? (
+            <p className="text-sm text-action tracking-wide text-left">
+              Click the link sent to your Email to continue.If you have not
+              received any Email try signing in or up again.
+            </p>
+          ) : null}
+        </div>
+        <div>
+          <input type="checkbox" onClick={handleRememberMe} />
+          <label htmlFor="remember" className="ml-2 text-sm">
+            Remember Me
+          </label>
+        </div>
+        <button
+          className="lg:px-6 px-3 py-2 bg-button"
+          type="submit"
+          onClick={handleSignIn}
+        >
+          {props.title}
+        </button>
+        <GoogleButton onClick={handleGoogleAuth} />
+      </form>
+    </section>
   )
 }
 

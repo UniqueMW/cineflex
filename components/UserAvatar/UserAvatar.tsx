@@ -13,8 +13,8 @@ function UserAvatar(props: IUserAvatarProps): JSX.Element {
       <Image
         src={props.user.photoURL as string}
         alt={props.user.displayName as string}
-        width={128}
-        height={128}
+        width={32}
+        height={32}
         className="object-cover rounded-[100%] object-center aspect-square"
       />
     </section>

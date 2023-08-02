@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { PageGrid } from 'components'
-import { getBookmarks } from 'utils'
+import { getAllDatabaseBookmarks, getBookmarks } from 'utils'
 import type {
   IMovieDetail,
   ISeriesDetail,
@@ -9,19 +9,31 @@ import type {
   IMovie,
   ICardSeriesAndMovie
 } from 'types'
+import { useAuth } from 'hooks'
 
 type pageGridDataType = Array<
   IMovie & ICardSeriesAndMovie & Season & IMovieDetail & ISeriesDetail
 >
 
 function BookmarkPage(): JSX.Element {
+  const [isAuthenticated, user] = useAuth()
   const [data, setData] = React.useState<Array<
     ISeriesDetail | IMovieDetail
   > | null>(null)
 
   React.useEffect(() => {
-    setData(getBookmarks())
-  }, [])
+    if (isAuthenticated && user !== null) {
+      getAllDatabaseBookmarks(user.uid)
+        .then((value) => {
+          setData(value)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    } else {
+      setData(getBookmarks())
+    }
+  }, [isAuthenticated, user])
 
   if (data === null) {
     return <h1>Empty</h1>

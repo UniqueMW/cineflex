@@ -6,16 +6,14 @@ import { BsJournalBookmark } from 'react-icons/bs'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useRouter } from 'next/navigation'
 import { Button, ButtonAlt, ButtonIcon, UserAvatar } from 'components'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from 'firebase.config'
-import type { User } from 'firebase/auth'
+import { useAuth } from 'hooks'
 
 interface INavProps {
   setOpenMenu: (arg: boolean) => void
 }
 
 function Nav(props: INavProps): JSX.Element {
-  const [user, setUser] = React.useState<User | null>(null)
+  const [, user] = useAuth()
   const router = useRouter()
   const handleOpenMenu = React.useCallback(() => {
     props.setOpenMenu(true)
@@ -36,10 +34,6 @@ function Nav(props: INavProps): JSX.Element {
   const handleLogin = (): void => {
     router.push('/login')
   }
-
-  onAuthStateChanged(auth, (user) => {
-    setUser(user)
-  })
 
   return (
     <nav className="sticky top-0 left-0 z-20 w-full flex flex-row justify-between items-center lg:px-10 md:px-6 px-2 text-heading text-lg tracking-wider font-heading bg-background border shadow-md py-3">

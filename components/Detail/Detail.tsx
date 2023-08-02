@@ -6,9 +6,19 @@ import useSWR from 'swr'
 import { BsJournalBookmark, BsJournalBookmarkFill } from 'react-icons/bs'
 import { SlSocialYoutube } from 'react-icons/sl'
 import { Ratings, CarouselGroup, Button, ButtonAlt, Date } from 'components'
-import { fetcher, fetchers, addAndRemoveBookmark, checkInBookmark } from 'utils'
+import {
+  fetcher,
+  fetchers,
+  addAndRemoveBookmark,
+  checkInBookmark,
+  addAndRemoveMoviesOrSeriesInDatabase,
+  checkMovieOrSeriesInDatabase
+} from 'utils'
+import { useAuth } from 'hooks'
+import { database } from 'firebase.config'
 
 import type { IMovieDetail, ISeriesDetail, ICarouselGroupItem } from 'types'
+import { ref } from 'firebase/database'
 
 interface IDetailProps {
   mediaType: 'TV' | 'MOVIE'
@@ -19,6 +29,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 function Detail(props: IDetailProps): JSX.Element {
   const { id } = useParams() as { id: string }
   const router = useRouter()
+  const [isAuthenticated, user] = useAuth()
 
   const url = React.useMemo(
     () =>
@@ -82,9 +93,22 @@ function Detail(props: IDetailProps): JSX.Element {
 
   React.useEffect(() => {
     if (data !== undefined) {
-      setIsBookmarked(checkInBookmark(data))
+      if (isAuthenticated && user !== null) {
+        checkMovieOrSeriesInDatabase(
+          data.id,
+          ref(database, `bookmarks/${user.uid}`)
+        )
+          .then((value) => {
+            setIsBookmarked(typeof value !== 'boolean')
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        setIsBookmarked(checkInBookmark(data))
+      }
     }
-  }, [data])
+  }, [data, isAuthenticated, user])
 
   const handleTrailer = (): void => {
     if (data !== undefined) {
@@ -98,8 +122,28 @@ function Detail(props: IDetailProps): JSX.Element {
 
   const handleBookmark = (): void => {
     if (data !== undefined) {
-      addAndRemoveBookmark(data)
-      setIsBookmarked(checkInBookmark(data))
+      if (isAuthenticated && user !== null) {
+        addAndRemoveMoviesOrSeriesInDatabase(data, user.uid)
+          .then(() => {
+            checkMovieOrSeriesInDatabase(
+              data.id,
+              ref(database, `bookmarks/${user.uid}`)
+            )
+              .then((value) => {
+                setIsBookmarked(typeof value !== 'boolean')
+              })
+              .catch((error) => {
+                console.log(error)
+              })
+            console.log('bookmarked added or removed')
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        addAndRemoveBookmark(data)
+        setIsBookmarked(checkInBookmark(data))
+      }
     }
   }
 

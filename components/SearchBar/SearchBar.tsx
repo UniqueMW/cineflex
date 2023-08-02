@@ -4,7 +4,6 @@ import { RiSearch2Line } from 'react-icons/ri'
 import { Button } from 'components'
 import { debounce } from 'utils'
 import type { IFilterConfig } from 'types'
-import { setConfig } from 'next/config'
 
 interface ISearchBarProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>
@@ -53,7 +52,7 @@ function SearchBar(props: ISearchBarProps): JSX.Element {
   React.useEffect(() => {
     if (inputRef.current !== null) {
       const searchValue = inputRef.current.value
-      setConfig({ page: 1, query: searchValue })
+      props.setConfig({ page: 1, query: searchValue })
     }
   }, [props.segment])
 

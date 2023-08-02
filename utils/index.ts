@@ -6,6 +6,9 @@ import fetchers from './fetchers/fetchers'
 import addAndRemoveBookmark from './addAndRemoveBookmark/addAndRemoveBookmark'
 import checkInBookmark from './checkInBookmark/checkInBookmark'
 import getBookmarks from './getBookmarks/getBookmarks'
+import checkMovieOrSeriesInDatabase from './checkMovieOrSeriesInDatabase/checkMovieOrSeriesInDatabase'
+import getAllDatabaseBookmarks from './getAllDatabaseBookmarks/getAllDatabaseBookmarks'
+import addAndRemoveMoviesOrSeriesInDatabase from './addAndRemoveDBBookmark/addAndRemoveDBBookmark'
 
 export {
   fetcher,
@@ -15,5 +18,8 @@ export {
   fetchers,
   addAndRemoveBookmark,
   checkInBookmark,
-  getBookmarks
+  getBookmarks,
+  checkMovieOrSeriesInDatabase,
+  getAllDatabaseBookmarks,
+  addAndRemoveMoviesOrSeriesInDatabase
 }
