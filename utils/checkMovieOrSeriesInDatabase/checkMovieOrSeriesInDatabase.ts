@@ -10,10 +10,10 @@ async function checkMovieOrSeriesInDatabase(
     onValue(
       ref,
       (snapshot) => {
-        const drinksSnapshot = snapshot.val()
+        const movieOrSeriesSnapshot = snapshot.val()
 
-        for (const key in drinksSnapshot) {
-          if (drinksSnapshot[key].id === id) {
+        for (const key in movieOrSeriesSnapshot) {
+          if (movieOrSeriesSnapshot[key].id === id) {
             resolve({ isAvailable: true, key })
           }
         }

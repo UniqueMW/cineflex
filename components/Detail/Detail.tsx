@@ -5,7 +5,10 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import { BsJournalBookmark, BsJournalBookmarkFill } from 'react-icons/bs'
 import { SlSocialYoutube } from 'react-icons/sl'
+import { ref } from 'firebase/database'
 import { Ratings, CarouselGroup, Button, ButtonAlt, Date } from 'components'
+import { useAuth } from 'hooks'
+import { database } from 'firebase.config'
 import {
   fetcher,
   fetchers,
@@ -14,11 +17,8 @@ import {
   addAndRemoveMoviesOrSeriesInDatabase,
   checkMovieOrSeriesInDatabase
 } from 'utils'
-import { useAuth } from 'hooks'
-import { database } from 'firebase.config'
 
 import type { IMovieDetail, ISeriesDetail, ICarouselGroupItem } from 'types'
-import { ref } from 'firebase/database'
 
 interface IDetailProps {
   mediaType: 'TV' | 'MOVIE'
@@ -120,26 +120,15 @@ function Detail(props: IDetailProps): JSX.Element {
     }
   }
 
-  const handleBookmark = (): void => {
+  const handleBookmark = async (): Promise<void> => {
     if (data !== undefined) {
       if (isAuthenticated && user !== null) {
-        addAndRemoveMoviesOrSeriesInDatabase(data, user.uid)
-          .then(() => {
-            checkMovieOrSeriesInDatabase(
-              data.id,
-              ref(database, `bookmarks/${user.uid}`)
-            )
-              .then((value) => {
-                setIsBookmarked(typeof value !== 'boolean')
-              })
-              .catch((error) => {
-                console.log(error)
-              })
-            console.log('bookmarked added or removed')
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        await addAndRemoveMoviesOrSeriesInDatabase(data, user.uid)
+        const isMovieOrSeriesBookmarked = await checkMovieOrSeriesInDatabase(
+          data.id,
+          ref(database, `bookmarks/${user.uid}`)
+        )
+        setIsBookmarked(typeof isMovieOrSeriesBookmarked !== 'boolean')
       } else {
         addAndRemoveBookmark(data)
         setIsBookmarked(checkInBookmark(data))
@@ -154,6 +143,7 @@ function Detail(props: IDetailProps): JSX.Element {
   ) {
     return <h1>Loading....</h1>
   }
+
   return (
     <section className="space-y-4">
       <Image
@@ -202,6 +192,7 @@ function Detail(props: IDetailProps): JSX.Element {
         </Button>
         <ButtonAlt
           className="flex flex-row items-center font-heading text-lg text-headline tracking-wider"
+          // eslint-disable-next-line
           onClick={handleBookmark}
         >
           {isBookmarked ? (

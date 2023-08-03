@@ -5,6 +5,7 @@ import React from 'react'
 import type { IMoviePage } from 'types'
 import useSWR from 'swr'
 import { HeroSlide, MobileHeroSlide } from 'components'
+import { HeroSlideSkeleton } from 'skeletons'
 import { fetcher } from 'utils'
 import {
   Swiper,
@@ -28,6 +29,10 @@ function Hero(): JSX.Element {
       </SwiperSlide>
     ))
   }, [data])
+
+  if (data === undefined) {
+    return <HeroSlideSkeleton />
+  }
 
   return (
     <section className="h-fit">
