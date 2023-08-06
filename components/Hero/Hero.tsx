@@ -13,12 +13,19 @@ import {
   Navigation
 } from 'PackagesClientComponents/swiper'
 
+const swrConfig = {
+  refreshInterval: 60000, // Refresh every 1 minute
+  revalidateOnReconnect: true,
+  dedupingInterval: 600000 // Deduping interval of 10 minutes
+}
+
 function Hero(): JSX.Element {
   const { data } = useSWR<IMoviePage>(
     `https://api.themoviedb.org/3/discover/movie?api_key=${
       process.env.NEXT_PUBLIC_API_KEY as string
     }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`,
-    fetcher
+    fetcher,
+    swrConfig
   )
 
   const movieHeros = React.useMemo(() => {
@@ -30,8 +37,13 @@ function Hero(): JSX.Element {
     ))
   }, [data])
 
-  if (data === undefined) {
-    return <HeroSlideSkeleton />
+  if (data !== undefined) {
+    return (
+      <section className="relative lg:block hidden">
+        <HeroSlideSkeleton />
+        <h2>Stuff...</h2>
+      </section>
+    )
   }
 
   return (

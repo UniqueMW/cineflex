@@ -14,6 +14,7 @@ import type {
   IFilterConfig,
   Season
 } from 'types'
+import { CardGridSkeleton } from 'skeletons'
 
 interface IInfiniteScrollProps {
   url: string
@@ -84,7 +85,7 @@ function InfiniteScroll({
           />
         </div>
       ) : (
-        <h1>Loading....</h1>
+        <CardGridSkeleton />
       )}
       <PulseLoader loading={isLoading} color="#078080" />
       <div ref={targetElementRef} />

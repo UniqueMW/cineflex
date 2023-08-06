@@ -22,9 +22,8 @@ const actionCodeSettings = {
 }
 
 function AuthForm(props: IAuthFormProps): JSX.Element {
-  const formRef = React.useRef(null)
+  const formRef = React.useRef<HTMLFormElement>(null)
   const router = useRouter()
-  const [persistUser, setPersistUser] = React.useState(false)
   const [isEmailSent, setIsEmailSent] = React.useState(false)
   const handleGoogleAuth = (): void => {
     const provider = new GoogleAuthProvider()
@@ -43,28 +42,8 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
   ): void => {
     const target = event.target as HTMLInputElement
     const isChecked = target.checked
-    setPersistUser(isChecked)
-  }
 
-  const handleSignIn = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault()
-    if (formRef.current !== null) {
-      const email = formRef.current.email.value as string
-
-      sendSignInLinkToEmail(auth, email, actionCodeSettings)
-        .then(() => {
-          setIsEmailSent(true)
-          localStorage.setItem('userEmail', email)
-          router.push('/')
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-  }
-
-  React.useEffect(() => {
-    if (!persistUser) {
+    if (!isChecked) {
       setPersistence(auth, browserSessionPersistence)
         .then(() => {
           console.log("don't remember")
@@ -81,7 +60,24 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
           console.log(error)
         })
     }
-  }, [persistUser])
+  }
+
+  const handleSignIn = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
+    if (formRef.current !== null) {
+      const email = formRef.current.email.value
+
+      sendSignInLinkToEmail(auth, email, actionCodeSettings)
+        .then(() => {
+          setIsEmailSent(true)
+          localStorage.setItem('userEmail', email)
+          router.push('/')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }
 
   return (
     <section className="w-full flex flex-col justify-center items-center lg:mt-10 mt-4">
