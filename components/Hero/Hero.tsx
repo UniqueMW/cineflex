@@ -1,7 +1,5 @@
 'use client'
 import React from 'react'
-// import 'swiper/css'
-// import 'swiper/css/navigation'
 import type { IMoviePage } from 'types'
 import useSWR from 'swr'
 import { HeroSlide, MobileHeroSlide } from 'components'
@@ -13,19 +11,12 @@ import {
   Navigation
 } from 'PackagesClientComponents/swiper'
 
-const swrConfig = {
-  refreshInterval: 60000, // Refresh every 1 minute
-  revalidateOnReconnect: true,
-  dedupingInterval: 600000 // Deduping interval of 10 minutes
-}
-
 function Hero(): JSX.Element {
   const { data } = useSWR<IMoviePage>(
     `https://api.themoviedb.org/3/discover/movie?api_key=${
       process.env.NEXT_PUBLIC_API_KEY as string
     }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`,
-    fetcher,
-    swrConfig
+    fetcher
   )
 
   const movieHeros = React.useMemo(() => {

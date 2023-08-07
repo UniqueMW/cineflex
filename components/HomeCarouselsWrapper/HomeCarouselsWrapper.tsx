@@ -8,11 +8,6 @@ import { CardCarouselSkeleton } from 'skeletons'
 import type { IMoviePage, ICarouselGroupItem } from 'types'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
-const swrConfig = {
-  refreshInterval: 60000, // Refresh every 1 minute
-  revalidateOnReconnect: true,
-  dedupingInterval: 600000 // Deduping interval of 10 minutes
-}
 
 const titles = [
   'Trending',
@@ -22,8 +17,6 @@ const titles = [
   'Popular Series',
   'Airing Series'
 ]
-
-// TODO Remove SWR configs
 
 function HomeCarouselsWrapper(): JSX.Element {
   const trendingUrl = `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`
@@ -42,8 +35,7 @@ function HomeCarouselsWrapper(): JSX.Element {
       popularSeriesUrl,
       airingSeriesUrl
     ],
-    fetchers,
-    swrConfig
+    fetchers
   )
 
   const initialItems = React.useMemo(() => {
