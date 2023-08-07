@@ -8,10 +8,12 @@ import type { ITrailerList } from 'types'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
+// TODO add a skeleton
+
 function MovieTrailerPage(): JSX.Element {
   const { id } = useParams() as { id: string }
   const { data } = useSWR<ITrailerList>(
-    `http://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`,
+    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`,
     fetcher
   )
 

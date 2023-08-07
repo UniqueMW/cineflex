@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import { EpisodeCard, Footer } from 'components'
 
 import type { ISeasonDetail } from 'types'
+import { EpisodesSkeleton } from '@/skeletons'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
@@ -17,13 +18,14 @@ function SeasonPage(): JSX.Element {
   )
 
   const episodeCards = React.useMemo(() => {
+    console.log(info)
     return data.data?.episodes.map((episode) => (
       <EpisodeCard episode={episode} key={episode.id} />
     ))
   }, [data])
 
   if (data === undefined) {
-    return <h1>Loading....</h1>
+    return <EpisodesSkeleton />
   }
   return (
     <main className="min-h-screen">
