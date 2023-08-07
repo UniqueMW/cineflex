@@ -146,7 +146,7 @@ function Detail(props: IDetailProps): JSX.Element {
   }
 
   return (
-    <section className="space-y-4">
+    <section className="lg:px-10 px-2 space-y-4">
       <Image
         src={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
         height={758.81}

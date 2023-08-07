@@ -12,7 +12,7 @@ interface ITrailerPageWrapperProps {
 function TrailerPageWrapper({ data }: ITrailerPageWrapperProps): JSX.Element {
   const [activeTrailer, setActiveTrailer] = React.useState(data.results[0])
   return (
-    <div className="lg:gap-x-4 gap-y-2 flex lg:flex-row flex-col">
+    <div className="lg:gap-x-4 gap-y-2 flex lg:flex-row flex-col lg:px-10 px-2">
       <TrailerIFrame Trailer={activeTrailer} />
       <TrailerSidePanel
         Trailers={data.results}

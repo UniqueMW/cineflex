@@ -2,7 +2,7 @@
 import React from 'react'
 import { useParams } from 'next/navigation'
 import useSWR from 'swr'
-import { EpisodeCard } from 'components'
+import { EpisodeCard, Footer } from 'components'
 
 import type { ISeasonDetail } from 'types'
 
@@ -26,11 +26,14 @@ function SeasonPage(): JSX.Element {
     return <h1>Loading....</h1>
   }
   return (
-    <main className="lg:px-10 px-2">
-      <h1 className="text-lg font-heading text-heading tracking-wider w-full text-center">
-        {data.data?.name}
-      </h1>
-      <section className="space-y-2">{episodeCards}</section>
+    <main className="min-h-screen">
+      <div className="px-2 lg:px-10">
+        <h1 className="text-lg font-heading text-heading tracking-wider w-full text-center">
+          {data.data?.name}
+        </h1>
+        <section className="space-y-2">{episodeCards}</section>
+      </div>
+      <Footer />
     </main>
   )
 }

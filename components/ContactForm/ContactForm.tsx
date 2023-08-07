@@ -2,7 +2,7 @@ import React from 'react'
 
 function ContactForm(): JSX.Element {
   return (
-    <section className="flex flex-row justify-center items-center lg:mt-4 mt-2 ">
+    <section className="flex flex-row justify-center items-center lg:mt-4 mt-2 lg:px-10 px-2 ">
       <form
         className="flex flex-col items-center bg-cardBackground text-headline font-heading text-lg tracking-wider lg:w-1/2 w-full px-2 py-2"
         action="https://formsubmit.co/your@email.com"

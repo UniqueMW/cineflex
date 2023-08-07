@@ -1,10 +1,11 @@
 import React from 'react'
-import { ContactForm } from 'components'
+import { ContactForm, Footer } from 'components'
 
 function ContactPage(): JSX.Element {
   return (
-    <main className="lg:px-10 px-2 min-h-screen">
+    <main className=" min-h-screen">
       <ContactForm />
+      <Footer />
     </main>
   )
 }

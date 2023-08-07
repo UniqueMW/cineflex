@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { PageGrid } from 'components'
+import { Footer, PageGrid } from 'components'
 import { getAllDatabaseBookmarks, getBookmarks } from 'utils'
 import type {
   IMovieDetail,
@@ -40,11 +40,14 @@ function BookmarkPage(): JSX.Element {
   }
 
   return (
-    <main className="lg:px-10 px-2 space-y-2">
-      <h1 className="text-headline font-heading tracking-wider text-xl font-semibold">
+    <main className=" space-y-2">
+      <h1 className="text-headline font-heading tracking-wider text-xl font-semibold lg:px-10 px-2">
         Your Watchlist
       </h1>
-      <PageGrid data={data as pageGridDataType} />
+      <div className="lg:px-10 px-2">
+        <PageGrid data={data as pageGridDataType} />
+      </div>
+      <Footer />
     </main>
   )
 }

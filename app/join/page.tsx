@@ -1,10 +1,11 @@
 import React from 'react'
-import { AuthForm } from 'components'
+import { AuthForm, Footer } from 'components'
 
 function JoinNowPage(): JSX.Element {
   return (
-    <main className="min-h-screen lg:px-10 px-2">
+    <main className="min-h-screen">
       <AuthForm title="Join Now" />
+      <Footer />
     </main>
   )
 }

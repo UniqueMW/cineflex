@@ -3,15 +3,15 @@ import React from 'react'
 import useSWR from 'swr'
 import { useParams } from 'next/navigation'
 import { fetcher } from 'utils'
-import { TrailerPageWrapper } from 'components'
+import { TrailerPageWrapper, Footer } from 'components'
 import type { ITrailerList } from 'types'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
-function MovieTrailerPage(): JSX.Element {
+function SeriesTrailerPage(): JSX.Element {
   const { id } = useParams() as { id: string }
   const { data } = useSWR<ITrailerList>(
-    `http://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`,
+    `http://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}`,
     fetcher
   )
 
@@ -20,10 +20,11 @@ function MovieTrailerPage(): JSX.Element {
   }
 
   return (
-    <main className="lg:px-10 py-2 px-2 ">
+    <main className=" py-2">
       <TrailerPageWrapper data={data} />
+      <Footer />
     </main>
   )
 }
 
-export default MovieTrailerPage
+export default SeriesTrailerPage

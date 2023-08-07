@@ -80,7 +80,7 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
   }
 
   return (
-    <section className="w-full flex flex-col justify-center items-center lg:mt-10 mt-4">
+    <section className="w-full flex flex-col justify-center items-center lg:mt-10 mt-4 lg:px-10 px-2">
       <form
         className="text-headline font-heading tracking-wider space-y-2 text-lg"
         ref={formRef}
