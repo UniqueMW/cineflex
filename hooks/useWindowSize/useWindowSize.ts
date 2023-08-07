@@ -1,3 +1,4 @@
+'use client'
 import 'client-only'
 import React from 'react'
 import { getScreenWidth } from 'utils'

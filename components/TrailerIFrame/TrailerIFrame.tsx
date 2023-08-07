@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { Date } from 'components'
 import type { ITrailer } from 'types'
