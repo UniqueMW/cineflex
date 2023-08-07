@@ -11,7 +11,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 function SeriesTrailerPage(): JSX.Element {
   const { id } = useParams() as { id: string }
   const { data } = useSWR<ITrailerList>(
-    `http://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}`,
+    `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${API_KEY}`,
     fetcher
   )
 
