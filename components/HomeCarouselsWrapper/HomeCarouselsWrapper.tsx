@@ -55,7 +55,7 @@ function HomeCarouselsWrapper(): JSX.Element {
 
   if (initialItems === undefined) {
     return (
-      <div className="lg:px-10 px-2 border border-red-700 space-y-2">
+      <div className="lg:px-10 px-2 space-y-4">
         {titles.map((title) => (
           <CardCarouselSkeleton key={title} />
         ))}

@@ -5,7 +5,7 @@ import React from 'react'
 import type { IMoviePage } from 'types'
 import useSWR from 'swr'
 import { HeroSlide, MobileHeroSlide } from 'components'
-import { HeroSlideSkeleton } from 'skeletons'
+import { HeroSlideSkeleton, SquareSkeleton } from 'skeletons'
 import { fetcher } from 'utils'
 import {
   Swiper,
@@ -37,11 +37,23 @@ function Hero(): JSX.Element {
     ))
   }, [data])
 
-  if (data !== undefined) {
+  if (data === undefined) {
     return (
       <section className="relative lg:block hidden">
+        <SquareSkeleton
+          width="1349px"
+          height="758.81px"
+          color="#f8f8f8"
+          className="lg:block hidden"
+        />
+        <SquareSkeleton
+          width="499px"
+          height="748.5px"
+          color="#f8f8f8"
+          className="block lg:hidden"
+        />
+
         <HeroSlideSkeleton />
-        <h2>Stuff...</h2>
       </section>
     )
   }

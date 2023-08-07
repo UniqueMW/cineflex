@@ -16,10 +16,22 @@ function Card({ data }: ICardProps): JSX.Element {
     typeof data.title === 'string' ? data.title : data?.name
   )
   const [, width] = useWindowSize()
+
+  const cardUrl = React.useMemo(() => {
+    let url = ''
+    if (data.first_air_date !== undefined) {
+      url = `/tv/${data.id}`
+    } else if (data.season_number !== undefined) {
+      url = `/season/${data.id}_${data.season_number}`
+    } else {
+      url = `tv/${data.id}`
+    }
+
+    return url
+  }, [data])
+
   return (
-    <Link
-      href={`/${data.first_air_date !== undefined ? 'tv' : 'movie'}/${data.id}`}
-    >
+    <Link href={cardUrl}>
       <section className="bg-cardBackground shadow-sm pb-2 px-1">
         <Image
           src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}

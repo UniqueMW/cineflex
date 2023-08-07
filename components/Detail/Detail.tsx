@@ -7,6 +7,7 @@ import { BsJournalBookmark, BsJournalBookmarkFill } from 'react-icons/bs'
 import { SlSocialYoutube } from 'react-icons/sl'
 import { ref } from 'firebase/database'
 import { Ratings, CarouselGroup, Button, ButtonAlt, Date } from 'components'
+import { DetailSkeleton } from 'skeletons'
 import { useAuth } from 'hooks'
 import { database } from 'firebase.config'
 import {
@@ -141,7 +142,7 @@ function Detail(props: IDetailProps): JSX.Element {
     carouselItems === undefined ||
     additionalData === undefined
   ) {
-    return <h1>Loading....</h1>
+    return <DetailSkeleton mediaType={props.mediaType} />
   }
 
   return (

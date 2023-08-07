@@ -41,6 +41,7 @@ import Footer from './Footer/Footer'
 import ContactForm from './ContactForm/ContactForm'
 import AuthForm from './AuthForm/AuthForm'
 import UserAvatar from './UserAvatar/UserAvatar'
+import EpisodeCard from './EpisodeCard/EpisodeCard'
 
 export {
   Nav,
@@ -85,5 +86,6 @@ export {
   Footer,
   ContactForm,
   AuthForm,
-  UserAvatar
+  UserAvatar,
+  EpisodeCard
 }

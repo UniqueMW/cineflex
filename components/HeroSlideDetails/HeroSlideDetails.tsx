@@ -1,8 +1,6 @@
 import React from 'react'
-import { Genre, Ratings, ButtonIcon, Date } from 'components'
+import { Genre, Ratings, Date } from 'components'
 import * as _ from 'lodash'
-import { SlSocialYoutube } from 'react-icons/sl'
-import { CiBookmarkPlus } from 'react-icons/ci'
 
 import type { ICardSeriesAndMovie, IMovie } from 'types'
 
@@ -35,14 +33,6 @@ function HeroSlideDetails({ heroMovie }: IHeroSlideProps): JSX.Element {
           omission: '.....'
         })}
       </p>
-      <div className="flex flex-row items-center space-x-2 w-fit text-headline text-lg tracking-wider font-heading font-semibold p-2 bg-button/90">
-        <ButtonIcon>
-          <SlSocialYoutube />
-        </ButtonIcon>
-        <ButtonIcon>
-          <CiBookmarkPlus />
-        </ButtonIcon>
-      </div>
     </div>
   )
 }
