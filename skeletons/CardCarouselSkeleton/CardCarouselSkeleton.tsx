@@ -1,5 +1,6 @@
-import { useWindowSize } from 'hooks'
+'use client'
 import React from 'react'
+import { useWindowSize } from 'hooks'
 import { SquareSkeleton, CardSkeleton, CastCardSkeleton } from 'skeletons'
 
 interface ICardCarouselSkeletonProps {

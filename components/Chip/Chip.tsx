@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import type { Genre, IWatchProvider } from 'types'
 import { LiaTimesSolid } from 'react-icons/lia'

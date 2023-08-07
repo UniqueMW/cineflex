@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { AiOutlineCalendar } from 'react-icons/ai'
 
