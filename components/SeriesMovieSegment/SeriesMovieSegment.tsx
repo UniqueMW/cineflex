@@ -6,9 +6,8 @@ interface ISeriesMovieSegment {
 
 function SeriesMovieSegment(props: ISeriesMovieSegment): JSX.Element {
   const handleSegment = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    const buttonValue = event.target.value
-    if (typeof buttonValue === 'string') {
-      props.setSegment(buttonValue)
+    if ('value' in event.target) {
+      props.setSegment(event.target.value as string)
     }
   }
   return (
