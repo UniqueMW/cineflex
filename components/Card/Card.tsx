@@ -24,7 +24,7 @@ function Card({ data }: ICardProps): JSX.Element {
     } else if (data.season_number !== undefined) {
       url = `/season/${data.id}_${data.season_number}`
     } else {
-      url = `tv/${data.id}`
+      url = `/movie/${data.id}`
     }
 
     return url
