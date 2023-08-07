@@ -12,7 +12,9 @@ import type {
   IMovie,
   ICardSeriesAndMovie,
   IFilterConfig,
-  Season
+  Season,
+  IMovieDetail,
+  ISeriesDetail
 } from 'types'
 import { CardGridSkeleton } from 'skeletons'
 
@@ -81,7 +83,15 @@ function InfiniteScroll({
             <PageFilter isShowFilter={isShowFilter} />
           </PageFilterContext.Provider>
           <PageGrid
-            data={cardData as Array<IMovie & ICardSeriesAndMovie & Season>}
+            data={
+              cardData as Array<
+                IMovie &
+                  ICardSeriesAndMovie &
+                  Season &
+                  IMovieDetail &
+                  ISeriesDetail
+              >
+            }
           />
         </div>
       ) : (
