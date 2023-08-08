@@ -37,6 +37,7 @@
     "typescript": "*"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.39.3",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
