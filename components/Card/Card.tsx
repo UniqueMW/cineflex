@@ -4,14 +4,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Ratings, Date } from 'components'
 import * as _ from 'lodash'
+import { useParams } from 'next/navigation'
 import { useWindowSize } from 'hooks'
 import type { ICardSeriesAndMovie, IMovie, Season } from 'types'
 
 interface ICardProps {
   data: IMovie & ICardSeriesAndMovie & Season
+  id?: string
 }
 
 function Card({ data }: ICardProps): JSX.Element {
+  const { info } = useParams() as { info: string }
+
   const [cardName] = React.useState<string>(
     typeof data.title === 'string' ? data.title : data?.name
   )
@@ -22,7 +26,7 @@ function Card({ data }: ICardProps): JSX.Element {
     if (data.first_air_date !== undefined) {
       url = `/tv/${data.id}`
     } else if (data.season_number !== undefined) {
-      url = `/season/${data.id}_${data.season_number}`
+      url = `/season/${info.split('_')[0]}_${data.season_number}`
     } else {
       url = `/movie/${data.id}`
     }
