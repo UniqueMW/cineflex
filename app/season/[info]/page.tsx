@@ -3,6 +3,7 @@ import React from 'react'
 import { useParams } from 'next/navigation'
 import useSWR from 'swr'
 import { EpisodeCard, Footer } from 'components'
+import { fetcher } from 'utils'
 
 import type { ISeasonDetail } from 'types'
 import { EpisodesSkeleton } from '@/skeletons'
@@ -14,14 +15,17 @@ function SeasonPage(): JSX.Element {
   const data = useSWR<ISeasonDetail>(
     `https://api.themoviedb.org/3/tv/${info.split('_')[0]}/season/${
       info.split('_')[1]
-    }?api_key=${API_KEY}`
+    }?api_key=${API_KEY}`,
+    fetcher
   )
-
   const episodeCards = React.useMemo(() => {
-    console.log(info)
-    return data.data?.episodes.map((episode) => (
-      <EpisodeCard episode={episode} key={episode.id} />
-    ))
+    if (data !== undefined) {
+      console.log(data.data)
+      return data.data?.episodes.map((episode) => (
+        <EpisodeCard episode={episode} key={episode.id} />
+      ))
+    }
+    return []
   }, [data])
 
   if (data === undefined) {
