@@ -14,7 +14,7 @@ interface ICardProps {
 }
 
 function Card({ data }: ICardProps): JSX.Element {
-  const { info } = useParams() as { info: string }
+  const { id } = useParams() as { id: string }
 
   const [cardName] = React.useState<string>(
     typeof data.title === 'string' ? data.title : data?.name
@@ -26,7 +26,7 @@ function Card({ data }: ICardProps): JSX.Element {
     if (data.first_air_date !== undefined) {
       url = `/tv/${data.id}`
     } else if (data.season_number !== undefined) {
-      url = `/season/${info.split('_')[0]}_${data.season_number}`
+      url = `/season/${id}_${data.season_number}`
     } else {
       url = `/movie/${data.id}`
     }
