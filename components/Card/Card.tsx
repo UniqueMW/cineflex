@@ -10,7 +10,6 @@ import type { ICardSeriesAndMovie, IMovie, Season } from 'types'
 
 interface ICardProps {
   data: IMovie & ICardSeriesAndMovie & Season
-  id?: string
 }
 
 function Card({ data }: ICardProps): JSX.Element {

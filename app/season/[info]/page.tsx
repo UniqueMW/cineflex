@@ -10,6 +10,8 @@ import { EpisodesSkeleton } from '@/skeletons'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
+// TODO add correct number of episode skeletons based on episode count
+
 function SeasonPage(): JSX.Element {
   const { info } = useParams() as { info: string }
   const data = useSWR<ISeasonDetail>(
@@ -20,7 +22,6 @@ function SeasonPage(): JSX.Element {
   )
   const episodeCards = React.useMemo(() => {
     if (data !== undefined) {
-      console.log(data.data)
       return data.data?.episodes.map((episode) => (
         <EpisodeCard episode={episode} key={episode.id} />
       ))

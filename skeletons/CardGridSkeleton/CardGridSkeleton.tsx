@@ -1,6 +1,8 @@
 import React from 'react'
 import { CardSkeleton } from 'skeletons'
 
+// TODO add total results skeleton
+
 function CardGridSkeleton(): JSX.Element {
   const cards = React.useMemo(() => {
     const cardsArray = []

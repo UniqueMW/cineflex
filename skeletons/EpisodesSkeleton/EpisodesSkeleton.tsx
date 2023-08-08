@@ -6,7 +6,7 @@ function EpisodesSkeleton(): JSX.Element {
     let numberOfEpisode = 20
     const episodeArray = []
     while (numberOfEpisode > 0) {
-      episodeArray.push(<SquareSkeleton width="100%" height="50px" />)
+      episodeArray.push(<SquareSkeleton width="100%" height="54px" />)
       numberOfEpisode--
     }
     return episodeArray

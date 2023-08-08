@@ -6,6 +6,7 @@ import CardGridSkeleton from './CardGridSkeleton/CardGridSkeleton'
 import DetailSkeleton from './DetailSkeleton/DetailSkeleton'
 import CastCardSkeleton from './CastCardSkeleton/CastCardSkeleton'
 import EpisodesSkeleton from './EpisodesSkeleton/EpisodesSkeleton'
+import TrailerPageSkeleton from './TrailerPageSkeleton/TrailerPageSkeleton'
 
 export {
   HeroSlideSkeleton,
@@ -15,5 +16,6 @@ export {
   CardGridSkeleton,
   DetailSkeleton,
   CastCardSkeleton,
-  EpisodesSkeleton
+  EpisodesSkeleton,
+  TrailerPageSkeleton
 }

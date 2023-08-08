@@ -16,6 +16,7 @@ interface IPageGridProps {
 }
 
 // TODO refactor
+// TODO empty grid case
 function PageGrid({ data }: IPageGridProps): JSX.Element {
   const renderedCards = React.useMemo(
     () => data.map((item) => <Card key={item.id} data={item} />),

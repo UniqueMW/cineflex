@@ -4,6 +4,7 @@ import useSWR from 'swr'
 import { useParams } from 'next/navigation'
 import { fetcher } from 'utils'
 import { TrailerPageWrapper, Footer } from 'components'
+import { TrailerPageSkeleton } from 'skeletons'
 import type { ITrailerList } from 'types'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
@@ -16,7 +17,11 @@ function SeriesTrailerPage(): JSX.Element {
   )
 
   if (data === undefined) {
-    return <h1>Loading....</h1>
+    return (
+      <section className="py-2">
+        <TrailerPageSkeleton />
+      </section>
+    )
   }
 
   return (
