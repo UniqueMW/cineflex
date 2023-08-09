@@ -33,12 +33,12 @@ function SeasonPage(): JSX.Element {
     return <EpisodesSkeleton />
   }
   return (
-    <main className="min-h-screen">
+    <main>
       <div className="px-2 lg:px-10">
         <h1 className="text-lg font-heading text-heading tracking-wider w-full text-center">
           {data.data?.name}
         </h1>
-        <section className="space-y-2">{episodeCards}</section>
+        <section className="space-y-2 min-h-screen">{episodeCards}</section>
       </div>
       <Footer />
     </main>

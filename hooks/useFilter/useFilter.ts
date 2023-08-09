@@ -24,7 +24,10 @@ function useFilter(baseUrl: string, filterConfig?: IFilterConfig): string {
           generatedUrl = `${generatedUrl}&${key}=${String(config[key])}`
         }
       }
-      setUrl(generatedUrl)
+      // Only fetch up to 500 pages as specified by the api
+      if (config.page <= 500) {
+        setUrl(generatedUrl)
+      }
     } else {
       throw new Error(
         `${baseUrl} this url is invalid make sure it only include the api_key as the only parameter.`

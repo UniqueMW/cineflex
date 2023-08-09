@@ -46,6 +46,7 @@ function Search(): JSX.Element {
         genreType="MOVIES"
         config={config}
         segment={segment}
+        emptyStateMessage="No results found for your search."
       />
     </main>
   )

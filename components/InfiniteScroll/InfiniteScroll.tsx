@@ -24,6 +24,7 @@ interface IInfiniteScrollProps {
   displayFilter: boolean
   config?: IFilterConfig
   segment?: string
+  emptyStateMessage?: string
 }
 
 // TODO handle empty case
@@ -34,10 +35,12 @@ function InfiniteScroll({
   genreType,
   displayFilter,
   config,
-  segment
+  segment,
+  emptyStateMessage
 }: IInfiniteScrollProps): JSX.Element {
   const [pageConfig, setPageConfig] = React.useState<IFilterConfig>({ page: 1 })
   const [isShowFilter, setIsShowFilter] = React.useState(false)
+  const [isEndReached, setIsEndReached] = React.useState(false)
   const pageUrl = useFilter(url, pageConfig)
   const { data, isLoading } = useSWR<IMoviePage>(pageUrl, fetcher)
   const [cardData, setCardData] =
@@ -68,6 +71,15 @@ function InfiniteScroll({
     }
   }, [config, segment])
 
+  React.useEffect(() => {
+    if (data !== undefined) {
+      const isEndReachedYet =
+        data?.results.length === 0 || pageConfig.page > 500
+
+      setIsEndReached(isEndReachedYet)
+    }
+  }, [pageUrl, data])
+
   return (
     <section className="flex flex-col items-center w-full">
       {cardData !== undefined ? (
@@ -92,12 +104,19 @@ function InfiniteScroll({
                   ISeriesDetail
               >
             }
+            message={emptyStateMessage}
           />
         </div>
       ) : (
         <CardGridSkeleton />
       )}
-      <PulseLoader loading={isLoading} color="#078080" />
+      {isEndReached ? (
+        <p className="text-sm tracking-wide text-secondary font-paragraph text-center w-full">
+          End Of Results
+        </p>
+      ) : (
+        <PulseLoader loading={isLoading} color="#078080" />
+      )}
       <div ref={targetElementRef} />
     </section>
   )

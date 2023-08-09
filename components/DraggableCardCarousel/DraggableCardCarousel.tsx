@@ -17,7 +17,7 @@ interface IDraggableCardCarouselProps {
 
 function DraggableCardCarousel({
   item
-}: IDraggableCardCarouselProps): JSX.Element {
+}: IDraggableCardCarouselProps): JSX.Element | null {
   const controls = useDragControls()
   const [sizeType] = useWindowSize()
   const handleDrag = (event: any): void => {
@@ -35,6 +35,10 @@ function DraggableCardCarousel({
       </SwiperSlide>
     ))
   }, [item.data])
+
+  if (item.data.length <= 0) {
+    return null
+  }
 
   return (
     <Reorder.Item value={item} dragListener={false} dragControls={controls}>

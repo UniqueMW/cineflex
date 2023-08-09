@@ -25,7 +25,7 @@ function SeriesTrailerPage(): JSX.Element {
   }
 
   return (
-    <main className=" py-2">
+    <main className=" py-2 min-h-screen">
       <TrailerPageWrapper data={data} />
       <Footer />
     </main>

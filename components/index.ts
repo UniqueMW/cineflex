@@ -42,6 +42,7 @@ import ContactForm from './ContactForm/ContactForm'
 import AuthForm from './AuthForm/AuthForm'
 import UserAvatar from './UserAvatar/UserAvatar'
 import EpisodeCard from './EpisodeCard/EpisodeCard'
+import Empty from './Empty/Empty'
 
 export {
   Nav,
@@ -87,5 +88,6 @@ export {
   ContactForm,
   AuthForm,
   UserAvatar,
-  EpisodeCard
+  EpisodeCard,
+  Empty
 }
