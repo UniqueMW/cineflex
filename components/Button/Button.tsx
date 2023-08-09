@@ -5,6 +5,7 @@ interface IButtonProps {
   onClick?: (arg?: any) => void
   children: React.ReactNode
   className?: string
+  type?: 'button' | 'submit' | 'reset'
 }
 
 function Button(props: IButtonProps): JSX.Element {
@@ -16,6 +17,7 @@ function Button(props: IButtonProps): JSX.Element {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onTap={props.onClick}
+      type={props.type !== undefined ? props.type : 'button'}
     >
       {props.children}
     </motion.button>

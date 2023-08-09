@@ -20,11 +20,13 @@ function CastCard(props: ICastCardProps): JSX.Element {
         blurDataURL="/cardPlaceholder.png"
         className="object-cover rounded-[100%] object-center aspect-square"
       />
-      <h1 className="text-lg font-heading text-headline tracking-wider">
+      <h1 className="text-lg font-heading text-headline tracking-wider text-center w-full">
         {props.cast.name}
       </h1>
-      <h4 className="text-secondary text-xs font-paragraph">As</h4>
-      <h3 className="text-sm font-heading text-button tracking-wider">
+      <h4 className="text-secondary text-xs font-paragraph text-center w-full">
+        As
+      </h4>
+      <h3 className="text-sm font-heading text-button tracking-wider text-center w-full">
         {props.cast.character}
       </h3>
     </section>

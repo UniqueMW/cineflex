@@ -2,21 +2,20 @@
 import React from 'react'
 import { Date } from 'components'
 import type { ITrailer } from 'types'
-import { useDate } from 'hooks'
+import { useDate, useWindowSize } from 'hooks'
 
 interface ITrailerIFrameProps {
   Trailer: ITrailer
 }
 
-// TODO Adjust Iframe based on screen size
-
 function TrailerIFrame(props: ITrailerIFrameProps): JSX.Element {
   const date = useDate(props.Trailer.published_at)
+  const [windowType] = useWindowSize()
   return (
-    <section className="w-full h-screen flex flex-col justify-start gap-y-4">
+    <section className="w-full lg:h-screen md:h-[70vh] h-[70vh] flex flex-col justify-start gap-y-4">
       <iframe
         width="100%"
-        height="90%"
+        height={windowType === 'lg' ? '90%' : '100%'}
         src={`https://www.youtube.com/embed/${props.Trailer.key}`}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

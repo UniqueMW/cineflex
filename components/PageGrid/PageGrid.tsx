@@ -17,8 +17,6 @@ interface IPageGridProps {
 }
 const defaultMessage = 'Nothing found. Try a different search query.'
 
-// TODO refactor
-// TODO empty grid case
 function PageGrid({ data, message }: IPageGridProps): JSX.Element {
   const renderedCards = React.useMemo(
     () => data.map((item) => <Card key={item.id} data={item} />),

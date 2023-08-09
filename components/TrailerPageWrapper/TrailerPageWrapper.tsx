@@ -7,8 +7,6 @@ interface ITrailerPageWrapperProps {
   data: ITrailerList
 }
 
-// TODO handle empty trailers
-
 function TrailerPageWrapper({ data }: ITrailerPageWrapperProps): JSX.Element {
   const [activeTrailer, setActiveTrailer] = React.useState(data.results[0])
 

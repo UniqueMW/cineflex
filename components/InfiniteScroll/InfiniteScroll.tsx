@@ -27,9 +27,6 @@ interface IInfiniteScrollProps {
   emptyStateMessage?: string
 }
 
-// TODO handle empty case
-// TODO handle end of the page case
-
 function InfiniteScroll({
   url,
   genreType,
