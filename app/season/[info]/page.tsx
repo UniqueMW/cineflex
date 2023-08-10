@@ -10,8 +10,6 @@ import { EpisodesSkeleton } from '@/skeletons'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
-// TODO add correct number of episode skeletons based on episode count
-
 function SeasonPage(): JSX.Element {
   const { info } = useParams() as { info: string }
   const data = useSWR<ISeasonDetail>(

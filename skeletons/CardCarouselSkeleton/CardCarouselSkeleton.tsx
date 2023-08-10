@@ -29,7 +29,7 @@ function CardCarouselSkeleton({
   return (
     <section className="space-y-2">
       <SquareSkeleton width="300px" height="30px" />
-      <div className="flex flex-row justify-between w-full">
+      <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 gap-x-10 w-full">
         {cardSkeletons}
       </div>
     </section>

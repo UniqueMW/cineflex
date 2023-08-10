@@ -6,7 +6,7 @@ function Series(): JSX.Element {
   const seriesUrl = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}`
 
   return (
-    <main className="min-h-screen bg-background lg:px-10 px-2 py-1">
+    <main className="min-h-screen bg-background lg:px-10 px-2 py-1 w-full">
       <InfiniteScroll url={seriesUrl} genreType="SERIES" displayFilter />
     </main>
   )

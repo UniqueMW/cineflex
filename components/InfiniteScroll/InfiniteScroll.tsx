@@ -27,8 +27,6 @@ interface IInfiniteScrollProps {
   emptyStateMessage?: string
 }
 
-// TODO test page 500 case
-
 function InfiniteScroll({
   url,
   genreType,
@@ -37,7 +35,9 @@ function InfiniteScroll({
   segment,
   emptyStateMessage
 }: IInfiniteScrollProps): JSX.Element {
-  const [pageConfig, setPageConfig] = React.useState<IFilterConfig>({ page: 1 })
+  const [pageConfig, setPageConfig] = React.useState<IFilterConfig>({
+    page: 1
+  })
   const [isShowFilter, setIsShowFilter] = React.useState(false)
   const [isEndReached, setIsEndReached] = React.useState(false)
   const pageUrl = useFilter(url, pageConfig)
@@ -77,7 +77,7 @@ function InfiniteScroll({
 
       setIsEndReached(isEndReachedYet)
     }
-  }, [pageUrl, data])
+  }, [pageUrl, data, pageConfig])
 
   return (
     <section className="flex flex-col items-center w-full">

@@ -1,8 +1,8 @@
 import React from 'react'
 import type { IFilterConfig } from 'types'
 
+const defaultConfig: IFilterConfig = { language: 'en-US', page: 1 }
 function useFilter(baseUrl: string, filterConfig?: IFilterConfig): string {
-  const defaultConfig: IFilterConfig = { language: 'en-US', page: 1 }
   const [url, setUrl] = React.useState(baseUrl)
 
   React.useEffect(() => {

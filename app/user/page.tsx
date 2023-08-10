@@ -8,8 +8,6 @@ import { FiLogOut } from 'react-icons/fi'
 import { Footer, Button, ButtonAlt } from 'components'
 import { useAuth } from 'hooks'
 
-// TODO add a fallback profile image
-
 function UserPage(): JSX.Element {
   const router = useRouter()
   const [, user] = useAuth()
@@ -50,7 +48,7 @@ function UserPage(): JSX.Element {
     <main className="min-h-screen">
       <section className="lg:px-10 px-2 flex md:flex-row flex-col w-full min-h-screen justify-center items-center space-x-6">
         <Image
-          src={user.photoURL as string}
+          src={user.photoURL !== null ? user.photoURL : '/account.png'}
           alt="Profile Image"
           width={200}
           height={200}

@@ -1,7 +1,5 @@
 import React from 'react'
-import { CardSkeleton } from 'skeletons'
-
-// TODO add total results skeleton
+import { CardSkeleton, SquareSkeleton } from 'skeletons'
 
 function CardGridSkeleton(): JSX.Element {
   const cards = React.useMemo(() => {
@@ -15,9 +13,12 @@ function CardGridSkeleton(): JSX.Element {
   }, [])
 
   return (
-    <section className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 gap-2 min-h-screen">
-      {cards}
-    </section>
+    <div className="space-y-2 w-full">
+      <SquareSkeleton height="30px" width="100%" />
+      <section className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 gap-2 min-h-screen w-full">
+        {cards}
+      </section>
+    </div>
   )
 }
 

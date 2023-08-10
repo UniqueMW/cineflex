@@ -11,8 +11,6 @@ interface INavProps {
   setOpenMenu: (arg: boolean) => void
 }
 
-// TODO prevent a state refresh on page change.
-
 const Nav = React.memo((props: INavProps): JSX.Element => {
   const router = useRouter()
   const handleOpenMenu = React.useCallback(() => {

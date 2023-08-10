@@ -6,7 +6,7 @@ import { ToggleButton, Chip } from 'components'
 import { PageFilterContext } from 'reactContexts'
 import { fetcher } from 'utils'
 import type { GenreList, Genre, IWatchProvider } from 'types'
-import { useFilterEffect } from '@/hooks'
+import { useFilterEffect } from 'hooks'
 
 interface IGenreFilter {
   title: string

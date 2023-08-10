@@ -107,7 +107,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
                 exit={'start'}
                 transition={{ delay: 0.3 }}
               >
-                <Link href="/">Series</Link>
+                <Link href="/series">Series</Link>
               </motion.div>
               <motion.div
                 variants={linkVariant}
@@ -116,7 +116,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
                 exit={'start'}
                 transition={{ delay: 0.4 }}
               >
-                <Link href="/">Cinema</Link>
+                <Link href="/cinema">Cinema</Link>
               </motion.div>
               <motion.div
                 variants={linkVariant}
@@ -125,7 +125,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
                 exit={'start'}
                 transition={{ delay: 0.5 }}
               >
-                <Link href="/">Upcoming</Link>
+                <Link href="/upcoming">Upcoming</Link>
               </motion.div>
             </motion.div>
             <motion.div

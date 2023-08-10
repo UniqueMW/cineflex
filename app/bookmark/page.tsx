@@ -15,8 +15,6 @@ type pageGridDataType = Array<
   IMovie & ICardSeriesAndMovie & Season & IMovieDetail & ISeriesDetail
 >
 
-// TODO add bookmark from local storage if a user bookmarked stuff without logging in
-
 function BookmarkPage(): JSX.Element {
   const [isAuthenticated, user] = useAuth()
   const [data, setData] = React.useState<Array<
@@ -39,7 +37,7 @@ function BookmarkPage(): JSX.Element {
 
   if (data === null) {
     return (
-      <main className="min-h-screen justify-center items-center justify-center w-full h-full">
+      <main className="min-h-screen justify-center items-center w-full h-full">
         <Empty message="Save Your Favorite Movies and Series Here" />
       </main>
     )
