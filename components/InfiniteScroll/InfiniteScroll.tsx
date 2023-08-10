@@ -27,6 +27,8 @@ interface IInfiniteScrollProps {
   emptyStateMessage?: string
 }
 
+// TODO test page 500 case
+
 function InfiniteScroll({
   url,
   genreType,

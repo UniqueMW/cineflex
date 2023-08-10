@@ -2,8 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { RxCross2 } from 'react-icons/rx'
-import { useRouter } from 'next/navigation'
-import { Button, ButtonAlt, ButtonIcon } from 'components'
+import { ButtonIcon, SideMenuAuth } from 'components'
 import { motion, AnimatePresence } from 'PackagesClientComponents/framerMotion'
 
 interface ISideMenuProps {
@@ -21,18 +20,9 @@ const navVariant = {
 }
 
 function SideMenu(props: ISideMenuProps): JSX.Element {
-  const router = useRouter()
   const handleCloseMenu = React.useCallback((): void => {
     props.setOpenMenu(false)
   }, [])
-
-  const handleJoinNow = (): void => {
-    router.push('/join')
-  }
-
-  const handleLogin = (): void => {
-    router.push('/login')
-  }
 
   return (
     <AnimatePresence>
@@ -139,14 +129,13 @@ function SideMenu(props: ISideMenuProps): JSX.Element {
               </motion.div>
             </motion.div>
             <motion.div
-              className="flex flex-col space-y-3"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.8 }}
+              className="flex flex-col items-center w-full"
             >
-              <Button onClick={handleJoinNow}>Join Now</Button>
-              <ButtonAlt onClick={handleLogin}>LOGIN</ButtonAlt>
+              <SideMenuAuth />
             </motion.div>
           </motion.section>
         </motion.nav>

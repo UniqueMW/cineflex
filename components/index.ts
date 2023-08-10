@@ -43,6 +43,8 @@ import AuthForm from './AuthForm/AuthForm'
 import UserAvatar from './UserAvatar/UserAvatar'
 import EpisodeCard from './EpisodeCard/EpisodeCard'
 import Empty from './Empty/Empty'
+import NavAuth from './NavAuth/NavAuth'
+import SideMenuAuth from './SideMenuAuth/SideMenuAuth'
 
 export {
   Nav,
@@ -89,5 +91,7 @@ export {
   AuthForm,
   UserAvatar,
   EpisodeCard,
-  Empty
+  Empty,
+  NavAuth,
+  SideMenuAuth
 }

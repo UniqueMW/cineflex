@@ -5,15 +5,15 @@ import { RiSearch2Line } from 'react-icons/ri'
 import { BsJournalBookmark } from 'react-icons/bs'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useRouter } from 'next/navigation'
-import { Button, ButtonAlt, ButtonIcon, UserAvatar } from 'components'
-import { useAuth } from 'hooks'
+import { ButtonIcon, NavAuth } from 'components'
 
 interface INavProps {
   setOpenMenu: (arg: boolean) => void
 }
 
+// TODO prevent a state refresh on page change.
+
 function Nav(props: INavProps): JSX.Element {
-  const [, user] = useAuth()
   const router = useRouter()
   const handleOpenMenu = React.useCallback(() => {
     props.setOpenMenu(true)
@@ -25,14 +25,6 @@ function Nav(props: INavProps): JSX.Element {
 
   const handleBookmarkPage = (): void => {
     router.push('/bookmark')
-  }
-
-  const handleJoinNow = (): void => {
-    router.push('/join')
-  }
-
-  const handleLogin = (): void => {
-    router.push('/login')
   }
 
   return (
@@ -62,14 +54,7 @@ function Nav(props: INavProps): JSX.Element {
         <ButtonIcon onClick={handleBookmarkPage}>
           <BsJournalBookmark />
         </ButtonIcon>
-        {user === null ? (
-          <div className="md:flex hidden flex-row space-x-3">
-            <Button onClick={handleJoinNow}>Join Now</Button>
-            <ButtonAlt onClick={handleLogin}>LOGIN</ButtonAlt>
-          </div>
-        ) : (
-          <UserAvatar user={user} />
-        )}
+        <NavAuth />
       </div>
     </nav>
   )

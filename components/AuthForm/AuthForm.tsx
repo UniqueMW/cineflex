@@ -17,7 +17,7 @@ interface IAuthFormProps {
 }
 
 const actionCodeSettings = {
-  url: 'https://cineflex.netlify.app/',
+  url: 'https://cineflexxx.netlify.app/',
   handleCodeInApp: true
 }
 
