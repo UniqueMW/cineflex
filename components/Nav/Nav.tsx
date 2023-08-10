@@ -13,7 +13,7 @@ interface INavProps {
 
 // TODO prevent a state refresh on page change.
 
-function Nav(props: INavProps): JSX.Element {
+const Nav = React.memo((props: INavProps): JSX.Element => {
   const router = useRouter()
   const handleOpenMenu = React.useCallback(() => {
     props.setOpenMenu(true)
@@ -58,6 +58,8 @@ function Nav(props: INavProps): JSX.Element {
       </div>
     </nav>
   )
-}
+})
+
+Nav.displayName = 'Nav'
 
 export default Nav

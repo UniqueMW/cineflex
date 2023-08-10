@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Footer, PageGrid } from 'components'
+import { Empty, Footer, PageGrid } from 'components'
 import { getAllDatabaseBookmarks, getBookmarks } from 'utils'
 import type {
   IMovieDetail,
@@ -38,7 +38,11 @@ function BookmarkPage(): JSX.Element {
   }, [isAuthenticated, user])
 
   if (data === null) {
-    return <h1>Empty</h1>
+    return (
+      <main className="min-h-screen justify-center items-center justify-center w-full h-full">
+        <Empty message="Save Your Favorite Movies and Series Here" />
+      </main>
+    )
   }
 
   return (
@@ -47,7 +51,10 @@ function BookmarkPage(): JSX.Element {
         Your Watchlist
       </h1>
       <div className="lg:px-10 px-2">
-        <PageGrid data={data as pageGridDataType} />
+        <PageGrid
+          data={data as pageGridDataType}
+          message="Save Your Favorite Movies and Series Here"
+        />
       </div>
       <Footer />
     </main>

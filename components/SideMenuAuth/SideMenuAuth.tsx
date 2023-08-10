@@ -1,7 +1,8 @@
 import React from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useAuth } from 'hooks'
 import { Button, ButtonAlt, UserAvatar } from 'components'
-import { useRouter } from 'next/navigation'
 
 const SideMenuAuth = React.memo((): JSX.Element => {
   const router = useRouter()
@@ -24,12 +25,15 @@ const SideMenuAuth = React.memo((): JSX.Element => {
     )
   }
   return (
-    <section className="flex flex-row shadow-sm gap-x-2 p-2 items-center justify-center w-fit">
+    <Link
+      className="flex flex-row shadow-sm gap-x-2 p-2 items-center justify-center w-fit"
+      href="/user"
+    >
       <UserAvatar user={user} />
       <h2 className="text-headline tracking-wider font-heading">
         {user.email}
       </h2>
-    </section>
+    </Link>
   )
 })
 

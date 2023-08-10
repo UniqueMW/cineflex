@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useAuth } from 'hooks'
 import { UserAvatar, Button, ButtonAlt } from 'components'
 
@@ -25,9 +26,9 @@ const NavAuth = React.memo((): JSX.Element => {
   }
 
   return (
-    <div className="md:block hidden">
+    <Link className="md:block hidden" href="/user">
       <UserAvatar user={user} />
-    </div>
+    </Link>
   )
 })
 

@@ -19,7 +19,7 @@ const navVariant = {
   open: { x: 0, opacity: 1 }
 }
 
-function SideMenu(props: ISideMenuProps): JSX.Element {
+const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
   const handleCloseMenu = React.useCallback((): void => {
     props.setOpenMenu(false)
   }, [])
@@ -142,6 +142,8 @@ function SideMenu(props: ISideMenuProps): JSX.Element {
       )}
     </AnimatePresence>
   )
-}
+})
+
+SideMenu.displayName = 'SideMenu'
 
 export default SideMenu
