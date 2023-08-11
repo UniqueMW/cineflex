@@ -17,7 +17,7 @@ interface IAuthFormProps {
 }
 
 const actionCodeSettings = {
-  url: 'https://cineflexxx.netlify.app/',
+  url: 'http://localhost:3000/',
   handleCodeInApp: true
 }
 
@@ -62,7 +62,7 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
     }
   }
 
-  const handleSignIn = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleSignIn = (event: React.FormEvent): void => {
     event.preventDefault()
     if (emailRef.current !== null) {
       const email = emailRef.current.value
@@ -71,17 +71,20 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
         .then(() => {
           setIsEmailSent(true)
           localStorage.setItem('userEmail', email)
-          router.push('/')
+          console.log('sent')
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error, 'email link')
         })
     }
   }
 
   return (
     <section className="w-full flex flex-col justify-center items-center lg:mt-10 mt-4 lg:px-10 px-2">
-      <form className="text-headline font-heading tracking-wider space-y-2 text-lg">
+      <form
+        className="text-headline font-heading tracking-wider space-y-2 text-lg"
+        onSubmit={handleSignIn}
+      >
         <h1 className="text-xl font-semibold">{props.title}</h1>
         <div className="flex flex-col">
           <label htmlFor="emailLink">Email</label>
@@ -104,11 +107,7 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
             Remember Me
           </label>
         </div>
-        <button
-          className="lg:px-6 px-3 py-2 bg-button"
-          type="submit"
-          onClick={handleSignIn}
-        >
+        <button className="lg:px-6 px-3 py-2 bg-button" type="submit">
           {props.title}
         </button>
         <GoogleButton onClick={handleGoogleAuth} />
