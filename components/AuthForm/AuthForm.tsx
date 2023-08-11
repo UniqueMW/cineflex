@@ -22,7 +22,7 @@ const actionCodeSettings = {
 }
 
 function AuthForm(props: IAuthFormProps): JSX.Element {
-  const formRef = React.useRef<HTMLFormElement>(null)
+  const emailRef = React.useRef<HTMLInputElement>(null)
   const router = useRouter()
   const [isEmailSent, setIsEmailSent] = React.useState(false)
   const handleGoogleAuth = (): void => {
@@ -64,8 +64,8 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
 
   const handleSignIn = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    if (formRef.current !== null) {
-      const email = formRef.current.email.value
+    if (emailRef.current !== null) {
+      const email = emailRef.current.value
 
       sendSignInLinkToEmail(auth, email, actionCodeSettings)
         .then(() => {
@@ -81,10 +81,7 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
 
   return (
     <section className="w-full flex flex-col justify-center items-center lg:mt-10 mt-4 lg:px-10 px-2">
-      <form
-        className="text-headline font-heading tracking-wider space-y-2 text-lg"
-        ref={formRef}
-      >
+      <form className="text-headline font-heading tracking-wider space-y-2 text-lg">
         <h1 className="text-xl font-semibold">{props.title}</h1>
         <div className="flex flex-col">
           <label htmlFor="emailLink">Email</label>
@@ -92,6 +89,7 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
             type="email"
             id="emailLink"
             className="bg-transparent border-b border-b-headline outline-none"
+            ref={emailRef}
           />
           {isEmailSent ? (
             <p className="text-sm text-action tracking-wide text-left">

@@ -107,7 +107,9 @@ function InfiniteScroll({
           />
         </div>
       ) : (
-        <CardGridSkeleton />
+        <div className="mt-2">
+          <CardGridSkeleton />
+        </div>
       )}
       {isEndReached ? (
         <p className="text-sm tracking-wide text-secondary font-paragraph text-center w-full">

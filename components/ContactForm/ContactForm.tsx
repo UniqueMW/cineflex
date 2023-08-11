@@ -25,6 +25,7 @@ function ContactForm(): JSX.Element {
           id="email"
           name="email"
           className="background-transparent  border-b border-b-headline w-full"
+          type="email"
           required
         />
         <label htmlFor="subject" className="text-left w-full">

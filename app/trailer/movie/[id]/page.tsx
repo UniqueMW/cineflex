@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { fetcher } from 'utils'
 import { TrailerPageWrapper, Footer } from 'components'
 import type { ITrailerList } from 'types'
+import { TrailerPageSkeleton } from 'skeletons'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
@@ -16,11 +17,15 @@ function MovieTrailerPage(): JSX.Element {
   )
 
   if (data === undefined) {
-    return <h1>Loading....</h1>
+    return (
+      <section className="py-2">
+        <TrailerPageSkeleton />
+      </section>
+    )
   }
 
   return (
-    <main className=" py-2 min-h-screen ">
+    <main className=" py-2 min-h-screen flex flex-col justify-between">
       <TrailerPageWrapper data={data} />
       <Footer />
     </main>
