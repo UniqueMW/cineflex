@@ -43,4 +43,6 @@ function SeasonPage(): JSX.Element {
   )
 }
 
+export const dynamic = 'force-dynamic'
+
 export default SeasonPage
