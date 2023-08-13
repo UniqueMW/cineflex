@@ -107,7 +107,7 @@ function InfiniteScroll({
           />
         </div>
       ) : (
-        <div className="mt-2">
+        <div className="mt-2 w-full">
           <CardGridSkeleton />
         </div>
       )}

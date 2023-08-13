@@ -21,6 +21,9 @@ const actionCodeSettings = {
   handleCodeInApp: true
 }
 
+// TODO fix email Link auth
+// TODO handle seo
+
 function AuthForm(props: IAuthFormProps): JSX.Element {
   const emailRef = React.useRef<HTMLInputElement>(null)
   const router = useRouter()
