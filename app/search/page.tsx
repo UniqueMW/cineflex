@@ -8,6 +8,14 @@ import {
 } from 'components'
 import type { IFilterConfig } from 'types'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Search',
+  description:
+    'Explore Your Movie and Series Universe with CineFlex Search. Dive into a vast selection of films and series using our powerful search tool. Find your favorite titles, discover new gems, and tailor your cinematic journey. Uncover the magic of entertainment effortlessly with CineFlex Search.'
+}
+
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
 function Search(): JSX.Element {

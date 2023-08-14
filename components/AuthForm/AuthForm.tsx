@@ -17,11 +17,10 @@ interface IAuthFormProps {
 }
 
 const actionCodeSettings = {
-  url: 'http://localhost:3000/',
+  url: 'https://cineflex-uniquemw.vercel.app/',
   handleCodeInApp: true
 }
 
-// TODO fix email Link auth
 // TODO handle seo
 
 function AuthForm(props: IAuthFormProps): JSX.Element {
@@ -97,13 +96,13 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
             className="bg-transparent border-b border-b-headline outline-none"
             ref={emailRef}
           />
-          {isEmailSent ? (
-            <p className="text-sm text-action tracking-wide text-left">
-              Click the link sent to your Email to continue.If you have not
-              received any Email try signing in or up again.
-            </p>
-          ) : null}
         </div>
+        {isEmailSent ? (
+          <p className="text-sm text-action tracking-wide text-left">
+            Sign-in link sent to your email. Check inbox. If not received, check
+            spam or retry.
+          </p>
+        ) : null}
         <div>
           <input type="checkbox" onClick={handleRememberMe} />
           <label htmlFor="remember" className="ml-2 text-sm">

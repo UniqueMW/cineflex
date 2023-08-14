@@ -1,5 +1,12 @@
 import React from 'react'
 import { InfiniteScroll } from 'components'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Upcoming',
+  description:
+    'Discover the Future of Entertainment with CineFlex Upcoming. Stay ahead of the curve and explore the latest movie and series releases that are set to captivate audiences worldwide. Get a sneak peek into the next big hits and plan your cinematic journey with CineFlex Upcoming.'
+}
 
 function Upcoming(): JSX.Element {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string

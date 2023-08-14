@@ -1,6 +1,14 @@
 import React from 'react'
 import { Footer } from 'components'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description:
+    'Our Privacy Commitment at CineFlex: Your trust matters to us. Discover how we handle your personal information with utmost care. Our Privacy Policy outlines the steps we take to safeguard your data, ensuring a secure and enjoyable movie-watching experience. Your privacy is our priority at CineFlex.'
+}
+
 function Privacy(): JSX.Element {
   return (
     <main className=" text-headline font-paragraph">

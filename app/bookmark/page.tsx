@@ -10,10 +10,17 @@ import type {
   ICardSeriesAndMovie
 } from 'types'
 import { useAuth } from 'hooks'
+import type { Metadata } from 'next'
 
 type pageGridDataType = Array<
   IMovie & ICardSeriesAndMovie & Season & IMovieDetail & ISeriesDetail
 >
+
+export const metadata: Metadata = {
+  title: 'Bookmark',
+  description:
+    'Bookmark Your Favorites with CineFlex! Keep track of your most-loved movies and series by using our convenient bookmark feature. Never lose sight of your must-watch titles again. Elevate your movie-watching experience with CineFlex bookmarks.'
+}
 
 function BookmarkPage(): JSX.Element {
   const [isAuthenticated, user] = useAuth()

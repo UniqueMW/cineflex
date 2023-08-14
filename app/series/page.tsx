@@ -1,5 +1,12 @@
 import React from 'react'
 import { InfiniteScroll } from 'components'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Series',
+  description:
+    "Explore the World of Series with CineFlex Series. Dive into a captivating realm of TV series that span across genres and stories. Whether you're a binge-watcher or prefer episodic storytelling, CineFlex Series brings your favorite shows together in one place."
+}
 
 function Series(): JSX.Element {
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
