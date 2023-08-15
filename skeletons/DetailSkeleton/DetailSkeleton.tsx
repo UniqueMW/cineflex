@@ -9,7 +9,16 @@ interface IDetailSkeletonProps {
 function DetailSkeleton(props: IDetailSkeletonProps): JSX.Element {
   return (
     <section className="px-2 lg:px-10 space-y-4">
-      <SquareSkeleton width="100%" height="758.81px" />
+      <SquareSkeleton
+        width="100%"
+        height="1349px"
+        className="lg:block hidden"
+      />
+      <SquareSkeleton
+        width="499px"
+        height="748.5px"
+        className="lg:hidden block"
+      />
       <SquareSkeleton height="40px" width="500px" />
       <div className=" text-paragraph font-paragraph tracking-wider space-y-1">
         <div className="flex flex-row items-center gap-x-2">

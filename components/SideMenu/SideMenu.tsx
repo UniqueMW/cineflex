@@ -66,6 +66,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ delay: 0.8 }}
+              onTap={handleCloseMenu}
             >
               <Link
                 className="md:text-2xl text-xl text-button font-logo font-[700] tracking-wider"
@@ -86,6 +87,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
                 animate={'open'}
                 exit={'start'}
                 transition={{ delay: 0.1 }}
+                onTap={handleCloseMenu}
               >
                 <Link href="/" className="font-heading">
                   Home
@@ -96,6 +98,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
                 initial={'start'}
                 animate={'open'}
                 exit={'start'}
+                onTap={handleCloseMenu}
                 transition={{ delay: 0.2 }}
               >
                 <Link href="/movies">Movies</Link>
@@ -106,6 +109,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
                 animate={'open'}
                 exit={'start'}
                 transition={{ delay: 0.3 }}
+                onTap={handleCloseMenu}
               >
                 <Link href="/series">Series</Link>
               </motion.div>
@@ -115,6 +119,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
                 animate={'open'}
                 exit={'start'}
                 transition={{ delay: 0.4 }}
+                onTap={handleCloseMenu}
               >
                 <Link href="/cinema">Cinema</Link>
               </motion.div>
@@ -124,6 +129,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
                 animate={'open'}
                 exit={'start'}
                 transition={{ delay: 0.5 }}
+                onTap={handleCloseMenu}
               >
                 <Link href="/upcoming">Upcoming</Link>
               </motion.div>
@@ -133,6 +139,7 @@ const SideMenu = React.memo((props: ISideMenuProps): JSX.Element => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.8 }}
+              onTap={handleCloseMenu}
               className="flex flex-col items-center w-full"
             >
               <SideMenuAuth />

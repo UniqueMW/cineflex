@@ -147,15 +147,26 @@ function Detail(props: IDetailProps): JSX.Element {
 
   return (
     <section className="lg:px-10 px-2 space-y-4">
-      <Image
-        src={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
-        height={758.81}
-        placeholder="blur"
-        blurDataURL="/heroPlaceholder.png"
-        width={1349}
-        alt={data.title !== undefined ? data.title : data.name}
-        className="w-full object-cover object-center"
-      />
+      <section>
+        <Image
+          src={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
+          height={758.81}
+          placeholder="blur"
+          blurDataURL="/heroPlaceholder.png"
+          width={1349}
+          alt={data.title !== undefined ? data.title : data.name}
+          className="w-full object-cover object-center hidden lg:block"
+        />
+        <Image
+          src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+          height={748.5}
+          width={499}
+          alt={data.title !== undefined ? data.title : data.name}
+          placeholder="blur"
+          blurDataURL="/mobilePlaceholder.png"
+          className="object-cover object-center w-full lg:hidden block"
+        />
+      </section>
       <h1 className="text-4xl text-headline font-heading tracking-wider font-bold">
         {data.title !== undefined ? data.title : data.name}
       </h1>
