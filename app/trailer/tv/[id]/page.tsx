@@ -32,6 +32,4 @@ function SeriesTrailerPage(): JSX.Element {
   )
 }
 
-export const dynamic = 'force-dynamic'
-
 export default SeriesTrailerPage

@@ -45,6 +45,8 @@ import EpisodeCard from './EpisodeCard/EpisodeCard'
 import Empty from './Empty/Empty'
 import NavAuth from './NavAuth/NavAuth'
 import SideMenuAuth from './SideMenuAuth/SideMenuAuth'
+import SeasonDetail from './SeasonDetail/SeasonDetail'
+import Bookmark from './Bookmark/Bookmark'
 
 export {
   Nav,
@@ -93,5 +95,7 @@ export {
   EpisodeCard,
   Empty,
   NavAuth,
-  SideMenuAuth
+  SideMenuAuth,
+  SeasonDetail,
+  Bookmark
 }

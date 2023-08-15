@@ -3,13 +3,6 @@ import React from 'react'
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth'
 import { auth } from 'firebase.config'
 import { Hero, HomeCarouselsWrapper, Footer } from 'components'
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Cineflex',
-  description:
-    'Discover the world of CineFlex - your ultimate movie companion. Explore a vast collection of films, from classics to the latest releases, all at your fingertips. Immerse yourself in cinematic wonders with CineFlex, where entertainment meets convenience.'
-}
 
 function Home(): JSX.Element {
   React.useEffect(() => {

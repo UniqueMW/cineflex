@@ -4,8 +4,8 @@ import useSWR from 'swr'
 import { useParams } from 'next/navigation'
 import { fetcher } from 'utils'
 import { TrailerPageWrapper, Footer } from 'components'
-import type { ITrailerList } from 'types'
 import { TrailerPageSkeleton } from 'skeletons'
+import type { ITrailerList } from 'types'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
@@ -31,7 +31,5 @@ function MovieTrailerPage(): JSX.Element {
     </main>
   )
 }
-
-export const dynamic = 'force-dynamic'
 
 export default MovieTrailerPage
