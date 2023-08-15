@@ -18,9 +18,27 @@ function Footer(): JSX.Element {
           <Link href="about">About Me</Link>
         </div>
         <div className="flex flex-row items-center gap-x-2">
-          <FaGithub />
-          <SiUpwork className="text-[#6FDA44]" />
-          <FaLinkedin className="text-[#0A66C2]" />
+          <a
+            href="https://github.com/UniqueMW"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href="https://www.upwork.com/freelancers/~01a53d98963ca4a0a6"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <SiUpwork className="text-[#6FDA44]" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/cliff-likovo-57b148263/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaLinkedin className="text-[#0A66C2]" />
+          </a>
         </div>
       </div>
       <p className="text-base font-paragraph tracking-wider text-center">

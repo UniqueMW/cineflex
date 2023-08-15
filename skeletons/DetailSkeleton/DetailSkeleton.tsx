@@ -15,7 +15,7 @@ function DetailSkeleton(props: IDetailSkeletonProps): JSX.Element {
         className="lg:block hidden"
       />
       <SquareSkeleton
-        width="499px"
+        width="100%"
         height="748.5px"
         className="lg:hidden block"
       />
