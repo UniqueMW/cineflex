@@ -47,6 +47,7 @@ import NavAuth from './NavAuth/NavAuth'
 import SideMenuAuth from './SideMenuAuth/SideMenuAuth'
 import SeasonDetail from './SeasonDetail/SeasonDetail'
 import Bookmark from './Bookmark/Bookmark'
+import SearchWrapper from './SearchWrapper/SearchWrapper'
 
 export {
   Nav,
@@ -97,5 +98,6 @@ export {
   NavAuth,
   SideMenuAuth,
   SeasonDetail,
-  Bookmark
+  Bookmark,
+  SearchWrapper
 }
