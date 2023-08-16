@@ -18,9 +18,13 @@ const SideMenuAuth = React.memo((): JSX.Element => {
 
   if (user === null) {
     return (
-      <div className="flex flex-col space-y-3">
-        <Button onClick={handleJoinNow}>Join Now</Button>
-        <ButtonAlt onClick={handleLogin}>LOGIN</ButtonAlt>
+      <div className="flex flex-col space-y-3 w-[90%]">
+        <Button onClick={handleJoinNow} className="w-full">
+          Join Now
+        </Button>
+        <ButtonAlt onClick={handleLogin} className="w-full">
+          LOGIN
+        </ButtonAlt>
       </div>
     )
   }

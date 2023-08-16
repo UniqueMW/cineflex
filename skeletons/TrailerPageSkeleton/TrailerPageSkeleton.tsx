@@ -21,7 +21,7 @@ function TrailerPageSkeleton(): JSX.Element {
         <SquareSkeleton height="28px" width="200px" />
         <SquareSkeleton height="24px" width="150px" />
       </div>
-      <div className="lg:w-[30%] w-full lg:max-h-screen lg:overflow-y-scroll lg:scrollbar-thumb-button lg:scrollbar-thin lg:px-1">
+      <div className="lg:w-[30%] w-full lg:max-h-screen lg:overflow-y-scroll lg:scrollbar-thumb-button lg:scrollbar-thin lg:px-1 space-y-2">
         <SquareSkeleton width="120px" height="24px" />
         <section className="space-y-1 bg-background">
           {trailerSkeletons}

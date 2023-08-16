@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { RiSearch2Line } from 'react-icons/ri'
 import { BsJournalBookmark } from 'react-icons/bs'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSelectedLayoutSegment } from 'next/navigation'
 import { ButtonIcon, NavAuth } from 'components'
 
 interface INavProps {
@@ -13,6 +13,7 @@ interface INavProps {
 
 const Nav = React.memo((props: INavProps): JSX.Element => {
   const router = useRouter()
+  const segment = useSelectedLayoutSegment()
   const handleOpenMenu = React.useCallback(() => {
     props.setOpenMenu(true)
   }, [])
@@ -39,17 +40,60 @@ const Nav = React.memo((props: INavProps): JSX.Element => {
         </Link>
       </div>
       <div className="lg:flex hidden flex-row space-x-4">
-        <Link href="/">Home</Link>
-        <Link href="/movies">Movies</Link>
-        <Link href="/series">Series</Link>
-        <Link href="/cinema">Cinema</Link>
-        <Link href="/upcoming">Upcoming</Link>
+        <Link
+          href="/"
+          className={`${segment === null ? 'text-button' : 'text-headline'}`}
+        >
+          Home
+        </Link>
+        <Link
+          href="/movies"
+          className={`${
+            segment === 'movies' ? 'text-button' : 'text-headline'
+          }`}
+        >
+          Movies
+        </Link>
+        <Link
+          href="/series"
+          className={`${
+            segment === 'series' ? 'text-button' : 'text-headline'
+          }`}
+        >
+          Series
+        </Link>
+        <Link
+          href="/cinema"
+          className={`${
+            segment === 'cinema' ? 'text-button' : 'text-headline'
+          }`}
+        >
+          Cinema
+        </Link>
+        <Link
+          href="/upcoming"
+          className={`${
+            segment === 'upcoming' ? 'text-button' : 'text-headline'
+          }`}
+        >
+          Upcoming
+        </Link>
       </div>
       <div className="flex flex-row items-center space-x-3">
-        <ButtonIcon onClick={handleSearchPage}>
+        <ButtonIcon
+          onClick={handleSearchPage}
+          className={`${
+            segment === 'search' ? 'text-button' : 'text-headline'
+          }`}
+        >
           <RiSearch2Line />
         </ButtonIcon>
-        <ButtonIcon onClick={handleBookmarkPage}>
+        <ButtonIcon
+          onClick={handleBookmarkPage}
+          className={`${
+            segment === 'bookmark' ? 'text-button' : 'text-headline'
+          }`}
+        >
           <BsJournalBookmark />
         </ButtonIcon>
         <NavAuth />
