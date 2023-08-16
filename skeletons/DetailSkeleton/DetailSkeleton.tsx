@@ -8,7 +8,7 @@ interface IDetailSkeletonProps {
 
 function DetailSkeleton(props: IDetailSkeletonProps): JSX.Element {
   return (
-    <section className="px-2 lg:px-10 space-y-4">
+    <section className="flex flex-col px-2 lg:px-10 gap-y-4">
       <SquareSkeleton
         width="100%"
         height="1349px"

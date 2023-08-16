@@ -30,15 +30,15 @@ function Hero(): JSX.Element {
 
   if (data === undefined) {
     return (
-      <section className="relative lg:block hidden">
+      <section className="relative">
         <SquareSkeleton
-          width="1349px"
+          width="100%"
           height="758.81px"
           color="#f8f8f8"
           className="lg:block hidden"
         />
         <SquareSkeleton
-          width="499px"
+          width="100%"
           height="748.5px"
           color="#f8f8f8"
           className="block lg:hidden"
