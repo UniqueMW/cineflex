@@ -24,6 +24,9 @@ function HeroSlide({ heroMovie }: IHeroSlideProps): JSX.Element {
           width={1349}
           alt={heroMovie.title as string}
           className="w-full object-cover object-center"
+          onError={(event) => {
+            event.currentTarget.src = '/brokenImage.png'
+          }}
         />
         <HeroSlideDetails heroMovie={heroMovie} />
       </section>

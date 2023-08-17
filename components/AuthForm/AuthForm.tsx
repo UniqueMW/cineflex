@@ -21,8 +21,6 @@ const actionCodeSettings = {
   handleCodeInApp: true
 }
 
-// TODO handle seo
-
 function AuthForm(props: IAuthFormProps): JSX.Element {
   const emailRef = React.useRef<HTMLInputElement>(null)
   const router = useRouter()
@@ -98,7 +96,7 @@ function AuthForm(props: IAuthFormProps): JSX.Element {
           />
         </div>
         {isEmailSent ? (
-          <p className="text-sm text-action tracking-wide text-left">
+          <p className="text-sm text-action tracking-wide text-left max-w-[300px]">
             Sign-in link sent to your email. Check inbox. If not received, check
             spam or retry.
           </p>

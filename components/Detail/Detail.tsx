@@ -156,6 +156,9 @@ function Detail(props: IDetailProps): JSX.Element {
           width={1349}
           alt={data.title !== undefined ? data.title : data.name}
           className="w-full object-cover object-center hidden lg:block"
+          onError={(event) => {
+            event.currentTarget.src = '/brokenImage.png'
+          }}
         />
         <Image
           src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
@@ -165,6 +168,9 @@ function Detail(props: IDetailProps): JSX.Element {
           placeholder="blur"
           blurDataURL="/mobilePlaceholder.png"
           className="object-cover object-center w-full lg:hidden block"
+          onError={(event) => {
+            event.currentTarget.src = '/brokenImage.png'
+          }}
         />
       </section>
       <h1 className="text-4xl text-headline font-heading tracking-wider font-bold">
