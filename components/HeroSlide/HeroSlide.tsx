@@ -25,7 +25,7 @@ function HeroSlide({ heroMovie }: IHeroSlideProps): JSX.Element {
           alt={heroMovie.title as string}
           className="w-full object-cover object-center"
           onError={(event) => {
-            event.currentTarget.src = '/brokenImage.svg'
+            event.currentTarget.src = '/heroBrokenImage.png'
           }}
         />
         <HeroSlideDetails heroMovie={heroMovie} />

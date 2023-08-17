@@ -157,7 +157,7 @@ function Detail(props: IDetailProps): JSX.Element {
           alt={data.title !== undefined ? data.title : data.name}
           className="w-full object-cover object-center hidden lg:block"
           onError={(event) => {
-            event.currentTarget.src = '/brokenImage.svg'
+            event.currentTarget.src = '/heroBrokenImage.png'
           }}
         />
         <Image
