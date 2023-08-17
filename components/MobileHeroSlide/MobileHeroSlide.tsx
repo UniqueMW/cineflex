@@ -25,7 +25,7 @@ function MobileHeroSlide({ heroMovie }: IHeroSlideProps): JSX.Element {
           blurDataURL="/mobilePlaceholder.png"
           className="object-cover object-center w-full"
           onError={(event) => {
-            event.currentTarget.src = '/brokenImage.png'
+            event.currentTarget.src = '/brokenImageCard.png'
           }}
         />
         <HeroSlideDetails heroMovie={heroMovie} />

@@ -20,7 +20,7 @@ function CastCard(props: ICastCardProps): JSX.Element {
         blurDataURL="/cardPlaceholder.png"
         className="object-cover rounded-[100%] object-center aspect-square"
         onError={(event) => {
-          event.currentTarget.src = '/brokenImage.png'
+          event.currentTarget.src = '/brokenImageCast.png'
         }}
       />
       <h1 className="md:text-lg text-base font-heading text-headline tracking-wider text-center w-full">

@@ -45,7 +45,7 @@ function Card({ data }: ICardProps): JSX.Element {
           blurDataURL="/cardPlaceholder.png"
           className="object-cover object-center w-full "
           onError={(event) => {
-            event.currentTarget.src = '/brokenImage.png'
+            event.currentTarget.src = '/brokenImageCard.png'
           }}
         />
         <h1 className="text-headline font-heading font-[400] sm:text-base text-xs">

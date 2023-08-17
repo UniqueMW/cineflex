@@ -157,7 +157,7 @@ function Detail(props: IDetailProps): JSX.Element {
           alt={data.title !== undefined ? data.title : data.name}
           className="w-full object-cover object-center hidden lg:block"
           onError={(event) => {
-            event.currentTarget.src = '/brokenImage.png'
+            event.currentTarget.src = '/brokenImage.svg'
           }}
         />
         <Image
@@ -169,7 +169,7 @@ function Detail(props: IDetailProps): JSX.Element {
           blurDataURL="/mobilePlaceholder.png"
           className="object-cover object-center w-full lg:hidden block"
           onError={(event) => {
-            event.currentTarget.src = '/brokenImage.png'
+            event.currentTarget.src = '/brokenImageCard.png'
           }}
         />
       </section>
