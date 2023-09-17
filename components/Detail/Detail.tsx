@@ -72,7 +72,7 @@ function Detail(props: IDetailProps): JSX.Element {
           cardType: 'ACTOR'
         },
         {
-          title: 'You Might Also Like',
+          title: 'Recommended Picks',
           data: additionalData.data[1].results
         }
       ])
