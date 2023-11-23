@@ -129,8 +129,8 @@ function Detail(props: IDetailProps): JSX.Element {
   const handleBookmark = async (): Promise<void> => {
     if (data !== undefined) {
       if (isAuthenticated && user !== null) {
-        await addAndRemoveMoviesOrSeriesInDatabase(data, user.uid)
         setIsBookmarkStatusLoading(true)
+        await addAndRemoveMoviesOrSeriesInDatabase(data, user.uid)
         const isMovieOrSeriesBookmarked = await checkMovieOrSeriesInDatabase(
           data.id,
           ref(database, `bookmarks/${user.uid}`)

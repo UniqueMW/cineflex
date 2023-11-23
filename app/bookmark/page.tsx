@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 function BookmarkPage(): JSX.Element {
   return (
-    <main className=" space-y-2 min-h-screen">
+    <main className=" flex flex-col justify-between min-h-screen">
       <Bookmark />
       <Footer />
     </main>
