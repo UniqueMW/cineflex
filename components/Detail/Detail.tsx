@@ -1,12 +1,13 @@
 'use client'
 import React from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import Image from 'next/image'
-import useSWR from 'swr'
 import { BsJournalBookmark, BsJournalBookmarkFill } from 'react-icons/bs'
 import { SlSocialYoutube } from 'react-icons/sl'
+import Image from 'next/image'
+import useSWR from 'swr'
 import { ref } from 'firebase/database'
 import { Ratings, CarouselGroup, Button, ButtonAlt, Date } from 'components'
+import { PuffLoader } from 'PackagesClientComponents/reactSpinner'
 import { DetailSkeleton } from 'skeletons'
 import { useAuth } from 'hooks'
 import { database } from 'firebase.config'
@@ -59,6 +60,8 @@ function Detail(props: IDetailProps): JSX.Element {
   const { data } = useSWR<IMovieDetail & ISeriesDetail>(url, fetcher)
   const additionalData = useSWR([castUrls, recommendationsUrls], fetchers)
   const [isBookmarked, setIsBookmarked] = React.useState(false)
+  const [isBookmarkStatusLoading, setIsBookmarkStatusLoading] =
+    React.useState(false)
 
   const [carouselItems, setCarouselItems] =
     React.useState<ICarouselGroupItem[]>()
@@ -95,11 +98,13 @@ function Detail(props: IDetailProps): JSX.Element {
   React.useEffect(() => {
     if (data !== undefined) {
       if (isAuthenticated && user !== null) {
+        setIsBookmarkStatusLoading(true)
         checkMovieOrSeriesInDatabase(
           data.id,
           ref(database, `bookmarks/${user.uid}`)
         )
           .then((value) => {
+            setIsBookmarkStatusLoading(false)
             setIsBookmarked(typeof value !== 'boolean')
           })
           .catch((error) => {
@@ -125,10 +130,12 @@ function Detail(props: IDetailProps): JSX.Element {
     if (data !== undefined) {
       if (isAuthenticated && user !== null) {
         await addAndRemoveMoviesOrSeriesInDatabase(data, user.uid)
+        setIsBookmarkStatusLoading(true)
         const isMovieOrSeriesBookmarked = await checkMovieOrSeriesInDatabase(
           data.id,
           ref(database, `bookmarks/${user.uid}`)
         )
+        setIsBookmarkStatusLoading(false)
         setIsBookmarked(typeof isMovieOrSeriesBookmarked !== 'boolean')
       } else {
         addAndRemoveBookmark(data)
@@ -213,7 +220,14 @@ function Detail(props: IDetailProps): JSX.Element {
           // eslint-disable-next-line
           onClick={handleBookmark}
         >
-          {isBookmarked ? (
+          {isBookmarkStatusLoading ? (
+            <PuffLoader
+              className="mr-2"
+              color="#078080"
+              loading={isBookmarkStatusLoading}
+              size={18}
+            />
+          ) : isBookmarked ? (
             <BsJournalBookmarkFill className="mr-2 text-[#FFD700]" />
           ) : (
             <BsJournalBookmark className="mr-2" />
