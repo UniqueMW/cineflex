@@ -472,3 +472,10 @@ export interface IGuestStar {
   popularity: number
   profile_path?: string
 }
+
+interface IUseCheckBookmarkStatusObj {
+  isBookmarked: boolean
+  isBookmarkStatusLoading: boolean
+  setIsBookmarked: React.Dispatch<React.SetStateAction<boolean>>
+  setIsBookmarkStatusLoading: React.Dispatch<React.SetStateAction<boolean>>
+}

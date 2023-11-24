@@ -1,26 +1,18 @@
 'use client'
 import React from 'react'
-import { useParams, useRouter } from 'next/navigation'
-import { BsJournalBookmark, BsJournalBookmarkFill } from 'react-icons/bs'
-import { SlSocialYoutube } from 'react-icons/sl'
-import Image from 'next/image'
+import { useParams } from 'next/navigation'
 import useSWR from 'swr'
-import { ref } from 'firebase/database'
-import { Ratings, CarouselGroup, Button, ButtonAlt, Date } from 'components'
-import { PuffLoader } from 'PackagesClientComponents/reactSpinner'
 import { DetailSkeleton } from 'skeletons'
-import { useAuth } from 'hooks'
-import { database } from 'firebase.config'
+import { useCarouselItems, useSelectDetailUrls } from 'hooks'
+import { fetcher, fetchers } from 'utils'
 import {
-  fetcher,
-  fetchers,
-  addAndRemoveBookmark,
-  checkInBookmark,
-  addAndRemoveMoviesOrSeriesInDatabase,
-  checkMovieOrSeriesInDatabase
-} from 'utils'
+  CarouselGroup,
+  DetailImages,
+  DetailHeaderInfo,
+  DetailActionButtons
+} from 'components'
 
-import type { IMovieDetail, ISeriesDetail, ICarouselGroupItem } from 'types'
+import type { IMovieDetail, ISeriesDetail } from 'types'
 
 interface IDetailProps {
   mediaType: 'TV' | 'MOVIE'
@@ -30,119 +22,13 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
 
 function Detail(props: IDetailProps): JSX.Element {
   const { id } = useParams() as { id: string }
-  const router = useRouter()
-  const [isAuthenticated, user] = useAuth()
-
-  const url = React.useMemo(
-    () =>
-      props.mediaType === 'MOVIE'
-        ? `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
-        : `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`,
-    [id, props.mediaType]
+  const urls = useSelectDetailUrls(id, props.mediaType, API_KEY)
+  const { data } = useSWR<IMovieDetail & ISeriesDetail>(urls.detailUrl, fetcher)
+  const additionalData = useSWR(
+    [urls.castUrl, urls.recommendationsUrl],
+    fetchers
   )
-
-  const recommendationsUrls = React.useMemo(
-    () =>
-      props.mediaType === 'MOVIE'
-        ? `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`
-        : `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=${API_KEY}`,
-    [id, props.mediaType]
-  )
-
-  const castUrls = React.useMemo(
-    () =>
-      props.mediaType === 'MOVIE'
-        ? `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
-        : `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${API_KEY}`,
-    [id, props.mediaType]
-  )
-
-  const { data } = useSWR<IMovieDetail & ISeriesDetail>(url, fetcher)
-  const additionalData = useSWR([castUrls, recommendationsUrls], fetchers)
-  const [isBookmarked, setIsBookmarked] = React.useState(false)
-  const [isBookmarkStatusLoading, setIsBookmarkStatusLoading] =
-    React.useState(false)
-
-  const [carouselItems, setCarouselItems] =
-    React.useState<ICarouselGroupItem[]>()
-
-  React.useEffect(() => {
-    if (props.mediaType === 'MOVIE' && additionalData.data !== undefined) {
-      setCarouselItems([
-        {
-          title: 'Cast',
-          data: additionalData.data[0].cast,
-          cardType: 'ACTOR'
-        },
-        {
-          title: 'Recommended Picks',
-          data: additionalData.data[1].results
-        }
-      ])
-    } else if (additionalData.data !== undefined && data !== undefined) {
-      setCarouselItems([
-        { title: 'Seasons', data: data?.seasons },
-        {
-          title: 'Cast',
-          data: additionalData.data[0].cast,
-          cardType: 'ACTOR'
-        },
-        {
-          title: 'Recommended Picks',
-          data: additionalData.data[1].results
-        }
-      ])
-    }
-  }, [data, additionalData.data])
-
-  React.useEffect(() => {
-    if (data !== undefined) {
-      if (isAuthenticated && user !== null) {
-        setIsBookmarkStatusLoading(true)
-        checkMovieOrSeriesInDatabase(
-          data.id,
-          ref(database, `bookmarks/${user.uid}`)
-        )
-          .then((value) => {
-            setIsBookmarkStatusLoading(false)
-            setIsBookmarked(typeof value !== 'boolean')
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      } else {
-        setIsBookmarked(checkInBookmark(data))
-      }
-    }
-  }, [data, isAuthenticated, user])
-
-  const handleTrailer = (): void => {
-    if (data !== undefined) {
-      router.push(
-        `/trailer/${data.first_air_date !== undefined ? 'tv' : 'movie'}/${
-          data.id
-        }`
-      )
-    }
-  }
-
-  const handleBookmark = async (): Promise<void> => {
-    if (data !== undefined) {
-      if (isAuthenticated && user !== null) {
-        setIsBookmarkStatusLoading(true)
-        await addAndRemoveMoviesOrSeriesInDatabase(data, user.uid)
-        const isMovieOrSeriesBookmarked = await checkMovieOrSeriesInDatabase(
-          data.id,
-          ref(database, `bookmarks/${user.uid}`)
-        )
-        setIsBookmarkStatusLoading(false)
-        setIsBookmarked(typeof isMovieOrSeriesBookmarked !== 'boolean')
-      } else {
-        addAndRemoveBookmark(data)
-        setIsBookmarked(checkInBookmark(data))
-      }
-    }
-  }
+  const carouselItems = useCarouselItems(data, additionalData, props.mediaType)
 
   if (
     data === undefined ||
@@ -154,88 +40,9 @@ function Detail(props: IDetailProps): JSX.Element {
 
   return (
     <section className="lg:px-10 px-2 space-y-4">
-      <section>
-        <Image
-          src={`https://image.tmdb.org/t/p/original/${data?.backdrop_path}`}
-          height={758.81}
-          placeholder="blur"
-          blurDataURL="/heroPlaceholder.png"
-          width={1349}
-          alt={data.title !== undefined ? data.title : data.name}
-          className="w-full object-cover object-center hidden lg:block"
-          onError={(event) => {
-            event.currentTarget.src = '/heroBrokenImage.png'
-          }}
-        />
-        <Image
-          src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
-          height={748.5}
-          width={499}
-          alt={data.title !== undefined ? data.title : data.name}
-          placeholder="blur"
-          blurDataURL="/mobilePlaceholder.png"
-          className="object-cover object-center w-full lg:hidden block"
-          onError={(event) => {
-            event.currentTarget.src = '/brokenImageCard.png'
-          }}
-        />
-      </section>
-      <h1 className="text-4xl text-headline font-heading tracking-wider font-bold">
-        {data.title !== undefined ? data.title : data.name}
-      </h1>
-      <div className=" text-paragraph font-paragraph tracking-wider space-y-1">
-        <div className="flex flex-row items-center gap-x-2">
-          <Date
-            date={
-              data.first_air_date === undefined
-                ? data.release_date
-                : data.first_air_date
-            }
-          />
-          <h4>|</h4>
-          <Ratings rating={data.vote_average} />
-        </div>
-        <h3 className="text-left">
-          {data.genres.map((genre) => genre.name).join(', ')}
-        </h3>
-      </div>
-      <div>
-        <h2 className="text-headline font-heading tracking-wider text-xl font-semibold">
-          Overview
-        </h2>
-        <p className="text-lg font-paragraph text-paragraph tracking-wider text-left">
-          {data.overview}
-        </p>
-      </div>
-      <div className="flex flex-row justify-center space-x-6 w-full">
-        <Button
-          className="flex flex-row items-center text-lg font-heading text-headline tracking-wider"
-          onClick={handleTrailer}
-        >
-          <SlSocialYoutube className="mr-2" />
-          <h2>Trailer</h2>
-        </Button>
-        <ButtonAlt
-          className="flex flex-row items-center font-heading text-lg text-headline tracking-wider"
-          // eslint-disable-next-line
-          onClick={handleBookmark}
-        >
-          {isBookmarkStatusLoading ? (
-            <PuffLoader
-              className="mr-2"
-              color="#078080"
-              loading={isBookmarkStatusLoading}
-              size={18}
-            />
-          ) : isBookmarked ? (
-            <BsJournalBookmarkFill className="mr-2 text-[#FFD700]" />
-          ) : (
-            <BsJournalBookmark className="mr-2" />
-          )}
-
-          <h2>Bookmark</h2>
-        </ButtonAlt>
-      </div>
+      <DetailImages data={data} />
+      <DetailHeaderInfo data={data} />
+      <DetailActionButtons data={data} />
       <CarouselGroup items={carouselItems} />
     </section>
   )

@@ -48,6 +48,9 @@ import SideMenuAuth from './SideMenuAuth/SideMenuAuth'
 import SeasonDetail from './SeasonDetail/SeasonDetail'
 import Bookmark from './Bookmark/Bookmark'
 import SearchWrapper from './SearchWrapper/SearchWrapper'
+import DetailImages from './DetailImages/DetailImages'
+import DetailHeaderInfo from './DetailHeaderInfo/DetailHeaderInfo'
+import DetailActionButtons from './DetailActionButtons/DetailActionButtons'
 
 export {
   Nav,
@@ -99,5 +102,8 @@ export {
   SideMenuAuth,
   SeasonDetail,
   Bookmark,
-  SearchWrapper
+  SearchWrapper,
+  DetailImages,
+  DetailHeaderInfo,
+  DetailActionButtons
 }

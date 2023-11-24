@@ -4,6 +4,9 @@ import useFilter from './useFilter/useFilter'
 import useFilterEffect from './useFilterEffect/useFilterEffect'
 import useDate from './useDate/useDate'
 import useAuth from './useAuth/useAuth'
+import useSelectDetailUrls from './useSelectDetailUrls/useSelectDetailsUrls'
+import useCheckBookmarkStatus from './useCheckBookmarkStatus/useCheckBookmarkStatus'
+import useCarouselItems from './useCarouselItems/useCarouselItems'
 
 export {
   useWindowSize,
@@ -11,5 +14,8 @@ export {
   useFilter,
   useFilterEffect,
   useDate,
-  useAuth
+  useAuth,
+  useSelectDetailUrls,
+  useCheckBookmarkStatus,
+  useCarouselItems
 }

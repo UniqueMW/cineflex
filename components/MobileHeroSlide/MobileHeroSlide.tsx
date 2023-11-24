@@ -15,7 +15,7 @@ function MobileHeroSlide({ heroMovie }: IHeroSlideProps): JSX.Element {
         heroMovie.id
       }`}
     >
-      <section className="relative lg:hidden ">
+      <section className="relative lg:hidden">
         <Image
           src={`https://image.tmdb.org/t/p/original/${heroMovie.poster_path}`}
           height={748.5}
